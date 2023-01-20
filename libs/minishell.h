@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 16:55:16 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/20 20:04:54 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/01/20 23:02:48 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ typedef struct s_src
 //------src-------main.c------------------
 
 //------src-------start_pars.c------------
-
 t_src	*ft_parser(t_src *data);
+
 //------read------read_input.c------------
 void	ft_read_l(t_src *data);
 
 //------corector------line_corector.c-------
 char	*line_corector(char *line);
 //------corector------syntax_error.c-------
-t_src	find_syntax_error(t_src data);
+t_src	*find_syntax_error(t_src *data);
 //------input------input_data.c------------
 t_src	*start_input(t_src *data, char **env);
 t_env	*start_input_env(char **env);
