@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 16:55:16 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/20 23:02:48 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/01/21 19:57:20 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
+# include <unistd.h>
+
+typedef enum s_type
+{
+	PIPE,
+	REDIR_OUT,   	// >
+	REDIT_APPEND, 	// >>
+	REDIR_IN, 		// <
+	HEREDOC, 		// <<
+	WORD, 			// words
+	EXP_FIELD, 		// "..." kam '...'
+	UNDEFINED, 		// >>> <<< |||
+	SEP,
+}	t_type;
 
 typedef struct s_env
 {
@@ -29,11 +43,22 @@ typedef struct s_env
 	struct s_env	*prev;
 }t_env;
 
+typedef struct s_tokens
+{
+	int				len;
+	char			*token;
+	int				type;
+
+	struct s_tokens	*next;
+	struct s_tokens	*prev;
+}t_tokens;
+
 typedef struct s_src
 {
-	char	*line;
-	int		syntax_err;
-	t_env	*env;
+	char		*line;
+	int			syntax_err;
+	t_tokens	*tmp;
+	t_env		*env;
 }t_src;
 
 //------src-------main.c------------------
@@ -55,6 +80,7 @@ t_env	*start_input_env(char **env);
 size_t	ft_strlen(const char *s);
 int		ft_strchr_mod(const char *s, char c);
 char	*ft_str_env_cmp(char const *s, int start, int end);
+void	error_print(char *s, char *c);
 
 void write_env_list(t_env *node, char **env); // verjum jnji
 
