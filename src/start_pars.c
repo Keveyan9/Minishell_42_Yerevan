@@ -15,11 +15,9 @@
 t_src	*ft_parser(t_src *data)
 {
 	int		i;
-	int		k;
 	char	*s;
 
 	i = -1;
-	k = 0;
 	s = data->line;
 	while (s[++i])
 	{
