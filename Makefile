@@ -6,7 +6,7 @@
 #    By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/23 15:15:32 by artadevo          #+#    #+#              #
-#    Updated: 2023/01/22 21:59:01 by artadevo         ###   ########.fr        #
+#    Updated: 2023/01/22 22:42:41 by artadevo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,82 +78,3 @@ readline: $(READLINE_OUT)
 	@cd readline && ./configure --prefix=$(PREFIX) && make clean && make && make install
 
 .PHONY: all clean fclean re readline
-
-# NAME =  minishell
-
-# CC = cc
-
-# CFLAGS = -Wall -Wextra -Werror
-
-# SRCS = $(wildcard */*.c)
-
-# LIB_SRCS = $(wildcard ./libft/*.c)
-
-# ALL_SRCS = $(filter-out $(SRCS) - $(LIB_SRCS))
-
-# OBJS = $(patsubst %.c, %.o, $(ALL_SRCS))
-
-# INCLUDES = -I ./include
-
-# RM = rm -f
-
-# %.o: %.c
-# 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-# all: $(NAME) 
-
-# $(NAME): $(OBJS) 
-# 	$(CC) $(CFLAGS) $(INCLUDES) -lreadline -o $(NAME) $(OBJS) 
-
-# clean:
-# 	$(RM) $(OBJS)
-
-# fclean: clean
-# 	$(RM) $(NAME)
-
-# re:	fclean all
-
-# .PHONY: all clean fclean re
-
-
-
-# , all, clean, fclean, re
-
-# CC	=	cc
-
-# CFLAGS = -I./libs -Wall -Wextra -Werror
-
-# ALL_SRCS = $(wildcard ./sources/*.c)
-
-# OBJS = $(patsubst %.c, %.o, $(ALL_SRCS))
-
-# RM = rm -f
-
-# INCLUDES = -I ./libs -Imlx
-
-# LIB_BIN = mlx/libmlx.a
-
-# FRAMEWORKS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-
-# %.o: %.c
-# 	$(CC) $(CFLAGS) -c $< -o $@
-
-# all: $(NAME) 
-
-# $(NAME): $(OBJS) $(LIB_BIN)
-# 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(FRAMEWORKS)
-# $(LIB_BIN):
-# 	$(MAKE) -C mlx;
-
-# clean:
-# 	$(RM) $(OBJS) $(OBJS_BONUS)
-# 	$(MAKE) -C mlx clean
-
-# fclean: clean
-# 	$(RM) $(NAME) $(NAME_BONUS)
-
-# re:	fclean all
-
-# .PHONY: all clean fclean re bonus
-
-

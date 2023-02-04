@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:28:12 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:08:09 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/04 17:49:07 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,19 @@ t_env	*start_input_env(char **env)
 	return (env_list);
 }
 
-t_src	*start_input(t_src *data, char **env)
+t_src	*all_input(t_src *data, char **env)
+{
+	data->env = start_input_env(env);
+	data = start_input(data);
+	return (data);
+}
+
+t_src	*start_input(t_src *data)
 {
 	data->line = NULL;
 	data->syntax_err = 0;
-	data->env = start_input_env(env);
+	data->doubl_quotes = 0;
+	data->single_quotes = 0;
+	//data->token_line = NULL;
 	return (data);
 }

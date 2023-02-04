@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 18:17:47 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:11:06 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:21:12 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_read_l(t_src *data)
 {
+	free (data->line);
 	data->line = readline("mini$ ");
 	
 	//data = ft_parser(data);

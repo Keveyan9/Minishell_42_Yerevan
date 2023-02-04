@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 17:50:44 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:12:31 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/04 17:47:48 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ int	main(int ac, char **av, char **env)
 	data = malloc (sizeof(t_src));
 	if (!data)
 		return (0);
-	data = start_input(data, env);
+	data = all_input(data, env);
 	while (1)
 	{
+		data = start_input(data);
 		ft_read_l(data);
-		//data = find_syntax_error(data);
+		data = syntax_error(data);
 	}
 	return (0);
 }

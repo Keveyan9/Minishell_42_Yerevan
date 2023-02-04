@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 16:55:16 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:37:03 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/04 18:15:36 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,31 +59,36 @@ typedef struct s_src
 {
 	char		*line;
 	int			syntax_err;
+	int			doubl_quotes;
+	int			single_quotes;
 	t_tokens	*token_list;
 	t_env		*env;
 }t_src;
 
 //------src-------main.c------------------
 
+//------src-------get_tokens.c------------------
+t_tokens	*new_node_tokens(char *s, int k, t_tokens *token_list);
+
 //------src-------start_pars.c------------
-t_src	*ft_parser(t_src *data);
+t_src		*ft_parser(t_src *data);
 
 //------src------read_input.c------------
-void	ft_read_l(t_src *data);
+void		ft_read_l(t_src *data);
 
 //------src------line_corector.c-------
-char	*line_corector(char *line);
+char		*line_corector(char *line);
 //------src------syntax_error.c-------
-t_src	*syntax_error(t_src *data);
+t_src		*syntax_error(t_src *data);
 //------src------input_data.c------------
-t_src	*start_input(t_src *data, char **env);
-t_env	*start_input_env(char **env);
+t_src		*all_input(t_src *data, char **env);
+t_src		*start_input(t_src *data);
+t_env		*start_input_env(char **env);
 //------src------str_utils.c------------
-size_t	ft_strlen(const char *s);
-int		ft_strchr_mod(const char *s, char c);
-char	*ft_str_env_cmp(char const *s, int start, int end);
-void	error_print(char *s, char *c);
+int			ft_strchr_mod(const char *s, char c);
+char		*ft_str_env_cmp(char const *s, int start, int end);
+void		error_print(char *s, char *c);
 
-void write_env_list(t_env *node, char **env); // verjum jnji
+void 		write_env_list(t_env *node, char **env); // verjum jnji
 
 #endif

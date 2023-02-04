@@ -6,85 +6,67 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 19:30:42 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:13:39 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/04 17:56:45 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
-t_tokens	*new_node_tokens(char *s, int k, t_tokens *token_list)
-{
-	t_tokens	*node;
-	int			i;
-
-	i = 0;
-	node = (t_tokens *)malloc(sizeof(t_tokens));
-	if (!node)
-		return (0);
-	node->len = (int)ft_strlen(s);
-	node->token = s;
-	node->type = k;
-	node->next = NULL;
-		node->prev = token_list;
-	if (token_list)
-		token_list->next = node;
-	return (node);
-}
-
-//   []
-// void	get_redial(char *str, int *i, t_src *data)
-// {
-// 	char	*s;
-// 	int		k;
-
-// 	k = &i;
-// 	if (str[k] == '>' && str[k] != '>')
-// 	{
-// 		s = ">";
-// 		data->token_list = new_node_tokens(s , );
-// 	}
-// }
-
-// t_src	*syntax_error(t_src *data)
-// {
-// 	char		*str;
-// 	int			i;
-
-// 	i = -1;
-// 	str = data->line;
-// 	data->token_list = NULL;
-// 	// while (str[++i])
-// 	// {
-// 	// 	if (str[i] == '>' || str[i] == '<')
-// 	// 		get_redial(&str[i], &i, &data);
-// 	// 	else if (str[i] == ' ')
-// 	// 		tmp = ????;
-// 	// 	else if (str[i] == '|')
-// 	// 		tmp = ????;
-// 	// 	else if (str[i] == '\'' || str[i] == '\"')
-// 	// 		tmp = ????;
-// 	// 	else 
-// 	// 		tmp = ????;
-// 	// }
-// 	return (data);
-// }
-
-int	check_frst_bite(char c, char *s)
+int	get_index_quotes(t_src *data)
 {
 	int		i;
-	char	t[2];
 
 	i = 0;
-	while (s[i])
+	if (!data->doubl_quotes && !data->single_quotes)
+		i = 0;
+	else if (data->doubl_quotes && data->single_quotes)
 	{
-		if (s[i] == c)
-		{
-			t[0] = c;
-			t[1] = '\0';
-			error_print(" syntax error near unexpected token `", t);
-			return (128);
-		}
-		i++;
+		if (data->doubl_quotes > data->single_quotes)
+			i = data->single_quotes;
+		else
+			i = data->doubl_quotes;
 	}
-	return (0);
+	else if (data->doubl_quotes && !data->single_quotes)
+		i = data->doubl_quotes;
+	else if (!data->doubl_quotes && data->single_quotes)
+		i = data->single_quotes;
+		data->syntax_err = i;
+	return (i);
+}
+
+int	check_and_break_parentheses(t_src *data)
+{
+	int	i;
+
+	i = -1;
+	while (data->line[++i] && i <= (int)ft_strlen(data->line))
+	{
+		if (data->line[i] == '\'')
+		{
+			data->single_quotes = i;
+			i++;
+			if (ft_strchr_mod(data->line + i, '\'') || data->line[i] == '\'')
+				data->single_quotes = 0;
+			i += ft_strchr_mod(data->line + i, '\'');
+		}
+		else if (data->line[i] == '\"')
+		{
+			data->doubl_quotes = i;
+			i++;
+			if (ft_strchr_mod(data->line + i, '\"') || data->line[i] == '\"')
+				data->doubl_quotes = 0;
+			i += ft_strchr_mod(data->line + i, '\"');
+		}
+	}
+	return (get_index_quotes(data));
+}
+
+t_src	*syntax_error(t_src *data)
+{
+	data->line = line_corector(data->line);
+	if (data->line[0] == '|' || data->line[0] == ')' || data->line[0] == ';')
+		printf(" syntax error near unexpected token `|;)\n"); // grel exit funkcia
+	if (check_and_break_parentheses(data))
+		printf(" syntax error near unexpected token `\'\"\n"); // grel exit funkcia
+	return (data);
 }
