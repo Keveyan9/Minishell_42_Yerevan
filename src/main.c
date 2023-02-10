@@ -14,40 +14,32 @@
 int main(int ac, char **av, char **env)
 {
 	t_src *data;
-	int error;
-	t_env *origin;
-	(void)ac;
-	(void)av;
-	data = malloc(sizeof(t_src));
-	if (!data)
-		return (0);
-	start_input(data, env);
-
-	//origin = data->env;
-	// while (origin)
-	// {
-	// 	printf("%s = %s\n", origin->key, origin->value);
-	// 	origin = origin->next;
-	// }
-
-	data->token_list = (t_tokens *)malloc(sizeof(t_tokens));
-	if (!data->token_list)
-		return (0);
-	data->token_list->token = ft_strdup("cd src");
-	// printf(" token --%s\n", data->token_list->token);
-	// cd(data);
-	// pwd();
-	// 	data->token_list->token = ft_strdup("cd ../../01");
-	// printf(" token --%s\n", data->token_list->token);
-	// cd(data);
-	//  origin = data->env;
-	// while (origin)
-	// {
-	// 	printf("# %s = %s\n", origin->key, origin->value);
-	// 	origin = origin->next;
-	// }
-	//pwd();
-	env_f(data);
-	//while(1);
-	 return (0);
+///__clen input///
+    t_cl_in *in;
+    (void)ac;
+    (void)av;
+    data = malloc(sizeof(t_src));
+    if (!data)
+        return (0);
+    start_input(data, env);
+    ///test after need clinig //
+    in =  malloc(sizeof(t_cl_in));
+    data->cl_in = in;
+    data->cl_in->id = ft_strdup("echo");
+ //env_f(data);
+    data->cl_in->word = ft_split("cd ../../Tumo",' ');
+    data->cl_in->oll = ft_strdup("echo -n gaeg wafer df e r mnlm");
+   //cd(data);
+   // pwd();
+    //free(data->cl_in->word);
+    data->cl_in->word = ft_split("unset OLDPWD",' ');
+   // env_f(data);
+    unset(data);
+   // env_f(data);	
+    data->cl_in->word = ft_split("echo $?+$?",' ');
+    echo(data);
+ //   cd(data);
+   // env_f(data);
+    //export(data);
+    return (0);
 }

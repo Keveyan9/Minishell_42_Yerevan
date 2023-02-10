@@ -3,12 +3,13 @@
 void unset(t_src *data)
 {
     t_env *cat_segment;
+    int n;
 
-    cat_segment = find(data->env,data->token_list->token);
-    if(cat_segment)
+    n = 1;
+    while(data->cl_in->word[n])
     {
-        delet_env(cat_segment);
+        cat_segment = find_env(data->env,data->cl_in->word[n++]);
+        if(cat_segment)
+          delet_env(cat_segment);   
     }
-    
 }
-

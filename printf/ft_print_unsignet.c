@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   ft_print_unsignet.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 18:17:47 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:11:06 by artadevo         ###   ########.fr       */
+/*   Created: 2022/08/01 19:14:21 by skeveyan          #+#    #+#             */
+/*   Updated: 2022/08/01 19:14:51 by skeveyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "ft_printf.h"
 
-#include "minishell.h"
-
-void	ft_read_l(t_src *data)
+void	ft_print_unsigned( int *len, unsigned int num)
 {
-//	data->line = readline("mini$ ");
-	
-	//data = ft_parser(data);
-		printf("[%s]\n", data->line);
-	return ;
+	char	d;
+
+	if (num >= 10)
+		ft_print_unsigned(len, num / 10);
+	d = num % 10 + '0';
+	(*len) += write(1, &d, 1);
 }

@@ -18,7 +18,7 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <unistd.h>
-
+#include  "ft_printf.h"
 # include "../libft/libft.h"
 
 typedef enum s_type
@@ -38,8 +38,8 @@ typedef struct s_env
 {
 	char			*key;
 	char			*value;
-
 	int				flag;
+    int             place;
 
 	struct s_env	*next;
 	struct s_env	*prev;
@@ -48,6 +48,7 @@ typedef struct s_env
 typedef struct s_tokens
 {
 	int				len;
+    char            *comand;
 	char			*token;
 	int				type;
 
@@ -55,15 +56,40 @@ typedef struct s_tokens
 	struct s_tokens	*prev;
 }t_tokens;
 
+typedef struct s_cl_in
+{
+    char *id;
+    char **word;
+    char *oll;
+    struct s_cl_in *next;
+    struct s_cl_in *prev;
+}       t_cl_in;
+
 typedef struct s_src
 {
 	char		*line;
-	int			syntax_err;
+	int			error;
 	t_tokens	*token_list;
 	t_env		*env;
+    t_cl_in     *cl_in;
 }t_src;
 
+
+typedef struct s_export
+{
+    int i;
+    int row;
+    int add;
+    int string_len;
+    char *key;
+    char *value;
+    char *addstring;
+    t_env *find_key;
+}           t_export;
+
+
 //------src-------main.c------------------
+
 
 //------src-------start_pars.c------------
 t_src	*ft_parser(t_src *data);
@@ -87,13 +113,15 @@ void	error_print(char *s, char *c);
 
 void write_env_list(t_env *node, char **env); // verjum jnji
 // builtins
-void echo (char **s);
+void echo (t_src *data);
 void cd(t_src *data);
 void pwd();
 t_env   *find_env(t_env *env,char *s);
-void env_f(t_src *data);
+void    env_f(t_src *data);
 void    frik(char **s1);
-void env_fri(t_env *fri_segment);
-void delet_env(t_src *cat_segmeint);
-void unset(t_src *data);
+void    env_fri(t_env *fri_segment);
+void    delet_env(t_env *cat_segmeint);
+void    unset(t_src *data);
+void    export(t_src *data);
+void    sort_print_env(t_env *data);
 #endif

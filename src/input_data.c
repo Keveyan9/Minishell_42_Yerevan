@@ -61,6 +61,6 @@ t_env *start_input_env(char **env)
 void *start_input(t_src *data, char **env)
 {
 	data->line = NULL;
-	data->syntax_err = 0;
+	data->error = 0;
 	data->env = start_input_env(env);
 }

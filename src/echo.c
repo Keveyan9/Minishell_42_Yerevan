@@ -1,29 +1,49 @@
 #include "minishell.h"
 
-void echo(char **s)
+static void call_$(char *s,t_src *data)
+{
+    int n;
+
+    n = 0;
+    while(s[n])
+    {
+        if(s[n] == '$' && s[n + 1] == '?')
+        {
+            ft_printf("%d",data->error);
+            n = n+2;
+        }
+        else
+            write(1,&s[n++],1);
+    }
+}
+void echo(t_src *data)
 {
     int calem;
     int row;
     int flag;
     calem = 1;
     flag = 1;
-    if (s[1][0] == '-' && s[1][1] =='n')
+    row = 0;
+    if (data->cl_in->word[1][0] == '-' && data->cl_in->word[1][1] =='n')
         {
-            while(s[1][++calem] == 'n');
-            if(ft_strlen(s[1]) == calem)
+            while(data->cl_in->word[1][++calem] == 'n');
+            if(ft_strlen(data->cl_in->word[1]) == calem)
              {
                calem = 2;
-                flag = 0;
+                 flag = 0;
              }
             else
                 calem = 1;
         }
     else
         calem = 1;
-    while(s[calem])
+
+    while( data->cl_in->word[calem])
     {
-        while(s[calem][row])
-            write(1,&s[calem][row++],1);
+        if(data->cl_in->word[calem][0] == '$' && data->cl_in->word[calem][1])
+            call_$(data->cl_in->word[calem++], data);
+        while(data->cl_in->word[calem][row])
+            write(1,&(data->cl_in->word[calem][row++]),1);
         write(1," ",1);
         row = 0;
         calem++;

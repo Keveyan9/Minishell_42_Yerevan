@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   ft_print_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/24 18:17:47 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:11:06 by artadevo         ###   ########.fr       */
+/*   Created: 2022/07/19 20:23:38 by skeveyan          #+#    #+#             */
+/*   Updated: 2022/07/19 20:28:58 by skeveyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "ft_printf.h"
 
-#include "minishell.h"
-
-void	ft_read_l(t_src *data)
+void	ft_print_string(int *len, char *c)
 {
-//	data->line = readline("mini$ ");
-	
-	//data = ft_parser(data);
-		printf("[%s]\n", data->line);
-	return ;
+	if (!c)
+		c = "(null)";
+	while (*c && *c != '\0')
+		(*len) += write (1, c++, 1);
 }
