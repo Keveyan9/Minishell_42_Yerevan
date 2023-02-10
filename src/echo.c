@@ -7,7 +7,7 @@ static void call_$(char *s,t_src *data ,int n)
         n++;
         while(s[n])
         {
-        if( s[n-1] && s[n] == '?')
+        if( s[n-1] == '$' && s[n] == '?')
         {
             ft_printf("%d",data->error);
                n = n+2;

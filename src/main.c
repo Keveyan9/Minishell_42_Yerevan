@@ -36,7 +36,7 @@ int main(int ac, char **av, char **env)
    // env_f(data);
     unset(data);
    // env_f(data);	
-    data->cl_in->word = ft_split("echo -n $?",' ');
+    data->cl_in->word = ft_split("echo -n $$?",' ');
     echo(data);
  //   cd(data);
    // env_f(data);
