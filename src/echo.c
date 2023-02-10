@@ -1,20 +1,24 @@
 #include "minishell.h"
 
-static void call_$(char *s,t_src *data)
+static void call_$(char *s,t_src *data ,int n)
 {
-    int n;
-
-    n = 0;
-    while(s[n])
-    {
-        if(s[n] == '$' && s[n + 1] == '?')
+    n++;
+    while(s[n] && !(s[n] > 20 && s[n] < 65))
+        n++;
+        while(s[n])
+        {
+        if( s[n-1] && s[n] == '?')
         {
             ft_printf("%d",data->error);
-            n = n+2;
+               n = n+2;
         }
         else
-            write(1,&s[n++],1);
-    }
+        {
+            write(1,&s[n],1);
+            n++;
+        }
+        }
+
 }
 void echo(t_src *data)
 {
@@ -37,16 +41,23 @@ void echo(t_src *data)
         }
     else
         calem = 1;
-
-    while( data->cl_in->word[calem])
+ while(data->cl_in->word[calem])
+ {
+    while(data->cl_in->word[calem][row])
     {
-        if(data->cl_in->word[calem][0] == '$' && data->cl_in->word[calem][1])
-            call_$(data->cl_in->word[calem++], data);
-        while(data->cl_in->word[calem][row])
+        if( data->cl_in->word[calem][row] == '$')
+        {
+            call_$(data->cl_in->word[calem], data,row);
+            break;
+        }
+        else
             write(1,&(data->cl_in->word[calem][row++]),1);
-        write(1," ",1);
+    }
+    if((data->cl_in->word[calem + 1 ] )&& ((calem >= 2 && flag == 0) || (calem >= 1 && flag == 1)))
+           write(1," ",1);
         row = 0;
         calem++;
+    
     }
     if (flag)
         write(1,"\n",1);
