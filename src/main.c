@@ -36,10 +36,11 @@ int main(int ac, char **av, char **env)
    // env_f(data);
     unset(data);
    // env_f(data);	
-    data->cl_in->word = ft_split("echo -n $$?",' ');
-    echo(data);
+    data->cl_in->word = ft_split("export  test+=154  fefes",' ');
+   echo(data);
  //   cd(data);
    // env_f(data);
-    //export(data);
+   printf("%d");
+    export(data);
     return (0);
 }

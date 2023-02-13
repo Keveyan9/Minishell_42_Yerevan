@@ -18,8 +18,8 @@ static void call_$(char *s,t_src *data ,int n)
             n++;
         }
         }
-
 }
+
 void echo(t_src *data)
 {
     int calem;
@@ -55,10 +55,9 @@ void echo(t_src *data)
     }
     if((data->cl_in->word[calem + 1 ] )&& ((calem >= 2 && flag == 0) || (calem >= 1 && flag == 1)))
            write(1," ",1);
-        row = 0;
-        calem++;
-    
-    }
+    row = 0;
+    calem++;
     if (flag)
         write(1,"\n",1);
+}
 }

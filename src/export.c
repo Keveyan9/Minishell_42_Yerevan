@@ -6,10 +6,8 @@ int find_index(char *s,char c)
 
     i = 0;
     while(s[i])
-    {
         if(s[i++] == c)
             return(i);
-    }
     return(0);
 }
 
@@ -19,21 +17,28 @@ static int chek_key(char *s)
 
     n = 0;
     if(ft_isalpha(s[0]))
-    {
          while(ft_isalnum(s[n++]));
-    }
     if(n == ft_strlen(s))
         return(0);
     printf(": %s : not a valid identifier\n",s);
     return(1);
 }
 
+static int clin_creat(char **s, int lenqt)
+{
+    if(*s)
+        free(*s);
+    *s = (char* ) malloc(sizeof(lenqt));
+    if(!s)
+        return(1);
+    return(0);
+}
+
 void export (t_src *data)
 {
     t_export var;
 
-    var.value
-     = NULL;
+    var.value = NULL;
     var.key = NULL;
     var.add = 0;
     var.row = 1;
@@ -42,59 +47,47 @@ void export (t_src *data)
     {
         while (data->cl_in->word[var.row])
         {
+            if (!ft_isalpha(data->cl_in->word[var.row][0]))
+                {
+                   ft_printf("is not valid argument %s\n", data->cl_in->word[var.row]);
+                    break;
+                }
              var.i = find_index(data->cl_in->word[var.row],'=');
              var.string_len = ft_strlen(data->cl_in->word[var.row]);
-        if(var.i)
-        {
-            if(data->cl_in->word[var.row][var.i-2] == '+')
-                var.add = 1;
-            if(var.key)
-                free(var.key);
-            if (var.value
-            )
-                free(var.value
-                );
-            var. key = (char* ) malloc(var.i + 1 - var.add);
-            if(!var.key)
-                return;
-            var.value
-             = (char*) malloc (var.string_len - var.i);
-            if(!var.value
-             )
-                return;
+            if(var.i)
+             {
+                if(data->cl_in->word[var.row][var.i-2] == '+')
+                    var.add = 1;
+            clin_creat(&(var.key),(var.i + 1 - var.add));
             ft_strlcpy(var.key,data->cl_in->word[var.row], var.i - var.add);
-            ft_strlcpy(var.value
-            ,&data->cl_in->word[var.row][var.i],var.string_len - var.i + 1);
-            var.find_key = find_env(data->env,var.key);
-        //printf("%s___%s\n",var.key,var.value
-        
+            clin_creat(&(var.value),(var.string_len - var.i));
+            ft_strlcpy(var.value,&(data->cl_in->word[var.row][var.i]),var.string_len - var.i + 1);
+            printf("%d ___ %s __%s\n",var.i,var.key,var.value);
 
-            if (var.find_key)
-            {   
-              if(var.add)
-                {
-                   var.addstring = ft_strjoin(var.find_key->value,var.value
-                   );       
-                    free(var.find_key->value);
-                    var. find_key->value = var.addstring;
-                
-                }
-                else
-                {
-                  free(var.find_key->value
-                  );
-                 var.find_key->value = var.value;
-                }
+            // var.find_key = find_env(data->env,var.key);
+            // if (var.find_key)
+            // {   
+            //   if(var.add)
+            //        var.addstring = ft_strjoin(var.find_key->value,var.value);       
+            //         free(var.find_key->value);
+            //         var. find_key->value = var.addstring;
+            //     }
+            //     else
+            //     {
+            //       free(var.find_key->value);
+            //      var.find_key->value = var.value;
+            //     }
+          //  }
+          //  else
+             // printf("now nod \n");
+           }
+             else
+            {
+                printf("chek key and creat now node only key");
             }
-            else
-                printf("%s\n",data->cl_in->word[var.row]);
-        var.row++;
-       
-    }
-            else;
- 
-                //now node
+           var.row++; 
         }
- 
     }
+    else
+        ft_printf("prinf est aji\n");
 }
