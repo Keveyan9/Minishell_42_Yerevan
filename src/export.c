@@ -17,7 +17,8 @@ static int chek_key(char *s)
 
     n = 0;
     if(ft_isalpha(s[0]))
-         while(ft_isalnum(s[n++]));
+         while(  s[n] == '_' || ft_isalnum(s[n]))
+            n++;
     if(n == ft_strlen(s))
         return(0);
     printf(": %s : not a valid identifier\n",s);
@@ -31,12 +32,41 @@ static int clin_creat(char **s, int lenqt)
     *s = (char* ) malloc(sizeof(lenqt));
     if(!s)
         return(1);
-    return(0);
+    return(0); 
+}
+
+static  void    creat_chanch_nod(t_export *var , t_src *data)
+{
+    t_env *new_nod;
+
+    var->find_key = find_env(data->env,var->key);
+    if(var->find_key)
+    {
+       if(var->add)
+       {   
+            var->addstring = ft_strjoin(var->find_key->value,var->value);       
+            free(var->find_key->value);
+            var->find_key->value = var->addstring;
+        }
+        else
+        {
+            free(var->find_key->value);
+            var->find_key->value = var->value;
+         }
+     }
+    else
+    {
+        new_nod = new_node(data->env);
+        new_nod->key = ft_strdup(var->key);
+        new_nod->value = ft_strdup(var->value);
+    }
+
 }
 
 void export (t_src *data)
 {
     t_export var;
+    t_env    *new_nod;
 
     var.value = NULL;
     var.key = NULL;
@@ -55,39 +85,28 @@ void export (t_src *data)
              var.i = find_index(data->cl_in->word[var.row],'=');
              var.string_len = ft_strlen(data->cl_in->word[var.row]);
             if(var.i)
-             {
+            {
                 if(data->cl_in->word[var.row][var.i-2] == '+')
                     var.add = 1;
-            clin_creat(&(var.key),(var.i + 1 - var.add));
-            ft_strlcpy(var.key,data->cl_in->word[var.row], var.i - var.add);
-            clin_creat(&(var.value),(var.string_len - var.i));
-            ft_strlcpy(var.value,&(data->cl_in->word[var.row][var.i]),var.string_len - var.i + 1);
-            printf("%d ___ %s __%s\n",var.i,var.key,var.value);
-
-            // var.find_key = find_env(data->env,var.key);
-            // if (var.find_key)
-            // {   
-            //   if(var.add)
-            //        var.addstring = ft_strjoin(var.find_key->value,var.value);       
-            //         free(var.find_key->value);
-            //         var. find_key->value = var.addstring;
-            //     }
-            //     else
-            //     {
-            //       free(var.find_key->value);
-            //      var.find_key->value = var.value;
-            //     }
-          //  }
-          //  else
-             // printf("now nod \n");
-           }
+                clin_creat(&(var.key),(var.i + 1 - var.add));
+                ft_strlcpy(var.key,data->cl_in->word[var.row], var.i - var.add);
+                clin_creat(&(var.value),(var.string_len - var.i));
+                ft_strlcpy(var.value,&(data->cl_in->word[var.row][var.i]),var.string_len - var.i + 1);
+                if(chek_key(var.key))
+                    break;
+                creat_chanch_nod(&var, data);
+            }
              else
             {
-                printf("chek key and creat now node only key");
+                if(chek_key(data->cl_in->word[var.row]))
+                    break;
+                new_nod = new_node(data->env);
+                new_nod->key = ft_strdup(data->cl_in->word[var.row]);
+                new_nod->value = NULL;
             }
            var.row++; 
         }
     }
-    else
-        ft_printf("prinf est aji\n");
+    else;
+       print_export(data);
 }

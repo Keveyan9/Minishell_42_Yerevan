@@ -40,6 +40,7 @@ typedef struct s_env
 	char			*value;
 	int				flag;
     int             place;
+	int				flag_p;
 
 	struct s_env	*next;
 	struct s_env	*prev;
@@ -124,4 +125,5 @@ void    delet_env(t_env *cat_segmeint);
 void    unset(t_src *data);
 void    export(t_src *data);
 void    sort_print_env(t_env *data);
+void	print_export(t_src *data);
 #endif
