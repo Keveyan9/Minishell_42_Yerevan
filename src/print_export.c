@@ -34,6 +34,9 @@ void    print_export(t_src *data)
     int go_on;
     t_env *grup;
     int  big;
+     char c;
+
+     c = '"';
      big = 0;
      go_on = 1;
    
@@ -54,7 +57,7 @@ void    print_export(t_src *data)
         {
             if(big <= grup->place && grup->flag_p == 0) 
             {
-                printf("%s%s\n",grup->key, grup->value);
+                printf("%s=%c%s%c\n",grup->key, c,grup->value,c);
                 grup->flag_p = 1;
                 big--;
             }

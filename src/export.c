@@ -107,6 +107,6 @@ void export (t_src *data)
            var.row++; 
         }
     }
-    else;
+    else
        print_export(data);
 }

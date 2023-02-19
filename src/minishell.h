@@ -21,6 +21,7 @@
 #include  "ft_printf.h"
 # include "../libft/libft.h"
 
+
 typedef enum s_type
 {
 	PIPE,			// |
@@ -70,6 +71,7 @@ typedef struct s_src
 {
 	char		*line;
 	int			error;
+	int 		pipes;
 	t_tokens	*token_list;
 	t_env		*env;
     t_cl_in     *cl_in;
@@ -126,4 +128,6 @@ void    unset(t_src *data);
 void    export(t_src *data);
 void    sort_print_env(t_env *data);
 void	print_export(t_src *data);
+int chek_coll_builtin(t_src *data);
+char *find_comand_path(t_src *data, char *s);
 #endif
