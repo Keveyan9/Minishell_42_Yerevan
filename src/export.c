@@ -27,8 +27,8 @@ static int chek_key(char *s)
 
 static int clin_creat(char **s, int lenqt)
 {
-    if(*s)
-        free(*s);
+    // if(*s)
+    //     free(*s);
     *s = (char* ) malloc(sizeof(lenqt));
     if(!s)
         return(1);
@@ -90,8 +90,10 @@ void export (t_src *data)
                     var.add = 1;
                 clin_creat(&(var.key),(var.i + 1 - var.add));
                 ft_strlcpy(var.key,data->cl_in->word[var.row], var.i - var.add);
+                free(var.key);
                 clin_creat(&(var.value),(var.string_len - var.i));
                 ft_strlcpy(var.value,&(data->cl_in->word[var.row][var.i]),var.string_len - var.i + 1);
+                free(var.value);
                 if(chek_key(var.key))
                     break;
                 creat_chanch_nod(&var, data);

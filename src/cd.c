@@ -46,5 +46,6 @@ void cd(t_src *data)
     {
         error_string = ft_strjoin("minishell: cd: ", data->cl_in->word[1]);
         perror(error_string);
+        free(error_string);
     }
 }

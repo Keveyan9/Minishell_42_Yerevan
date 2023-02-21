@@ -116,9 +116,9 @@ void	error_print(char *s, char *c);
 
 void write_env_list(t_env *node, char **env); // verjum jnji
 // builtins
-void echo (t_src *data);
-void cd(t_src *data);
-void pwd();
+void 	echo (t_src *data);
+void 	cd(t_src *data);
+void 	pwd();
 t_env   *find_env(t_env *env,char *s);
 void    env_f(t_src *data);
 void    frik(char **s1);
@@ -128,6 +128,9 @@ void    unset(t_src *data);
 void    export(t_src *data);
 void    sort_print_env(t_env *data);
 void	print_export(t_src *data);
-int chek_coll_builtin(t_src *data);
-char *find_comand_path(t_src *data, char *s);
+int 	chek_coll_builtin(t_src *data);
+char 	*find_comand_path(t_src *data);
+void 	coll_comands(t_src *data);
+void	 free_env(t_src *data);
+
 #endif

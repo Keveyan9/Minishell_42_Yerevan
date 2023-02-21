@@ -21,46 +21,26 @@ int main(int ac, char **av, char **env)
     data = malloc(sizeof(t_src));
     if (!data)
         return (0);
-    start_input(data, env);
+   start_input(data, env);
 
 
     ///test after need clinig //
     in =  malloc(sizeof(t_cl_in));
   
-    data->cl_in = in;
-    data->cl_in->id = ft_strdup("ls");
-    data->cl_in->word = ft_split("ls -l" ,' ');
-    chek_coll_builtin(data);
-    char *comand_path = find_comand_path(data,data->cl_in->id);
-    char *s = " ls -la";
-   //printf("test_%s\n", comand_path);
-    //execve(comand_path,data->cl_in->word,env);
-    if(access("/home/go/Desktop/Minishell/src",F_OK))
-        printf("sxal\n");
-    char *args[] = {"/Desktop/Minishell/src", "test.ou"};
-    char *envp[] = {NULL};
+     data->cl_in = in;
+     data->cl_in->id = ft_strdup("ls");
+     data->cl_in->word = ft_split("ls -la" ,' ');
+  // chek_coll_builtin(data);
+  //  export(data);
+   //  env_f(data);
 
-
-    if (execve(args[0], args, env) == -1) {
-        perror("execve");
-        exit(EXIT_FAILURE);
-    }
-  //chek_coll_builtin(data);
- 
-    return (0);
+    //heto grel fork pahere 
+   coll_comands(data); 
+     free(data->cl_in->id);
+     frik(data->cl_in->word);
+     free(in);
+    free_env(data);
+    free(data);
+   // while (1);
+      return (0);
 }
-
-
-//int main(int ac, char **av, char **env)
-// {
-//     char *args[] = {"/bin/ls", "-la", "/tmp", NULL};
-//     char *envp[] = {NULL};
-
-//     // if (execve(args[0], args, env) == -1) {
-//     //     perror("execve");
-//     //     exit(EXIT_FAILURE);
-//     // }
-//     printf("gago tes\n");
-
-//     return 0;
-// }
