@@ -20,6 +20,8 @@
 # include <unistd.h>
 #include  "ft_printf.h"
 # include "../libft/libft.h"
+#include <sys/wait.h>
+
 
 
 typedef enum s_type
@@ -71,7 +73,9 @@ typedef struct s_src
 {
 	char		*line;
 	int			error;
-	int 		pipes;
+	int 		pipes_count;
+	int 		*pip;
+	int 		ferst_child;
 	t_tokens	*token_list;
 	t_env		*env;
     t_cl_in     *cl_in;
@@ -132,5 +136,12 @@ int 	chek_coll_builtin(t_src *data);
 char 	*find_comand_path(t_src *data);
 void 	coll_comands(t_src *data);
 void	 free_env(t_src *data);
+void 	free_clin(t_src *data);
+void 	oll_free(t_src *data);
+void	 clin(t_src *data);
+void 	child(t_src *data);
+
+void logic(t_src *data);
+
 
 #endif
