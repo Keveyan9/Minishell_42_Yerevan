@@ -3,9 +3,9 @@
 void clin(t_src *data)
 {
     data->cl_in = malloc(sizeof(t_cl_in) );
-    data->cl_in->prev = NULL;
+     data->cl_in->prev = NULL;
     data->cl_in->id = ft_strdup("ls");
-    data->cl_in->word = ft_split("ls -la",' ');
+     data->cl_in->word = ft_split("ls -la",' ');
     data->cl_in->oll = ft_strdup("ls -la ");
     data->cl_in->next = malloc(sizeof(t_cl_in) );
     data->cl_in->next->prev = data->cl_in;
@@ -26,5 +26,5 @@ void clin(t_src *data)
     //          printf("test %s;",data->cl_in->next->next->id);
 }
 
-int **pipe
-pipe[n] maloc (2);
+// int **pipe
+// pipe[n] maloc (2);

@@ -1,15 +1,14 @@
 #include "minishell.h"
 
-void	frik(char **s1)
+void frik(char **s1)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (s1)
 	{
 		while (s1[i])
-			free (s1[i++]);
-		free (s1);
+			free(s1[i++]);
+		free(s1);
 	}
 }
-

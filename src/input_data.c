@@ -19,9 +19,9 @@ t_env *new_node(t_env *env_list)
 	node = (t_env *)malloc(sizeof(t_env));
 	if (!node)
 		return (0);
-		while (env_list && env_list->next != NULL)
-			env_list = env_list->next;
-		
+	while (env_list && env_list->next != NULL)
+		env_list = env_list->next;
+
 	node->next = NULL;
 	node->prev = env_list;
 	if (env_list)
@@ -38,7 +38,7 @@ t_env *start_input_env(char **env)
 	i = 0;
 	k = ft_strchr_mod(env[i], '=');
 	// i chench in hear thats new_ned need doing only creat now nod it wrong when great and give valu
-	env_list = new_node( NULL);
+	env_list = new_node(NULL);
 	env_list->key = ft_str_env_cmp(env[i], 0, k - 1);
 	env_list->value = ft_str_env_cmp(env[i], k + 1, ft_strlen(env[i]));
 	env_list->flag = 0; // karoga heto petq lini popoxel kamel che????

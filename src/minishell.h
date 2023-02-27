@@ -74,7 +74,8 @@ typedef struct s_src
 	char		*line;
 	int			error;
 	int 		pipes_count;
-	int 		*pip;
+	int 		(*pip)[2];
+	int			ciqel;
 	int 		ferst_child;
 	t_tokens	*token_list;
 	t_env		*env;
@@ -132,6 +133,8 @@ void    unset(t_src *data);
 void    export(t_src *data);
 void    sort_print_env(t_env *data);
 void	print_export(t_src *data);
+
+/// logik//
 int 	chek_coll_builtin(t_src *data);
 char 	*find_comand_path(t_src *data);
 void 	coll_comands(t_src *data);
@@ -140,8 +143,7 @@ void 	free_clin(t_src *data);
 void 	oll_free(t_src *data);
 void	 clin(t_src *data);
 void 	child(t_src *data);
-
-void logic(t_src *data);
-
-
+void 	realaysing(t_src *data);
+void 	logic(t_src *data);
+void	 alone_child(t_src *data);
 #endif

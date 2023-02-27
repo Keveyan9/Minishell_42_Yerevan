@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-t_src	*ft_parser(t_src *data)
+t_src *ft_parser(t_src *data)
 {
-	int		i;
-	char	*s;
+	int i;
+	char *s;
 
 	i = -1;
 	s = data->line;
