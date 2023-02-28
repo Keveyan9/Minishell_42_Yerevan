@@ -25,7 +25,7 @@ int main(int ac, char **av, char **env)
 		return (0);
 	start_input(data, env);
 	data->ferst_child = 0;
-	data->pipes_count = 2;
+	data->pipes_count = 3;
 	clin(data);
 	////	// coll_comands(data);
 	if (data->pipes_count == 0)

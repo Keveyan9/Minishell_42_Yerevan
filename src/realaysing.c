@@ -30,12 +30,13 @@ void realaysing(t_src *data)
             if (data->pipes_count > 1)
                 data->ciqel++;
         }
+        
     }
     if (pid > 0)
         child(data);
     if (pid == 0)
     {
-        wait(NULL);
+       // wait(NULL);
         free(data->pip);
     // printf("free");
     }
