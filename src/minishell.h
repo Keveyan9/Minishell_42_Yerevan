@@ -23,7 +23,6 @@
 #include <sys/wait.h>
 
 
-
 typedef enum s_type
 {
 	PIPE,			// |
@@ -95,6 +94,14 @@ typedef struct s_export
     t_env *find_key;
 }           t_export;
 
+typedef struct s_coll_comand
+{
+	char	**env_aray;
+	int		row;
+	t_env	*origin;
+	char	*key_equal;
+	int		i;
+} t_coll_comand;
 
 //------src-------main.c------------------
 

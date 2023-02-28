@@ -9,10 +9,9 @@
 /*   Updated: 2023/01/22 20:08:09 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "minishell.h"
 
-t_env *new_node(t_env *env_list)
+t_env	*new_node(t_env *env_list)
 {
 	t_env *node;
 
@@ -21,7 +20,6 @@ t_env *new_node(t_env *env_list)
 		return (0);
 	while (env_list && env_list->next != NULL)
 		env_list = env_list->next;
-
 	node->next = NULL;
 	node->prev = env_list;
 	if (env_list)
@@ -58,7 +56,7 @@ t_env *start_input_env(char **env)
 	return (env_list);
 }
 
-void *start_input(t_src *data, char **env)
+void	*start_input(t_src *data, char **env)
 {
 	data->line = NULL;
 	data->error = 0;
