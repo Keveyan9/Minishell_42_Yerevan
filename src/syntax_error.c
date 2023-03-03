@@ -6,11 +6,38 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 19:30:42 by artadevo          #+#    #+#             */
-/*   Updated: 2023/02/04 17:56:45 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/27 21:49:34 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	get_count(char *s, char c)
+{
+	int	i;
+	int	count;
+
+	i = -1;
+	count = 0;
+	while (s[++i])
+	{
+		if (s[i] == c)
+			count++;
+	}
+	return (count);
+}
+
+static	int	get_index_quotes_2(t_src *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->doubl_quotes > data->single_quotes)
+		i = data->single_quotes;
+	else
+		i = data->doubl_quotes;
+	return (i);
+}
 
 int	get_index_quotes(t_src *data)
 {
@@ -18,19 +45,25 @@ int	get_index_quotes(t_src *data)
 
 	i = 0;
 	if (!data->doubl_quotes && !data->single_quotes)
-		i = 0;
-	else if (data->doubl_quotes && data->single_quotes)
 	{
-		if (data->doubl_quotes > data->single_quotes)
-			i = data->single_quotes;
-		else
-			i = data->doubl_quotes;
+		i = 0;
+		if ((data->line[0] == '\'' || data->line[0] == '\"')
+			&& (get_count(data->line, '\'') == 1
+				|| get_count(data->line, '\"') == 1))
+		{
+			i = -1;
+			data->index_s_err = 0;
+		}
 	}
+	else if (data->doubl_quotes && data->single_quotes)
+		i = get_index_quotes_2(data);
 	else if (data->doubl_quotes && !data->single_quotes)
 		i = data->doubl_quotes;
 	else if (!data->doubl_quotes && data->single_quotes)
 		i = data->single_quotes;
-		data->syntax_err = i;
+	if (i >= 0)
+		data->index_s_err = i;
+	data->syntax_err = (int)(data->line[data->index_s_err]);
 	return (i);
 }
 
@@ -43,19 +76,21 @@ int	check_and_break_parentheses(t_src *data)
 	{
 		if (data->line[i] == '\'')
 		{
-			data->single_quotes = i;
-			i++;
+			data->single_quotes = i++;
 			if (ft_strchr_mod(data->line + i, '\'') || data->line[i] == '\'')
 				data->single_quotes = 0;
 			i += ft_strchr_mod(data->line + i, '\'');
+			if (data->single_quotes != 0)
+				data->index_s_err = i;
 		}
 		else if (data->line[i] == '\"')
 		{
-			data->doubl_quotes = i;
-			i++;
+			data->doubl_quotes = i++;
 			if (ft_strchr_mod(data->line + i, '\"') || data->line[i] == '\"')
 				data->doubl_quotes = 0;
 			i += ft_strchr_mod(data->line + i, '\"');
+			if (data->doubl_quotes != 0)
+				data->index_s_err = i;
 		}
 	}
 	return (get_index_quotes(data));
@@ -65,8 +100,17 @@ t_src	*syntax_error(t_src *data)
 {
 	data->line = line_corector(data->line);
 	if (data->line[0] == '|' || data->line[0] == ')' || data->line[0] == ';')
-		printf(" syntax error near unexpected token `|;)\n"); // grel exit funkcia
+	{
+		get_frst_element(data->line, data);
+		print_eyntax_err(data);// grel exit funkcia
+		return (data);
+	}
 	if (check_and_break_parentheses(data))
-		printf(" syntax error near unexpected token `\'\"\n"); // grel exit funkcia
+	{
+		print_eyntax_err(data);// grel exit funkcia
+		return (data);
+	}
+	data = get_tokens(data);
+	add_sintex_error(data);
 	return (data);
 }

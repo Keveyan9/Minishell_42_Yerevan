@@ -6,11 +6,11 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:46:31 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:10:58 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/20 23:11:10 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 static int	get_start(const char *str)
 {

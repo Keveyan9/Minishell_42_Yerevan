@@ -6,18 +6,19 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 18:17:47 by artadevo          #+#    #+#             */
-/*   Updated: 2023/02/04 16:21:12 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/07 22:47:40 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 void	ft_read_l(t_src *data)
 {
 	free (data->line);
 	data->line = readline("mini$ ");
-	
-	//data = ft_parser(data);
+	// if (data->line)
+	// 	add_history(data->line);
+	// //data = ft_parser(data);
 		printf("[%s]\n", data->line);
 	return ;
 }
