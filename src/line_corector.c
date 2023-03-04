@@ -12,9 +12,9 @@
 
 #include "../inc/minishell.h"
 
-static int	get_start(const char *str)
+static int get_start(const char *str)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (str[++i])
@@ -23,9 +23,9 @@ static int	get_start(const char *str)
 	return (0);
 }
 
-static int	get_end(const char *str)
+static int get_end(const char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i])
@@ -40,11 +40,11 @@ static int	get_end(const char *str)
 	return (0);
 }
 
-char	*line_corector(char *line)
+char *line_corector(char *line)
 {
-	int		start;
-	int		end;
-	char	*tmp;
+	int start;
+	int end;
+	char *tmp;
 
 	start = get_start(line);
 	end = get_end(line);

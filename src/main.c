@@ -10,15 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
-
-int	main(int ac, char **av, char **env)
+#include "minishell.h"
+int main(int ac, char **av, char **env)
 {
-	t_src	*data;
-
+	t_src *data;
+	t_cl_in *in;
+	pid_t pid;
 	(void)ac;
 	(void)av;
-	data = malloc (sizeof(t_src));
+	int flag = 1;
+	data = malloc(sizeof(t_src));
+	pid = 0;
 	if (!data)
 		return (0);
 	data = all_input(data, env);
@@ -28,5 +30,21 @@ int	main(int ac, char **av, char **env)
 		ft_read_l(data);
 		data = syntax_error(data);
 	}
+	
+	// data->ferst_child = 0;
+	// data->pipes_count = 2;
+	// clin(data);
+	// ////	// coll_comands(data);
+	// if (data->pipes_count == 0)
+	// {
+	// 	if (chek_coll_builtin(data) == 1)
+	// 		alone_child(data);
+
+	// }
+	// else
+	// 	realaysing(data);
+	//  oll_free(data);
+    // printf("test\n");
 	return (0);
+		//mnac piperi pahe dzem haskanam inch e linum
 }

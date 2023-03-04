@@ -19,6 +19,8 @@ void	ft_read_l(t_src *data)
 	// if (data->line)
 	// 	add_history(data->line);
 	// //data = ft_parser(data);
-		printf("[%s]\n", data->line);
-	return ;
+//	data->line = readline("mini$ ");
+	// //data = ft_parser(data);
+	// 	printf("[%s]\n", data->line);
+	// return ;
 }
