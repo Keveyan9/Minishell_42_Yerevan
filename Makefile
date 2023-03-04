@@ -34,7 +34,7 @@ INCLUDES		=	$(INC) $(READLINE)
 
 LINKERS			=	-L$(READLINE_LIB) -lreadline -L$(LIBFT_DIR) -lft
 
-CFLAGS			=	*.a #-Wall -Wextra # -Werror # m-fsanitize=address -g
+CFLAGS			=	#-Wall -Wextra -Werror # m-fsanitize=address -g
 
 OBJS_DIR		=	objs
 
@@ -78,7 +78,6 @@ readline: $(READLINE_OUT)
 	@cd readline && ./configure --prefix=$(PREFIX) && make clean && make && make install
 
 .PHONY: all clean fclean re readline
-
 # NAME =  minishell
 
 # CC = cc

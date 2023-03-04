@@ -56,7 +56,7 @@ t_env *start_input_env(char **env)
 	return (env_list);
 }
 
-void	*start_input(t_src *data, char **env)
+void	start_input(t_src *data, char **env)
 {
 	data->line = NULL;
 	data->error = 0;

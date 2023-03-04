@@ -18,7 +18,6 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include  "ft_printf.h"
 # include "../libft/libft.h"
 #include <sys/wait.h>
 
@@ -118,7 +117,7 @@ char	*line_corector(char *line);
 //------src------syntax_error.c-------
 t_src	*syntax_error(t_src *data);
 //------src------input_data.c------------
-void	*start_input(t_src *data, char **env);//stex poxel em void 
+void	start_input(t_src *data, char **env);//stex poxel em void 
 t_env	*start_input_env(char **env);
 //------src------str_utils.c------------
 size_t	ft_strlen(const char *s);

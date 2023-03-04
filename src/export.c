@@ -86,7 +86,7 @@ void	export(t_src *data)
 		{
 			if (!ft_isalpha(data->cl_in->word[var.row][0]))
 			{
-				ft_printf("is not valid argument %s\n", data->cl_in->word[var.row]);
+				printf("is not valid argument %s\n", data->cl_in->word[var.row]);
 				break ;
 			}
 			var.i = find_index(data->cl_in->word[var.row], '=');

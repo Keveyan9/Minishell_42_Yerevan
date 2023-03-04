@@ -23,9 +23,11 @@ int main(int ac, char **av, char **env)
 	pid = 0;
 	if (!data)
 		return (0);
-	start_input(data, env);
+
+    start_input(data, env);
+    //printf("test\n");
 	data->ferst_child = 0;
-	data->pipes_count = 3;
+	data->pipes_count = 2;
 	clin(data);
 	////	// coll_comands(data);
 	if (data->pipes_count == 0)
@@ -36,6 +38,7 @@ int main(int ac, char **av, char **env)
 	else
 		realaysing(data);
 	 oll_free(data);
+    printf("test\n");
 	return (0);
 	//	mnac piperi pahe dzem haskanam inch e linum
 }
