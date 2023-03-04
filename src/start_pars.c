@@ -6,11 +6,11 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 21:15:07 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:11:09 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/20 23:11:01 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 t_src *ft_parser(t_src *data)
 {

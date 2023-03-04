@@ -6,9 +6,12 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:28:12 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:08:09 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:07:00 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+// <<<<<<< HEAD
+
+// #include "../inc/minishell.h"
 #include "minishell.h"
 
 t_env	*new_node(t_env *env_list)
@@ -56,9 +59,20 @@ t_env *start_input_env(char **env)
 	return (env_list);
 }
 
-void	start_input(t_src *data, char **env)
+t_src	*all_input(t_src *data, char **env)
+{
+	data->env = start_input_env(env);
+	data = start_input(data);
+	return (data);
+}
+
+t_src	*start_input(t_src *data)
 {
 	data->line = NULL;
 	data->error = 0;
-	data->env = start_input_env(env);
+	data->syntax_err = 0;
+	data->doubl_quotes = 0;
+	data->single_quotes = 0;
+	data->token_list = NULL;
+	return (data);
 }

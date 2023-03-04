@@ -6,7 +6,7 @@
 #    By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/23 15:15:32 by artadevo          #+#    #+#              #
-#    Updated: 2023/01/22 21:59:01 by artadevo         ###   ########.fr        #
+#    Updated: 2023/01/22 22:42:41 by artadevo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ readline: $(READLINE_OUT)
 	@cd readline && ./configure --prefix=$(PREFIX) && make clean && make && make install
 
 .PHONY: all clean fclean re readline
+
 # NAME =  minishell
 
 # CC = cc
@@ -154,5 +155,3 @@ readline: $(READLINE_OUT)
 # re:	fclean all
 
 # .PHONY: all clean fclean re bonus
-
-

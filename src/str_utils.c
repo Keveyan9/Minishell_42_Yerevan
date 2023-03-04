@@ -6,11 +6,11 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:49:01 by artadevo          #+#    #+#             */
-/*   Updated: 2023/01/22 20:41:21 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/02/20 23:10:57 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/minishell.h"
 
 char	*ft_str_env_cmp(char const *s, int start, int end)
 {
@@ -36,7 +36,7 @@ char	*ft_str_env_cmp(char const *s, int start, int end)
 int	ft_strchr_mod(const char *s, char c)
 {
 	int	i;
-
+//printf("%s\n", s);
 	if (!s)
 		return (0);
 	i = 0;
@@ -48,16 +48,6 @@ int	ft_strchr_mod(const char *s, char c)
 	}
 	return (0);
 }
-
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (s[i] != '\0')
-// 		i++;
-// 	return (i);
-// }
 
 void	error_print(char *s, char *c)
 {
