@@ -14,7 +14,7 @@
 
 void	ft_read_l(t_src *data)
 {
-	data->line = readline("mini$ ");
+//	data->line = readline("mini$ ");
 	
 	//data = ft_parser(data);
 		printf("[%s]\n", data->line);

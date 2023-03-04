@@ -34,7 +34,7 @@ INCLUDES		=	$(INC) $(READLINE)
 
 LINKERS			=	-L$(READLINE_LIB) -lreadline -L$(LIBFT_DIR) -lft
 
-CFLAGS			=	-Wall -Wextra -Werror # m-fsanitize=address -g
+CFLAGS			=	*.a #-Wall -Wextra # -Werror # m-fsanitize=address -g
 
 OBJS_DIR		=	objs
 
