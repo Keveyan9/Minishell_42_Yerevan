@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 17:50:44 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/04 21:55:48 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:06:09 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int main(int ac, char **av, char **env)
 		data = start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
-		// if (data->pipes_count == 0)
-		// {
-		// 	if (chek_coll_builtin(data) == 1)
-		// 		alone_child(data);
-		// }
-		// else
-		// 	realaysing(data);
-		// oll_free(data);
+		if (data->pipes_count == 0)
+		{
+			if (chek_coll_builtin(data) == 1)
+				alone_child(data);
+		}
+		else
+			realaysing(data);
+		oll_free(data);
 	}
 	return (0);
 }	

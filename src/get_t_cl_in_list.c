@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:35:47 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/05 18:30:35 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:05:53 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	get_t_cl_in_list(t_src *data)
 		}
 		data->token_list = data->token_list->next;
 	}
-	print_t_cl_in(data);
+	// print_t_cl_in(data); // heto jnji
+	tokens_list_start(data);
 }
 
 t_cl_in	*new_node_t_cl_in(char *str, t_cl_in *cl_in)
