@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:35:47 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/05 15:00:48 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:30:35 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ t_cl_in	*new_node_t_cl_in(char *str, t_cl_in *cl_in)
 	node = (t_cl_in *)malloc(sizeof(t_cl_in));
 	if (!node)
 		return (0);
-	node->oll = str;
+	node->oll = ft_strdup(str);
 	node->word = ft_split(str, ' ');
-	node->id = node->word[0];
+	node->id = ft_strdup(node->word[0]);
 	node->next = NULL;
 	node->prev = cl_in;
 	if (cl_in)
