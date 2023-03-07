@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:37:41 by artadevo          #+#    #+#             */
-/*   Updated: 2023/02/22 20:41:21 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:04:41 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	tokens_list_start(t_src *data)
 	t_tokens	*tmp;
 
 	tmp = data->token_list;
-	while (tmp->prev)
+	while (tmp && tmp->prev)
 		tmp = tmp->prev;
 	data->token_list = tmp;
 }
@@ -72,7 +72,7 @@ void	tokens_list_last(t_src *data)
 	t_tokens	*tmp;
 
 	tmp = data->token_list;
-	while (tmp->next)
+	while (tmp && tmp->next)
 		tmp = tmp->next;
 	data->token_list = tmp;
 }

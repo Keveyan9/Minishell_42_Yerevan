@@ -6,15 +6,15 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:46:31 by artadevo          #+#    #+#             */
-/*   Updated: 2023/02/20 23:11:10 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/04 22:13:06 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int get_start(const char *str)
+static int	get_start(const char *str)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (str[++i])
@@ -23,9 +23,9 @@ static int get_start(const char *str)
 	return (0);
 }
 
-static int get_end(const char *str)
+static int	get_end(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -40,11 +40,11 @@ static int get_end(const char *str)
 	return (0);
 }
 
-char *line_corector(char *line)
+char	*line_corector(char *line)
 {
-	int start;
-	int end;
-	char *tmp;
+	int		start;
+	int		end;
+	char	*tmp;
 
 	start = get_start(line);
 	end = get_end(line);

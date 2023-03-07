@@ -6,17 +6,16 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:28:12 by artadevo          #+#    #+#             */
-/*   Updated: 2023/02/20 14:07:00 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/05 14:26:03 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-// <<<<<<< HEAD
 
 // #include "../inc/minishell.h"
 #include "minishell.h"
 
 t_env	*new_node(t_env *env_list)
 {
-	t_env *node;
+	t_env	*node;
 
 	node = (t_env *)malloc(sizeof(t_env));
 	if (!node)
@@ -30,11 +29,11 @@ t_env	*new_node(t_env *env_list)
 	return (node);
 }
 
-t_env *start_input_env(char **env)
+t_env	*start_input_env(char **env)
 {
-	t_env *env_list;
-	int i;
-	int k;
+	t_env	*env_list;
+	int		i;
+	int		k;
 
 	i = 0;
 	k = ft_strchr_mod(env[i], '=');
@@ -69,10 +68,16 @@ t_src	*all_input(t_src *data, char **env)
 t_src	*start_input(t_src *data)
 {
 	data->line = NULL;
-	data->error = 0;
+	data->index_s_err = 0;
 	data->syntax_err = 0;
 	data->doubl_quotes = 0;
 	data->single_quotes = 0;
+	data->error = 0;
+	data->pipes_count = 0;
+	data->ferst_child = 0;
+	data->ciqel = 0;
+	data->ferst_child = 0;
 	data->token_list = NULL;
+	data->cl_in = NULL;
 	return (data);
 }

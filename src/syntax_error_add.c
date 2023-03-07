@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:10:31 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/03 11:41:01 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/05 12:57:54 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,18 @@ void	add_sintex_error(t_src *data)
 		printf(" syntax error near unexpected token `|'\n"); // grel exit funkcia
 	if (get_redir_syntax_err(data) != 0)
 		printf(" syntax error near unexpected token `<>'\n"); // grel exit funkcia || bolor depqeri hamar > , >>,>>>,>>>>,<,<<,<<<,<<<<,<>,<>>,<<>>, ev ayln
-	tmp = NULL;
+	tokens_list_start(data);
+	tmp = data->token_list;
+	while (tmp && tmp->next != NULL)
+	{
+		if (tmp->type == 0)
+			data->pipes_count += 1;
+		tmp = tmp->next;
+	}
+	get_t_cl_in_list(data);
 	// print_tokens(data); // verjum jnji funkcian
 }
 
 // 
 //2) mini$ <<     newline
-//3)
+//3)bahe
