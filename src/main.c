@@ -27,19 +27,17 @@ int main(int ac, char **av, char **env)
 	{
 		data = start_input(data);
 		ft_read_l(data);
-		data = syntax_error(data);
-		print_t_cl_in(data);
-		// if (data->pipes_count == 0)
-		// {
-		// 	if (chek_coll_builtin(data) == 1);
-		// 		//alone_child(data);
-		// }
-		// else
-		// 	realaysing(data);
-		// print_t_cl_in(data);
+		//data = syntax_error(data);
+		clin(data);
+		if (data->pipes_count == 0)
+		{
+			if (chek_coll_builtin(data) == 1);
+				//alone_child(data);
+		}
+		else
+			realaysing(data);
 		// oll_free(data);
 	}
 	// free(data);
 	return (0);
 }
-// ////	// coll_comands(data);

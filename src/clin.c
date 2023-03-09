@@ -17,8 +17,8 @@ void	clin(t_src *data)
 	data->cl_in = malloc(sizeof(t_cl_in));
 	data->cl_in->prev = NULL;
 	data->cl_in->id = ft_strdup("export");
-	data->cl_in->word = ft_split("export",' ');
-	data->cl_in->oll = ft_strdup("export test+=45");
+	data->cl_in->word = ft_split("export test=452 test5",' ');
+	data->cl_in->oll = ft_strdup("export");
 	data->cl_in->next = malloc(sizeof(t_cl_in) );
 	data->cl_in->next->prev=data->cl_in;
 	data->cl_in=data->cl_in->next;

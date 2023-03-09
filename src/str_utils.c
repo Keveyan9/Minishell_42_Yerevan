@@ -12,19 +12,19 @@
 
 #include "../inc/minishell.h"
 
-char	*ft_str_env_cmp(char const *s, int start, int end)
+char *ft_str_env_cmp(char const *s, int start, int end)
 {
-	int		i;
-	char	*str;
+	int i;
+	char *str;
 
 	i = start;
 	while (s[i] && i < end)
 		i++;
-	str = (char *)malloc(sizeof(char)*(i + 1));
+	str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!str)
 		return (0);
 	i = 0;
-	while (s[start + i] && i < (end - start))
+	while (s[start + i] && i <= (end - start))
 	{
 		str[i] = s[start + i];
 		i++;
@@ -33,9 +33,9 @@ char	*ft_str_env_cmp(char const *s, int start, int end)
 	return (str);
 }
 
-int	ft_strchr_mod(const char *s, char c)
+int ft_strchr_mod(const char *s, char c)
 {
-	int	i;
+	int i;
 	if (!s)
 		return (0);
 	i = 0;
@@ -48,12 +48,12 @@ int	ft_strchr_mod(const char *s, char c)
 	return (0);
 }
 
-void	error_print(char *s, char *c)
+void error_print(char *s, char *c)
 {
 	printf("\n%d\n", (int)ft_strlen(c));
-	write (2, s, ft_strlen(s));
-	write (2, c, ft_strlen(c));
-	write (2, "\'\n", 2);
+	write(2, s, ft_strlen(s));
+	write(2, c, ft_strlen(c));
+	write(2, "\'\n", 2);
 }
 
 //---es togic heto sax jnji------V
@@ -64,7 +64,7 @@ void write_env_list(t_env *node, char **env)
 	while (node->next)
 	{
 		printf("env-> [%s]\n", env[i]);
-		printf("key-> [%s]\nvalue-> [%s]\n",node->key, node->value);
+		printf("key-> [%s]\nvalue-> [%s]\n", node->key, node->value);
 		node = node->next;
 		i++;
 	}

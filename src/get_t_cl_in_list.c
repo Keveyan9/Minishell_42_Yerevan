@@ -28,7 +28,6 @@ void	get_t_cl_in_list(t_src *data)
 			free(str);
 			str = NULL;
 		}
-		printf("token __%s\n ",data->token_list->token);
 		data->token_list = data->token_list->next;
 	}
 	// print_t_cl_in(data); // heto jnji
