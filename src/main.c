@@ -14,30 +14,32 @@
 
 int main(int ac, char **av, char **env)
 {
-	t_src	*data;
+	t_src *data;
 	// t_cl_in	*in;
-	// pid_t	pid;
+	pid_t pid;
 	(void)ac;
 	(void)av;
 	data = malloc(sizeof(t_src));
 	if (!data)
 		return (0);
-	data = all_input(data, env);
+	all_input(data, env);
 	while (1)
 	{
 		data = start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
-		if (data->pipes_count == 0)
-		{
-			if (chek_coll_builtin(data) == 1)
-				alone_child(data);
-		}
-		else
-			realaysing(data);
-		oll_free(data);
+		print_t_cl_in(data);
+		// if (data->pipes_count == 0)
+		// {
+		// 	if (chek_coll_builtin(data) == 1);
+		// 		//alone_child(data);
+		// }
+		// else
+		// 	realaysing(data);
+		// print_t_cl_in(data);
+		// oll_free(data);
 	}
+	// free(data);
 	return (0);
-}	
-// clin(data);
-	// ////	// coll_comands(data);
+}
+// ////	// coll_comands(data);

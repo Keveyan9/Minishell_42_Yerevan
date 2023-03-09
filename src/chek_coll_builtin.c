@@ -14,24 +14,22 @@
 
 int	chek_coll_builtin(t_src *data)
 {
-	int	len;
-
-	len = ft_strlen(data->cl_in->id);
-	if (!ft_strncmp(data->cl_in->id, "echo", len))
+	//printf("%d\n",ft_strncmp(data->cl_in->id, "pwd",));
+	if (ft_strlen(data->cl_in->id) == 4 && ft_strncmp(data->cl_in->id, "echo", 4) == 0)
 		echo(data);
-	else if (!ft_strncmp(data->cl_in->id, "cd", len))
+	else if ( ft_strlen(data->cl_in->id) == 2 && ft_strncmp(data->cl_in->id, "cd", 2) == 0)
 		cd(data);
-	else if (!ft_strncmp(data->cl_in->id, "pwd", len))
+	else if (ft_strlen(data->cl_in->id) == 3 && ft_strncmp(data->cl_in->id, "pwd", 3) == 0)
 		pwd();
-	else if (!ft_strncmp(data->cl_in->id, "export", len))
+	else if (ft_strlen(data->cl_in->id) == 6 && ft_strncmp(data->cl_in->id, "export",6) == 0 )
 		export(data);
-	else if (!ft_strncmp(data->cl_in->id, "unset", len))
+	else if (ft_strlen(data->cl_in->id) == 5 && ft_strncmp(data->cl_in->id, "unset", 5) == 0 )
 		unset(data);
-	else if (!ft_strncmp(data->cl_in->id, "env", len))
+	else if (ft_strlen(data->cl_in->id) == 3 && ft_strncmp(data->cl_in->id, "env", 3) == 0 )
 		env_f(data);
-	else if (!ft_strncmp(data->cl_in->id, "exit", len))
+	else if (ft_strlen(data->cl_in->id) == 4 && ft_strncmp(data->cl_in->id, "exit", 4) == 0)
 		printf("#############exit############\n");
 	else
 		return (1);
-	return (0);
+	 return (0);
 }

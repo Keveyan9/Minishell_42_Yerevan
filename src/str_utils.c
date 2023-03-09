@@ -20,11 +20,11 @@ char	*ft_str_env_cmp(char const *s, int start, int end)
 	i = start;
 	while (s[i] && i < end)
 		i++;
-	str = (char *)malloc(i + 1);
+	str = (char *)malloc(sizeof(char)*(i + 1));
 	if (!str)
 		return (0);
 	i = 0;
-	while (s[start + i] && i <= (end - start))
+	while (s[start + i] && i < (end - start))
 	{
 		str[i] = s[start + i];
 		i++;
@@ -36,7 +36,6 @@ char	*ft_str_env_cmp(char const *s, int start, int end)
 int	ft_strchr_mod(const char *s, char c)
 {
 	int	i;
-//printf("%s\n", s);
 	if (!s)
 		return (0);
 	i = 0;

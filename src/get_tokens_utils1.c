@@ -51,7 +51,7 @@ t_src	*find_space(char *s, t_src *data)
 	k = ft_strlen(data->line);
 	while (s[i] && s[i] == ' ')
 		i++;
-	data->token_list = new_node_tokens(" ", SPACE, data->token_list);
+	data->token_list = new_node_tokens(" ", SPAC, data->token_list);
 	tmp = ft_substr(data->line, i, k);
 	free(data->line);
 	data->line = tmp;
