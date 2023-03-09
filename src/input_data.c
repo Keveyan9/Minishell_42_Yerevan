@@ -39,15 +39,15 @@ t_env	*start_input_env(char **env)
 	k = ft_strchr_mod(env[i], '=');
 	// i chench in hear thats new_ned need doing only creat now nod it wrong when great and give valu
 	env_list = new_node(NULL);
-	env_list->key = ft_str_env_cmp(env[i], 0, k - 1);
+	env_list->key = ft_str_env_cmp(env[i], 0, k);
 	env_list->value = ft_str_env_cmp(env[i], k + 1, ft_strlen(env[i]));
 	env_list->flag = 0; // karoga heto petq lini popoxel kamel che????
-	i++;
+	 i++;
 	while (env[i])
 	{
 		k = ft_strchr_mod(env[i], '=');
 		env_list = new_node(env_list);
-		env_list->key = ft_str_env_cmp(env[i], 0, k - 1);
+		env_list->key = ft_str_env_cmp(env[i], 0, k );
 		env_list->value = ft_str_env_cmp(env[i], k + 1, ft_strlen(env[i]));
 		env_list->flag = 0; // karoga heto petq lini popoxel kamel che????
 		i++;

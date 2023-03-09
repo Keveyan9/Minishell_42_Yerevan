@@ -22,6 +22,7 @@ void	alone_child(t_src *data)
 	else if (pid > 0)
 	{
 		coll_comands(data);
+		printf("test  %s\n",data->cl_in->id);
 		oll_free(data);
 		exit(0);
 	}

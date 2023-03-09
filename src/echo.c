@@ -20,7 +20,8 @@ static void	call_dolar(char *s, t_src *data, int n)
 	{
 		if (s[n - 1] == '$' && s[n] == '?')
 		{
-			printf("%d", data->error);
+			//printf("%d", data->error);
+			write(1,"stex petqa poxel echon",22);
 			n = n + 2;
 		}
 		else
@@ -50,9 +51,9 @@ static void	echo_print(t_src *data, int *calem, int *row, int *flag)
 			write(1, " ", 1);
 		*row = 0;
 		(*calem)++;
+	}
 		if (*flag)
 			write(1, "\n", 1);
-	}
 }
 
 void	echo(t_src *data)
@@ -64,7 +65,7 @@ void	echo(t_src *data)
 	calem = 1;
 	flag = 1;
 	row = 0;
-	if (data->cl_in->word[1][0] == '-' && data->cl_in->word[1][1] == 'n')
+	if (data->cl_in->word[1] && data->cl_in->word[1][0] == '-' && data->cl_in->word[1][1] == 'n')
 	{
 		while (data->cl_in->word[1][++calem] == 'n')
 			;

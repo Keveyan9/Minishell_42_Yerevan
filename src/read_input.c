@@ -12,14 +12,18 @@
 
 #include "../inc/minishell.h"
 
-void	ft_read_l(t_src *data)
+void ft_read_l(t_src *data)
 {
-	free (data->line);
-	data->line = readline("mini$ ");
 	if (data->line)
-		add_history(data->line);
+		free(data->line);
+	data->line = readline("mini$ ");
+	// data->cl_in = malloc (sizeof(t_cl_in)*1);
+	// data->cl_in->oll = data->line;
+	// data->cl_in->word = ft_split(data->line, ' ');
+	// data->cl_in->id = data->cl_in->word[0];
+	//	add_history(data->line);
 	// //data = ft_parser(data);
-//	data->line = readline("mini$ ");
+	//	data->line = readline("mini$ ");
 	// //data = ft_parser(data);
 	// 	printf("[%s]\n", data->line);
 	// return ;
