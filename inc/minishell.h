@@ -40,6 +40,7 @@ typedef struct s_env
 	char *value;
 	int flag;
 	int flag_p;
+	int  place;
 
 	struct s_env *next;
 	struct s_env *prev;

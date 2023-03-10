@@ -27,17 +27,18 @@ int main(int ac, char **av, char **env)
 	{
 		data = start_input(data);
 		ft_read_l(data);
-		//data = syntax_error(data);
-		clin(data);
+		// clin(data);
+		// data = syntax_error(data);
+		printf("%d\n", ft_strncmp("wf", "gaga", 100));
 		if (data->pipes_count == 0)
 		{
 			if (chek_coll_builtin(data) == 1);
-				//alone_child(data);
+			// alone_child(data);
 		}
 		else
 			realaysing(data);
 		// oll_free(data);
+		// free(data);
 	}
-	// free(data);
 	return (0);
 }

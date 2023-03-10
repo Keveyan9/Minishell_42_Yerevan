@@ -14,7 +14,7 @@
 
 int	chek_coll_builtin(t_src *data)
 {
-	//printf("%d\n",ft_strncmp(data->cl_in->id, "pwd",));
+	//printf("%s\n",data->cl_in->id);
 	if (ft_strlen(data->cl_in->id) == 4 && ft_strncmp(data->cl_in->id, "echo", 4) == 0)
 		echo(data);
 	else if ( ft_strlen(data->cl_in->id) == 2 && ft_strncmp(data->cl_in->id, "cd", 2) == 0)
