@@ -13,6 +13,8 @@
 
 void	free_env(t_src *data)
 {
+	while (data->env->prev)
+		data->env = data->env->prev;
 	while (data->env)
 	{
 		if (data->env->key)
@@ -22,11 +24,13 @@ void	free_env(t_src *data)
 		if (data->env->next != NULL)
 		{
 			data->env = data->env->next;
-			free(data->env->prev);
+			if(data->env->prev)
+				free(data->env->prev);
 		}
 		else
 		{
-			free(data->env);
+			if(data->env)
+				free(data->env);
 			break ;
 		}
 	}

@@ -18,7 +18,7 @@ char *ft_str_env_cmp(char const *s, int start, int end)
 	char *str;
 
 	i = start;
-	while (s[i] && i < end)
+	while (s[i] && i <  end)
 		i++;
 	str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!str)

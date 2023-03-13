@@ -16,7 +16,7 @@ void	clin(t_src *data)
 {
 	data->cl_in = malloc(sizeof(t_cl_in));
 	data->cl_in->prev = NULL;
-	data->cl_in->id = ft_strdup("echo");
+	data->cl_in->id = ft_strdup("cd");
 	data->cl_in->word = ft_split("echo  wfwa$? wfaf$$?",' ');
 	data->cl_in->oll = ft_strdup("echo");
 	data->cl_in->next = malloc(sizeof(t_cl_in) );

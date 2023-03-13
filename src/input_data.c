@@ -13,59 +13,71 @@
 // #include "../inc/minishell.h"
 #include "minishell.h"
 
-t_env	*new_node(t_env *env_list)
+int new_node(t_src *data)
 {
-	t_env	*node;
+	t_env *node;
 
 	node = (t_env *)malloc(sizeof(t_env));
 	if (!node)
-		return (0);
-	while (env_list && env_list->next != NULL)
-		env_list = env_list->next;
+		return (1);
 	node->next = NULL;
-	node->prev = env_list;
-	if (env_list)
-		env_list->next = node;
-	return (node);
+	while (data->env && data->env->next != NULL)
+		data->env = data->env->next;
+	if (data->env)
+	{
+		node->prev = data->env;
+		data->env->next = node;
+		data->env = node;
+	}
+	else
+	{
+		node->prev = NULL;
+		data->env = node;
+	}
+	return (0);
 }
 
-t_env	*start_input_env(char **env)
+int start_input_env(char **env, t_src *data)
 {
-	t_env	*env_list;
-	int		i;
-	int		k;
+	int i;
+	int k;
+	size_t len;
+	data->env = NULL;
 
+	len = 0;
 	i = 0;
-	k = ft_strchr_mod(env[i], '=');
-	// i chench in hear thats new_ned need doing only creat now nod it wrong when great and give valu
-	env_list = new_node(NULL);
-	env_list->key = ft_str_env_cmp(env[i], 0, k);
-	env_list->value = ft_str_env_cmp(env[i], k + 1, ft_strlen(env[i]));
-	env_list->flag = 0; // karoga heto petq lini popoxel kamel che????
-	 i++;
+	k = 0;
+
 	while (env[i])
 	{
+		len = ft_strlen(env[i]);
 		k = ft_strchr_mod(env[i], '=');
-		env_list = new_node(env_list);
-		env_list->key = ft_str_env_cmp(env[i], 0, k );
-		env_list->value = ft_str_env_cmp(env[i], k + 1, ft_strlen(env[i]));
-		env_list->flag = 0; // karoga heto petq lini popoxel kamel che????
+		if (new_node(data))
+		{
+			printf("can not creat env_list\n");
+			return (1);
+		}
+		data->env->key = (char *) malloc(sizeof(char ) * (k + 1));
+		data->env->value = (char *) malloc (sizeof(char) * (len - k + 1));
+		if(!(data->env->key)&& data->env->value)
+			return (1);
+		ft_strlcpy(data->env->key, env[i], k + 1);
+		ft_strlcpy(data->env->value, &(env[i][k + 1]), (len - k));
+		data->env->flag_p = 0;
 		i++;
 	}
-	while (env_list->prev)
-		env_list = env_list->prev;
-	// write_env_list(env_list, env);
-	return (env_list);
+	while (data->env->prev)
+		data->env = data->env->prev;
+	return (0);
 }
 
-t_src	*all_input(t_src *data, char **env)
+int all_input(t_src *data, char **env)
 {
-	data->env = start_input_env(env);
-	data = start_input(data);
-	return (data);
+	start_input(data);
+	return (start_input_env(env, data));
 }
 
-t_src	*start_input(t_src *data)
+void start_input(t_src *data)
 {
 	data->line = NULL;
 	data->index_s_err = 0;
@@ -79,5 +91,4 @@ t_src	*start_input(t_src *data)
 	data->ferst_child = 0;
 	data->token_list = NULL;
 	data->cl_in = NULL;
-	return (data);
 }

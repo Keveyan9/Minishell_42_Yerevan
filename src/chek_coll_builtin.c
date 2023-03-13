@@ -15,6 +15,8 @@
 int	chek_coll_builtin(t_src *data)
 {
 	//printf("%s\n",data->cl_in->id);
+	if(data->cl_in)
+	{
 	if (ft_strlen(data->cl_in->id) == 4 && ft_strncmp(data->cl_in->id, "echo", 4) == 0)
 		echo(data);
 	else if ( ft_strlen(data->cl_in->id) == 2 && ft_strncmp(data->cl_in->id, "cd", 2) == 0)
@@ -31,5 +33,6 @@ int	chek_coll_builtin(t_src *data)
 		printf("#############exit############\n");
 	else
 		return (1);
+	}
 	 return (0);
 }

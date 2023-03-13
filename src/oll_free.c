@@ -13,7 +13,9 @@
 
 void	oll_free(t_src *data)
 {
-	free_env(data);
-	free_clin(data);
-	// free(data);
+	if(data->env)
+		free_env(data);
+	 if(data->cl_in)
+	 	free_clin(data);
+	free(data);
 }

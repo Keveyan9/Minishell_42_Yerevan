@@ -43,13 +43,14 @@ static int	chek_key(char *s)
 
 static int	clin_creat(char **s, int lenqt)
 {
-	*s = (char *)malloc(sizeof(lenqt));
+	*s = (char *)malloc(sizeof(char)*lenqt);
+	//stex cerq em tvel sizof mejj lenqt grvac ete inch 13.03.23
 	if (!s)
 		return (1);
 	return (0);
 }
 
-static void	creat_chanch_nod(t_export *var, t_src *data)
+static int	creat_chanch_nod(t_export *var, t_src *data)
 {
 	t_env	*new_nod;
 
@@ -70,7 +71,11 @@ static void	creat_chanch_nod(t_export *var, t_src *data)
 	}
 	else
 	{
-		new_nod = new_node(data->env);
+		if(new_node(data))
+		{
+			printf("can not creat export list\n");
+			return(1);	
+		}
 		new_nod->key = ft_strdup(var->key);
 		new_nod->value = ft_strdup(var->value);
 	}
@@ -94,13 +99,18 @@ static int	campeyr (t_src *data, t_export *var)
 					free(var->value);
 					return (1);
 				}
-				creat_chanch_nod(var, data);
+				if(creat_chanch_nod(var, data))
+					return(1);
 			}
 			else
 			{
 				if (chek_key(data->cl_in->word[var->row]))
 					return(1);
-				new_nod = new_node(data->env);
+				if(new_node(data))
+				{
+					printf("can not creat export list\n");
+					return(1);	
+				}
 				new_nod->key = ft_strdup(data->cl_in->word[var->row]);
 				new_nod->value = NULL;
 				}
@@ -134,6 +144,6 @@ void	export(t_src *data)
 			var.row++;
 		}
 	}
-	else
-		print_export(data);
+	else;
+		//print_export(data);
 }
