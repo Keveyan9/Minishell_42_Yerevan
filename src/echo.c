@@ -13,6 +13,7 @@
 
 static void	call_dolar(char *s, t_src *data, int n)
 {
+	char *error;
 	n++;
 	while (s[n] && !(s[n] > 20 && s[n] < 65))
 		n++;
@@ -20,8 +21,9 @@ static void	call_dolar(char *s, t_src *data, int n)
 	{
 		if (s[n - 1] == '$' && s[n] == '?')
 		{
-			//printf("%d", data->error);
-			write(1,"stex petqa poxel echon",22);
+			 error = ft_itoa(data->error);
+			 write(1,error,ft_strlen(error));
+			 free(error);
 			n = n + 2;
 		}
 		else

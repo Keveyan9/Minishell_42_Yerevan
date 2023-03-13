@@ -38,8 +38,8 @@ typedef struct s_env
 {
 	char *key;
 	char *value;
-	int flag;
-	int flag_p;
+	int		flag_p;
+	int		place;
 
 	struct s_env *next;
 	struct s_env *prev;
@@ -126,7 +126,7 @@ void print_tokens(t_src *data); // heto jnji
 t_src *ft_parser(t_src *data);
 //------src------read_input.c------------
 void ft_read_l(t_src *data);
-t_env *new_node(t_env *env_list);
+int	new_node(t_src *data);
 //------src------syntax_error.c-------
 t_src *syntax_error(t_src *data);
 int get_count(char *s, char c);
@@ -140,9 +140,9 @@ int get_redir_syntax_err(t_src *data);
 void get_frst_element(char *s, t_src *data);
 void print_eyntax_err(t_src *data);
 //------src------input_data.c------------
-t_src *all_input(t_src *data, char **env);
-t_src *start_input(t_src *data);
-t_env *start_input_env(char **env);
+int		all_input(t_src *data, char **env);
+void	start_input(t_src *data);
+int		start_input_env(char **env, t_src *data);
 //------src------line_corector.c-------
 char *line_corector(char *line);
 //------src------str_utils.c------------
