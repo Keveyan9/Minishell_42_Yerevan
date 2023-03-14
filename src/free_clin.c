@@ -23,7 +23,7 @@ void	free_clin(t_src *data)
 			frik(data->cl_in->word);
 		if (data->cl_in->oll)
 			free(data->cl_in->oll);
-		if (data->cl_in->next != NULL)
+		if(data->cl_in->next)
 		{
 			data->cl_in = data->cl_in->next;
 			free(data->cl_in->prev);

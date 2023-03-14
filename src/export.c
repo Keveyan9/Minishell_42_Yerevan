@@ -44,7 +44,6 @@ static int	chek_key(char *s)
 static int	clin_creat(char **s, int lenqt)
 {
 	*s = (char *)malloc(sizeof(char)*lenqt);
-	//stex cerq em tvel sizof mejj lenqt grvac ete inch 13.03.23
 	if (!s)
 		return (1);
 	return (0);
@@ -52,8 +51,6 @@ static int	clin_creat(char **s, int lenqt)
 
 static int	creat_chanch_nod(t_export *var, t_src *data)
 {
-	t_env	*new_nod;
-
 	var->find_key = find_env(data->env, var->key);
 	if (var->find_key)
 	{
@@ -76,14 +73,15 @@ static int	creat_chanch_nod(t_export *var, t_src *data)
 			printf("can not creat export list\n");
 			return(1);	
 		}
-		new_nod->key = ft_strdup(var->key);
-		new_nod->value = ft_strdup(var->value);
+		data->env->key = ft_strdup(var->key);
+		data->env->value = ft_strdup(var->value);
+		while (data->env->prev)
+			data->env = data->env->prev;	
 	}
 }
 
 static int	campeyr (t_src *data, t_export *var)
 {
-	t_env		*new_nod;
 
 			if (var->i)
 			{
@@ -111,9 +109,11 @@ static int	campeyr (t_src *data, t_export *var)
 					printf("can not creat export list\n");
 					return(1);	
 				}
-				new_nod->key = ft_strdup(data->cl_in->word[var->row]);
-				new_nod->value = NULL;
-				}
+				data->env->key = ft_strdup(data->cl_in->word[var->row]);
+				data->env->value = NULL;
+				while (data->env->prev)
+					data->env = data->env->prev;
+			}
 				return(0);
 }
 
@@ -132,7 +132,7 @@ void	export(t_src *data)
 		{
 			if (!ft_isalpha(data->cl_in->word[var.row][0]))
 			{
-				non_valid_arg = ft_strjoin("is not valid argumwent name  ",data->cl_in->word[var.row]);
+				non_valid_arg = ft_strjoin("is not valid argumwent name",data->cl_in->word[var.row]);
 				write(1,non_valid_arg,ft_strlen(non_valid_arg));
 				free(non_valid_arg);
 				break ;
@@ -144,6 +144,6 @@ void	export(t_src *data)
 			var.row++;
 		}
 	}
-	else;
-		//print_export(data);
+	else
+		print_export(data);
 }

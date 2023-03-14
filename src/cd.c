@@ -22,13 +22,18 @@ static	void	cd_half(t_src *data)
 	pwd = find_env(data->env, "PWD");
 	if (oldpwd)
 	{
+		write(1,"test\n",5);
+		pwd_flag = 1;
 		free(oldpwd->value);
 		oldpwd->value = NULL;
 		if (pwd)
-		oldpwd->value = pwd->value;
+			oldpwd->value = pwd->value;
+		else
+			oldpwd = NULL;
 	}
 	else if (!pwd_flag && pwd)
 	{
+		write(1,"test2\n",6);
 		pwd_flag = 1;
 		new_node(data);
 		data->env->key = ft_strdup("OLDPWD");

@@ -181,5 +181,5 @@ void clin(t_src *data);
 void child(t_src *data);
 void realaysing(t_src *data);
 void logic(t_src *data);
-void alone_child(t_src *data);
+int alone_child(t_src *data);
 #endif

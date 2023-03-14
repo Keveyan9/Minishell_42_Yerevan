@@ -63,15 +63,15 @@ void print_export(t_src *data)
 	grup = data->env;
 	// while (big >= 0)
 	// {
-	// 	grup = data->env;
+	 	grup = data->env;
 		while (grup)
 		{
-			if (big >= grup->place && grup->flag_p == 0)
-			{
+			// if (big >= grup->place && grup->flag_p == 0)
+			// {
 				printf("__%d__%s=%c%s%c\n", grup->place, grup->key, c, grup->value, c);
 				grup->flag_p = 1;
-				big--;
-			}
+			// 	big--;
+			// }
 			grup = grup->next;
 		//need chanj this moments
 	}
