@@ -21,10 +21,10 @@ int	alone_child(t_src *data)
 		write(1, "can not creat child\n", 20);
 	else if (pid == 0)
 	{
-		printf("test  %s\n",data->cl_in->id);
-		//coll_comands(data);
+		coll_comands(data);
 		oll_free(data);
 		exit(0);
 	}
+	wait(0);
 	return(0);
 }

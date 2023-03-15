@@ -36,8 +36,8 @@ typedef enum s_type
 
 typedef struct s_env
 {
-	char *key;
-	char *value;
+	char 	*key;
+	char 	*value;
 	int		flag_p;
 	int		place;
 
@@ -78,6 +78,8 @@ typedef struct s_src
 	int ferst_child;
 	t_tokens *token_list;
 	t_env *env;
+	t_env *envhead;
+	t_env *envlast;
 	t_cl_in *cl_in;
 } t_src;
 
@@ -126,7 +128,8 @@ void print_tokens(t_src *data); // heto jnji
 t_src *ft_parser(t_src *data);
 //------src------read_input.c------------
 void ft_read_l(t_src *data);
-int	new_node(t_src *data);
+t_env *new_node();
+int put_env_node(t_src *data, t_env *node);
 //------src------syntax_error.c-------
 t_src *syntax_error(t_src *data);
 int get_count(char *s, char c);

@@ -17,12 +17,12 @@ static	void	cd_half(t_src *data)
 	t_env		*oldpwd;
 	t_env		*pwd;
 	static int	pwd_flag;
+	t_env	*newnode;
 
 	oldpwd = find_env(data->env, "OLDPWD");
 	pwd = find_env(data->env, "PWD");
 	if (oldpwd)
 	{
-		write(1,"test\n",5);
 		pwd_flag = 1;
 		free(oldpwd->value);
 		oldpwd->value = NULL;
@@ -33,12 +33,11 @@ static	void	cd_half(t_src *data)
 	}
 	else if (!pwd_flag && pwd)
 	{
-		write(1,"test2\n",6);
 		pwd_flag = 1;
-		new_node(data);
-		data->env->key = ft_strdup("OLDPWD");
-		data->env->value = pwd->value;
-		data->env->flag_p = 0;
+		newnode = new_node();
+		newnode->key = ft_strdup("OLDPWD");
+		newnode->value = pwd->value;
+		put_env_node(data,newnode);
 	}
 	if (pwd)
 		pwd->value = getcwd(NULL, 0);
