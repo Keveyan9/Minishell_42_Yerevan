@@ -59,7 +59,6 @@ int start_input_env(char **env, t_src *data)
 	int k;
 	size_t len;
 	t_env *newnode;
-	data->env = NULL;
 	
 	len = 0;
 	i = 0;
@@ -86,6 +85,8 @@ int start_input_env(char **env, t_src *data)
 
 int all_input(t_src *data, char **env)
 {
+	data->env = NULL;
+	data->error = 0;
 	start_input(data);
 	return (start_input_env(env, data));
 }
@@ -97,7 +98,6 @@ void start_input(t_src *data)
 	data->syntax_err = 0;
 	data->doubl_quotes = 0;
 	data->single_quotes = 0;
-	data->error = 0;
 	data->pipes_count = 0;
 	data->ferst_child = 0;
 	data->ciqel = 0;
