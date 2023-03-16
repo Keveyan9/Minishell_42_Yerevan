@@ -16,6 +16,7 @@ void	realaysing(t_src *data)
 	pid_t	pid;
 
 	pid = 0;
+	write(1,"realayzi\n",9);
 	data->ciqel = 0;
 	data->pip = malloc(sizeof(*(data->pip)) * data->pipes_count);
 	if (!data->pip)

@@ -13,28 +13,44 @@
 // #include "../inc/minishell.h"
 #include "minishell.h"
 
-int new_node(t_src *data)
+t_env *new_node()
 {
 	t_env *node;
 
 	node = (t_env *)malloc(sizeof(t_env));
 	if (!node)
-		return (1);
+	{
+		write(1,"can not env malloc\n",19);
+		return (NULL);
+	}
+	node->flag_p = 0;
+	node->place = 0 ;
+	node->key = NULL;
+	node->value = NULL;
 	node->next = NULL;
-	while (data->env && data->env->next != NULL)
-		data->env = data->env->next;
-	if (data->env)
+	node->prev = NULL;
+	return(node);
+}
+
+int put_env_node(t_src *data, t_env *node)
+{
+	if(data && node)
 	{
-		node->prev = data->env;
-		data->env->next = node;
-		data->env = node;
+		if (!data->env)
+		{
+			data->env = node;
+			data->envhead = node;
+			data->envlast = node;
+		}
+		else 
+		{
+			node->prev = data->envlast;
+			data->envlast->next = node;
+			data->envlast = node;
+		}
+		return(0);
 	}
-	else
-	{
-		node->prev = NULL;
-		data->env = node;
-	}
-	return (0);
+	return (1);
 }
 
 int start_input_env(char **env, t_src *data)
@@ -42,32 +58,29 @@ int start_input_env(char **env, t_src *data)
 	int i;
 	int k;
 	size_t len;
+	t_env *newnode;
 	data->env = NULL;
-
+	
 	len = 0;
 	i = 0;
 	k = 0;
-
 	while (env[i])
 	{
 		len = ft_strlen(env[i]);
 		k = ft_strchr_mod(env[i], '=');
-		if (new_node(data))
-		{
-			printf("can not creat env_list\n");
+		newnode = new_node();
+		if (!newnode)
 			return (1);
-		}
-		data->env->key = (char *) malloc(sizeof(char ) * (k + 1));
-		data->env->value = (char *) malloc (sizeof(char) * (len - k + 1));
-		if(!(data->env->key)&& data->env->value)
+		newnode->key = (char *) malloc(sizeof(char ) * (k + 1));
+		newnode->value = (char *) malloc (sizeof(char) * (len - k + 1));
+		if(!(newnode->key) && !(newnode->value))
 			return (1);
-		ft_strlcpy(data->env->key, env[i], k + 1);
-		ft_strlcpy(data->env->value, &(env[i][k + 1]), (len - k));
-		data->env->flag_p = 0;
+		ft_strlcpy(newnode->key, env[i], k + 1);
+		ft_strlcpy(newnode->value, &(env[i][k + 1]), (len - k));
+		if(put_env_node(data,newnode))
+			return(1);
 		i++;
 	}
-	while (data->env->prev)
-		data->env = data->env->prev;
 	return (0);
 }
 

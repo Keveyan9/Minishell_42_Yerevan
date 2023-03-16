@@ -12,9 +12,30 @@
 
 #include "../inc/minishell.h"
 
-void	get_t_cl_in_list(t_src *data)
+static void free_token(t_src *data)
 {
-	char	*str;
+	while(data->token_list && data->token_list->prev)
+		data->token_list = data->token_list->prev;
+	while(data->token_list)
+	{
+		if(data->token_list->token)
+			free(data->token_list->token);
+		if(data->token_list->next)
+		{
+			data->token_list = data->token_list->next;
+			free(data->token_list->prev);
+		}
+		else
+		{
+			free(data->token_list);
+			break;
+		}
+	}
+}
+
+void get_t_cl_in_list(t_src *data)
+{
+	char *str;
 
 	str = NULL;
 	tokens_list_start(data);
@@ -30,14 +51,16 @@ void	get_t_cl_in_list(t_src *data)
 		}
 		data->token_list = data->token_list->next;
 	}
-	// print_t_cl_in(data); // heto jnji
-	tokens_list_start(data);
+
+ //print_t_cl_in(data); // heto jnji
+//	tokens_list_start(data);
+	free_token(data);
 }
 
-t_cl_in	*new_node_t_cl_in(char *str, t_cl_in *cl_in)
+t_cl_in *new_node_t_cl_in(char *str, t_cl_in *cl_in)
 {
-	t_cl_in	*node;
-	int		i;
+	t_cl_in *node;
+	int i;
 
 	i = 0;
 	node = (t_cl_in *)malloc(sizeof(t_cl_in));
@@ -45,7 +68,10 @@ t_cl_in	*new_node_t_cl_in(char *str, t_cl_in *cl_in)
 		return (0);
 	node->oll = ft_strdup(str);
 	node->word = ft_split(str, ' ');
-	node->id = ft_strdup(node->word[0]);
+	if (node->word[0])
+		node->id = ft_strdup(node->word[0]);
+	else
+		node->id = NULL;
 	node->next = NULL;
 	node->prev = cl_in;
 	if (cl_in)
@@ -56,9 +82,9 @@ t_cl_in	*new_node_t_cl_in(char *str, t_cl_in *cl_in)
 //------verjum jnji --------
 //-----VVVVVVVVVVVVV--------
 
-void		print_t_cl_in(t_src *data)
+void print_t_cl_in(t_src *data)
 {
-	t_cl_in	*tmp;
+	t_cl_in *tmp;
 
 	tmp = data->cl_in;
 	while (tmp->prev != NULL)

@@ -12,10 +12,10 @@
 
 #include "../inc/minishell.h"
 
-int	get_count(char *s, char c)
+int get_count(char *s, char c)
 {
-	int	i;
-	int	count;
+	int i;
+	int count;
 
 	i = -1;
 	count = 0;
@@ -27,9 +27,9 @@ int	get_count(char *s, char c)
 	return (count);
 }
 
-static	int	get_index_quotes_2(t_src *data)
+static int get_index_quotes_2(t_src *data)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (data->doubl_quotes > data->single_quotes)
@@ -39,17 +39,15 @@ static	int	get_index_quotes_2(t_src *data)
 	return (i);
 }
 
-int	get_index_quotes(t_src *data)
+int get_index_quotes(t_src *data)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	if (!data->doubl_quotes && !data->single_quotes)
 	{
 		i = 0;
-		if ((data->line[0] == '\'' || data->line[0] == '\"')
-			&& (get_count(data->line, '\'') == 1
-				|| get_count(data->line, '\"') == 1))
+		if ((data->line[0] == '\'' || data->line[0] == '\"') && (get_count(data->line, '\'') == 1 || get_count(data->line, '\"') == 1))
 		{
 			i = -1;
 			data->index_s_err = 0;
@@ -67,9 +65,9 @@ int	get_index_quotes(t_src *data)
 	return (i);
 }
 
-int	check_and_break_parentheses(t_src *data)
+int check_and_break_parentheses(t_src *data)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (data->line[++i] && i <= (int)ft_strlen(data->line))
@@ -96,21 +94,21 @@ int	check_and_break_parentheses(t_src *data)
 	return (get_index_quotes(data));
 }
 
-t_src	*syntax_error(t_src *data)
+t_src *syntax_error(t_src *data)
 {
 	data->line = line_corector(data->line);
 	if (data->line[0] == '|' || data->line[0] == ')' || data->line[0] == ';')
 	{
 		get_frst_element(data->line, data);
-		print_eyntax_err(data);// grel exit funkcia
+		print_eyntax_err(data); // grel exit funkcia
 		return (data);
 	}
 	if (check_and_break_parentheses(data))
 	{
-		print_eyntax_err(data);// grel exit funkcia
+		print_eyntax_err(data); // grel exit funkcia
 		return (data);
 	}
-	data = get_tokens(data);
-	add_sintex_error(data);
+	 data = get_tokens(data);
+	 add_sintex_error(data);
 	return (data);
 }
