@@ -25,18 +25,25 @@ int main(int ac, char **av, char **env)
 		return (0);
 	while (1)
 	{
-	 	start_input(data);
+		start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
-		if (data->pipes_count == 0)
+		if (data->line)
+			free(data->line);
+		if(data->cl_in)
 		{
-			if (chek_coll_builtin(data) == 1);
-				//alone_child(data);
+			if (data->pipes_count == 0)
+			{
+				if (chek_coll_builtin(data) == 1)
+					 alone_child(data);
+			}
+			else
+				realaysing(data);
+			 if (data->cl_in)
+		 		free_clin(data);
+			free(data->line);
 		}
-		else
-			realaysing(data);
-		free_clin(data);
-	 }
-	  oll_free(data);
+	}
+	oll_free(data);
 	return (0);
 }

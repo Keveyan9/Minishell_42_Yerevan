@@ -44,7 +44,6 @@ static int	chek_key(char *s)
 static int	clin_creat(char **s, int lenqt)
 {
 	*s = (char *)malloc(sizeof(char)*lenqt);
-	//stex cerq em tvel sizof mejj lenqt grvac ete inch 13.03.23
 	if (!s)
 		return (1);
 	return (0);
@@ -52,8 +51,9 @@ static int	clin_creat(char **s, int lenqt)
 
 static int	creat_chanch_nod(t_export *var, t_src *data)
 {
-	t_env	*new_nod;
+	t_env *newnode;
 
+	newnode = NULL;
 	var->find_key = find_env(data->env, var->key);
 	if (var->find_key)
 	{
@@ -71,20 +71,20 @@ static int	creat_chanch_nod(t_export *var, t_src *data)
 	}
 	else
 	{
-		if(new_node(data))
-		{
-			printf("can not creat export list\n");
+		newnode = new_node();
+		if(!newnode)
 			return(1);	
-		}
-		new_nod->key = ft_strdup(var->key);
-		new_nod->value = ft_strdup(var->value);
+		newnode->key = ft_strdup(var->key);
+		newnode->value = ft_strdup(var->value);
+		put_env_node(data,newnode);
 	}
 }
 
 static int	campeyr (t_src *data, t_export *var)
 {
-	t_env		*new_nod;
-
+	t_env *newnode;
+	
+	newnode = NULL;
 			if (var->i)
 			{
 				if (data->cl_in->word[var->row][var->i - 2] == '+')
@@ -106,14 +106,13 @@ static int	campeyr (t_src *data, t_export *var)
 			{
 				if (chek_key(data->cl_in->word[var->row]))
 					return(1);
-				if(new_node(data))
-				{
-					printf("can not creat export list\n");
+				newnode = new_node();
+				if(!newnode)
 					return(1);	
-				}
-				new_nod->key = ft_strdup(data->cl_in->word[var->row]);
-				new_nod->value = NULL;
-				}
+				newnode->key = ft_strdup(data->cl_in->word[var->row]);
+				newnode->value = NULL;
+				put_env_node(data,newnode);
+			}
 				return(0);
 }
 
@@ -130,9 +129,11 @@ void	export(t_src *data)
 	{
 		while (data->cl_in->word[var.row])
 		{
+			var.i = 0;
+			var.string_len = 0;
 			if (!ft_isalpha(data->cl_in->word[var.row][0]))
 			{
-				non_valid_arg = ft_strjoin("is not valid argumwent name  ",data->cl_in->word[var.row]);
+				non_valid_arg = ft_strjoin("is not valid argumwent name",data->cl_in->word[var.row]);
 				write(1,non_valid_arg,ft_strlen(non_valid_arg));
 				free(non_valid_arg);
 				break ;
@@ -144,6 +145,6 @@ void	export(t_src *data)
 			var.row++;
 		}
 	}
-	else;
-		//print_export(data);
+	else
+		print_export(data);
 }

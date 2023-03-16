@@ -15,7 +15,7 @@ void	realaysing(t_src *data)
 {
 	pid_t	pid;
 
-	pid = 0;
+	pid = 1;
 	data->ciqel = 0;
 	data->pip = malloc(sizeof(*(data->pip)) * data->pipes_count);
 	if (!data->pip)
@@ -24,7 +24,7 @@ void	realaysing(t_src *data)
 		return ;
 	}
 	data->pipes_count++;
-	while (pid == 0 && data->pipes_count)
+	while (pid > 0 && data->pipes_count)
 	{
 		if (data->pipes_count-- > 1)
 			pipe(data->pip[data->ciqel]);
@@ -34,7 +34,7 @@ void	realaysing(t_src *data)
 			write(1, "can not creat child\n", 20);
 			break ;
 		}
-		if (pid == 0)
+		if (pid > 0)
 		{
 			data->cl_in = data->cl_in->next;
 			data->ferst_child++;
@@ -42,9 +42,9 @@ void	realaysing(t_src *data)
 				data->ciqel++;
 		}
 	}
-	if (pid > 0)
-		child(data);
 	if (pid == 0)
+		child(data);
+	if (pid > 0)
 	{
 		free(data->pip);
 	}

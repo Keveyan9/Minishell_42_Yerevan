@@ -46,10 +46,11 @@ void	coll_comands(t_src *data)
 	comand_path = find_comand_path(data);
 	env = list_to_array(data);
 	data->error = execve(comand_path, data->cl_in->word, env);
+	printf("%d\n",data->error);
 	frik(env);
 	free(comand_path);
 	if (data->error != 0)
-		perror("execve");
+		perror("execve_");
 }
 
 	/// stex karoxa petq e exit avelcanel vor ete execve

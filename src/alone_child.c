@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-void	alone_child(t_src *data)
+int	alone_child(t_src *data)
 {
 	pid_t	pid;
 
@@ -19,11 +19,12 @@ void	alone_child(t_src *data)
 	pid = fork();
 	if (pid < 0)
 		write(1, "can not creat child\n", 20);
-	else if (pid > 0)
+	else if (pid == 0)
 	{
 		coll_comands(data);
-		printf("test  %s\n",data->cl_in->id);
 		oll_free(data);
 		exit(0);
 	}
+	wait(0);
+	return(0);
 }
