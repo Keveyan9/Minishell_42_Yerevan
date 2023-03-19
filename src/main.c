@@ -17,33 +17,41 @@ int main(int ac, char **av, char **env)
 	t_src *data;
 
 	(void)ac;
-	(void)av;
+	
 	data = malloc(sizeof(t_src));
 	if (!data)
 		return (0);
 	if (all_input(data, env))
 		return (0);
-	while (1)
+	shell_level(data,av);
+	while (1 && data->pid > 0)
 	{
 		start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
 		if (data->line)
 			free(data->line);
-		if(data->cl_in)
+		if (data->cl_in->id)
 		{
 			if (data->pipes_count == 0)
 			{
 				if (chek_coll_builtin(data) == 1)
-					 alone_child(data);
+					alone_child(data);
 			}
 			else
-				realaysing(data);
-			 if (data->cl_in)
-		 		free_clin(data);
+			{
+				while (data->cl_in->prev)
+					data->cl_in = data->cl_in->prev;
+				 realaysing(data);
+			}
+
+			if (data->cl_in)
+				free_clin(data);
 			free(data->line);
 		}
+		else
+			data->error = 130;
 	}
-	oll_free(data);
+		oll_free(data);
 	return (0);
 }

@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* **************************safsa************************************************ */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-static void	close_discriptor(t_src *data)
+ void	close_discriptor(t_src *data)
 {
 	int	n;
 
 	n = 0;
-	while (n <= data->ciqel)
+	while (n < data->pipes_count)
 	{
 		close(data->pip[n][0]);
 		close(data->pip[n++][1]);
@@ -25,23 +25,26 @@ static void	close_discriptor(t_src *data)
 
 void	child(t_src *data)
 {
-	if (data->ferst_child == 0 && data->pipes_count > 0)
+	//printf("%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->ciqel);
+	if (data->ciqel == 0 )
 	{
+		//printf("1__%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->ciqel);
 		dup2(data->pip[data->ciqel][1], 1);
 		close_discriptor(data);
 		logic(data);
 	}
-	else if (data->ferst_child > 0 && data->pipes_count == 0)
+	else if (data->ciqel > 0 && !(data->ciqel == data->pipes_count))
 	{
-		dup2(data->pip[data->ciqel][0], 0);
-		close_discriptor(data);
-		logic(data);
-	}
-	else
-	{
+		//printf("2__%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->ciqel);
 		dup2(data->pip[data->ciqel - 1][0], 0);
 		dup2(data->pip[data->ciqel][1], 1);
 		close_discriptor(data);
 		logic(data);
+	}
+	else if ( data->ciqel == data->pipes_count)
+	{
+		dup2(data->pip[data->ciqel-1][0], 0);
+		close_discriptor(data);
+			logic(data);
 	}
 }

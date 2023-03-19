@@ -72,6 +72,7 @@ t_cl_in *new_node_t_cl_in(char *str, t_cl_in *cl_in)
 		node->id = ft_strdup(node->word[0]);
 	else
 		node->id = NULL;
+	node->fd = -1;
 	node->next = NULL;
 	node->prev = cl_in;
 	if (cl_in)

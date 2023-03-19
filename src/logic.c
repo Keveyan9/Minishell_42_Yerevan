@@ -6,7 +6,9 @@ void logic(t_src *data)
     // stex en masna vor arancin mi procesi mej piti katarvi
   ///  ft_printf("%s_%s\n",data->cl_in->id,data->cl_in->oll);
    //exit;
-    if (chek_coll_builtin(data) == 0);
+  // write(1,data->cl_in->id, ft_strlen(data->cl_in->id));
+    if (chek_coll_builtin(data) == 0)
+        ;
     else
         coll_comands(data);
     //exit ;
