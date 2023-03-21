@@ -40,37 +40,30 @@ void close_discriptor(t_src *data, int d ,int ds)
 
 void child_coneqt(t_src *data)
 {
-	// printf("%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->cycle);
-	//   char *s = ft_itoa(data->cycle) ;
-	//   write(1,s,ft_strlen(s));
-	//   write(1,"\n",1);
-	//   free(s);
-	//   usleep(100000);
 	if (data->cycle == 0)
 	{
-		// printf("1__%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->cycle);
 		dup2(data->pip[data->cycle][1], 1);
-		close_discriptor(data, 1,1);
-		test(data);
-		// logic(data);
+		close_discriptor(data, data->cycle,2);
+		logic(data);
+		//test(data);
 	}
 	else if (data->cycle > 0 && !(data->cycle == data->pipes_count) && data->error == 0)
 	{
+		// printf("%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->cycle);
 		// printf("2__%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->cycle);
 		dup2(data->pip[data->cycle - 1][0], 0);
 		dup2(data->pip[data->cycle][1], 1);
-		// printf("%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->cycle);
-		close_discriptor(data, data->cycle,1);
-		// logic(data);
-		test(data);
+		close_discriptor(data, data->cycle,2);
+		logic(data);
+		//test(data);
 	}
 	else if (data->cycle == data->pipes_count || data->error != 0)
 	{
 
 		dup2(data->pip[data->cycle - 1][0], 0);
 		close_discriptor(data, data->cycle,1);
-		// logic(data);
-		test(data);
+		logic(data);
+		//test(data);
 	}
 	exit(data->error);
 }

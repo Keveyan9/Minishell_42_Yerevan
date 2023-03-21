@@ -24,6 +24,7 @@ void ft_read_l(t_src *data)
 			data->error = 130 ;
 			free(data->line);
 			data->line = NULL;
+			start_input(data);
 		}
 	}
 	// data->cl_in = malloc (sizeof(t_cl_in)*1);

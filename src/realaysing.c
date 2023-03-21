@@ -11,23 +11,20 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
+
 void create_child(t_src *data)
 {
 	int pip_eror ;
-
-	pip_eror = 0;
-	data->cycle = 0;
-	int n = 0;
 	while ( data->pid > 0 && data->pipes_count >= data->cycle)
 	{
 		if (data->pipes_count > data->cycle)
 		{
-			pip_eror == pipe(data->pip[data->cycle]);
-		//usleep(10);
+			pip_eror = pipe(data->pip[data->cycle]);
 			if (pip_eror != 0)
 			{
-				exit(11);
+				ft_putnbr_fd(data->pip_doing,2);
 				perror("pip");
+				data->error = pip_eror;
 				break;
 			}
 			data->pip_doing++;
@@ -35,13 +32,13 @@ void create_child(t_src *data)
 		data->pid = fork();
 		if (data->pid > 0 )
 		{
-			//data->cl_in = data->cl_in->next;
+			data->cl_in = data->cl_in->next;
 			data->cycle++;
 		}
 		if (data->pid < 0)
 		{
-			exit(11);
 			perror(" child problems ");
+			data->error = data->pid;
 			break;
 		}
 	}
@@ -49,7 +46,7 @@ void create_child(t_src *data)
 
 void realaysing(t_src *data)
 {
-	printf("_______________________%d______________\n",data->pipes_count);
+	//printf("_______________________%d______________\n", data->pipes_count);
 	data->pip = malloc(sizeof(*(data->pip)) * data->pipes_count);
 	if (!data->pip)
 	{
@@ -61,11 +58,11 @@ void realaysing(t_src *data)
 		child_coneqt(data);
 	if (data->pid > 0)
 	{
-		close_discriptor(data,0,2);
-	 	while (data->cycle--)
-	 	{
-	 		wait(&data->error);
-	 	}
+		close_discriptor(data, 0, 2);
+		while (data->cycle--)
+		{
+			wait(&data->error);
+		}
 		free(data->pip);
-	 }
+	}
 }

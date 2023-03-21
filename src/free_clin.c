@@ -15,6 +15,7 @@ void	free_clin(t_src *data)
 {
 	while (data->cl_in->prev)
 		data->cl_in = data->cl_in->prev;
+	printf("@_%s__@\n",data->cl_in->id);
 	while (data->cl_in)
 	{
 		if (data->cl_in->id)
