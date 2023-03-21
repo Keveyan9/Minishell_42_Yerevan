@@ -11,6 +11,6 @@ void logic(t_src *data)
         ;
     else
         coll_comands(data);
-    //exit ;
+    exit ;
    // oll_free(data);    
 }

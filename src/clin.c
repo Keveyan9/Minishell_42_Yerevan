@@ -12,28 +12,53 @@
 
 #include "minishell.h"
 
+static void *now_nod_clin()
+{
+	t_cl_in *nod ;
+
+	nod =  malloc(sizeof(t_cl_in));
+	if (!nod)
+		return(NULL);
+	nod->fd = 0;
+	nod->id = NULL;
+	nod->next = NULL;
+	nod->oll = NULL;
+	nod->prev = NULL;
+	nod->word = NULL;
+	return(nod);
+}
+static void cneqt_clin_nod(t_src *data, t_cl_in *nod)
+{
+	if(data->clin_head == NULL)
+	{
+		data->clin_head = nod;
+		data->clin_last = nod;
+		data->cl_in = nod;
+	}
+	else
+	{
+		nod->prev = data->clin_last;
+		data->clin_last->next = nod;
+		data->clin_last = nod;
+	}
+	
+}
+
 void	clin(t_src *data)
 {
-	data->cl_in = malloc(sizeof(t_cl_in));
-	data->cl_in->prev = NULL;
-	data->cl_in->id = ft_strdup("cd");
-	data->cl_in->word = ft_split("echo  wfwa$? wfaf$$?",' ');
-	data->cl_in->oll = ft_strdup("echo");
-	data->cl_in->next = malloc(sizeof(t_cl_in) );
-	data->cl_in->next->prev=data->cl_in;
-	data->cl_in=data->cl_in->next;
-	data->cl_in->id = ft_strdup("grep");
-	data->cl_in->word = ft_split("grep l",' ');
-	data->cl_in->oll = ft_strdup("grep l");
-	data->cl_in->next = malloc(sizeof(t_cl_in));
-	data->cl_in->next->prev =data->cl_in;
-	data->cl_in =data->cl_in->next;
-	data->cl_in->id = ft_strdup("wc");
-	data->cl_in->word = ft_split("wc -l",' ');
-	data->cl_in->oll = ft_strdup("wc -l");
-	data->cl_in->next = NULL;
-	data->cl_in = data->cl_in->prev->prev;
-    // printf("test %s;",data->cl_in->id);
-    //     printf("test %s;",data->cl_in->next->id);
-    //          printf("test %s;",data->cl_in->next->next->id);
+	int n;
+
+	n = data->pipes_count + 1;
+	t_cl_in *nod;
+
+	while(n--)
+	{
+		nod = now_nod_clin();
+		if(!nod)
+			return;
+		nod->id = ft_strdup("ls");
+		nod->word = ft_split(nod->id,' ');
+		nod->oll = ft_strdup("ls");
+		cneqt_clin_nod(data,nod);
+	}
 }

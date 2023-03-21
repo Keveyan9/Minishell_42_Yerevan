@@ -24,6 +24,7 @@ static void	call_dolar(char *s, t_src *data, int n)
 			 error = ft_itoa(data->error);
 			 write(1,error,ft_strlen(error));
 			 free(error);
+			 error = NULL;
 			n = n + 2;
 		}
 		else

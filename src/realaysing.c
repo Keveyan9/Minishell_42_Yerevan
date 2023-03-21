@@ -11,43 +11,61 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-void	realaysing(t_src *data)
+void create_child(t_src *data)
 {
-	//printf("%d", data->pipes_count);
-	data->ciqel = 0;
+	int pip_eror ;
+
+	pip_eror = 0;
+	data->cycle = 0;
+	int n = 0;
+	while ( data->pid > 0 && data->pipes_count >= data->cycle)
+	{
+		if (data->pipes_count > data->cycle)
+		{
+			pip_eror == pipe(data->pip[data->cycle]);
+		//usleep(10);
+			if (pip_eror != 0)
+			{
+				exit(11);
+				perror("pip");
+				break;
+			}
+			data->pip_doing++;
+		}
+		data->pid = fork();
+		if (data->pid > 0 )
+		{
+			//data->cl_in = data->cl_in->next;
+			data->cycle++;
+		}
+		if (data->pid < 0)
+		{
+			exit(11);
+			perror(" child problems ");
+			break;
+		}
+	}
+}
+
+void realaysing(t_src *data)
+{
+	printf("_______________________%d______________\n",data->pipes_count);
 	data->pip = malloc(sizeof(*(data->pip)) * data->pipes_count);
 	if (!data->pip)
 	{
-		write(1, "can not duing malloc\n", 21);
-		return ;
+		write(1, "can not duing malloc\n", 22);
+		return;
 	}
-
-	while (data->pid  && data->pipes_count >= data->ciqel)
-	{
-		 if(data->pipes_count > data->ciqel)
-			pipe(data->pip[data->ciqel]);
-		data->pid = fork();
-		if (data->pid < 0)
-		{
-			write(1, "can not creat child\n", 20);
-			break ;
-		}
-		if (data->pid > 0)
-		{
-			data->cl_in = data->cl_in->next;
-			data->ciqel++;
-		}
-	}
+	create_child(data);
 	if (data->pid == 0)
-		child(data);
+		child_coneqt(data);
 	if (data->pid > 0)
 	{
-		close_discriptor(data);
-		 while(data->pipes_count--)
-		 {
-			data->error = 0;
-		 	wait(&data->error);
-		 }
-		 free(data->pip);
-	}
+		close_discriptor(data,0,2);
+	 	while (data->cycle--)
+	 	{
+	 		wait(&data->error);
+	 	}
+		free(data->pip);
+	 }
 }

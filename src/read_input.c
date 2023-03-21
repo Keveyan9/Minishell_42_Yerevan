@@ -14,8 +14,18 @@
 
 void ft_read_l(t_src *data)
 {
-	data->line = readline("mini$ ");
-		add_history(data->line);
+	while (!(data->line) ||  data->line[0] == '\0')
+	{
+		data->line = readline("mini$ ");
+		if(data->line[0] != '\0')
+			add_history(data->line);
+		if(data->line[0] == '\0')
+		{
+			data->error = 130 ;
+			free(data->line);
+			data->line = NULL;
+		}
+	}
 	// data->cl_in = malloc (sizeof(t_cl_in)*1);
 	// data->cl_in->oll = data->line;
 	// data->cl_in->word = ft_split(data->line, ' ');

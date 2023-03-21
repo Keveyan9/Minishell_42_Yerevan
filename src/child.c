@@ -11,40 +11,66 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
- void	close_discriptor(t_src *data)
+static void test(t_src *data)
 {
-	int	n;
+	write(1, "test\n", 5);
+	oll_free(data);
+	exit;
+}
+
+void close_discriptor(t_src *data, int d ,int ds)
+{
+	int n;
 
 	n = 0;
-	while (n < data->pipes_count)
+	write(ds, "@@@", 3);
+	ft_putnbr_fd(d,ds);
+	write(ds, "\n", 1);
+	write(ds, "#", 1);
+	ft_putnbr_fd(data->pip_doing,ds);
+	write(ds, "#", 1);
+	write(ds, "\n", 1);
+	while (n < data->pip_doing)
 	{
 		close(data->pip[n][0]);
-		close(data->pip[n++][1]);
+		close(data->pip[n][1]);
+		n++;
 	}
 }
 
-void	child(t_src *data)
+void child_coneqt(t_src *data)
 {
-	//printf("%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->ciqel);
-	if (data->ciqel == 0 )
+	// printf("%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->cycle);
+	//   char *s = ft_itoa(data->cycle) ;
+	//   write(1,s,ft_strlen(s));
+	//   write(1,"\n",1);
+	//   free(s);
+	//   usleep(100000);
+	if (data->cycle == 0)
 	{
-		//printf("1__%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->ciqel);
-		dup2(data->pip[data->ciqel][1], 1);
-		close_discriptor(data);
-		logic(data);
+		// printf("1__%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->cycle);
+		dup2(data->pip[data->cycle][1], 1);
+		close_discriptor(data, 1,1);
+		test(data);
+		// logic(data);
 	}
-	else if (data->ciqel > 0 && !(data->ciqel == data->pipes_count))
+	else if (data->cycle > 0 && !(data->cycle == data->pipes_count) && data->error == 0)
 	{
-		//printf("2__%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->ciqel);
-		dup2(data->pip[data->ciqel - 1][0], 0);
-		dup2(data->pip[data->ciqel][1], 1);
-		close_discriptor(data);
-		logic(data);
+		// printf("2__%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->cycle);
+		dup2(data->pip[data->cycle - 1][0], 0);
+		dup2(data->pip[data->cycle][1], 1);
+		// printf("%s__%d__%d\n",data->cl_in->id, data->pipes_count, data->cycle);
+		close_discriptor(data, data->cycle,1);
+		// logic(data);
+		test(data);
 	}
-	else if ( data->ciqel == data->pipes_count)
+	else if (data->cycle == data->pipes_count || data->error != 0)
 	{
-		dup2(data->pip[data->ciqel-1][0], 0);
-		close_discriptor(data);
-			logic(data);
+
+		dup2(data->pip[data->cycle - 1][0], 0);
+		close_discriptor(data, data->cycle,1);
+		// logic(data);
+		test(data);
 	}
+	exit(data->error);
 }

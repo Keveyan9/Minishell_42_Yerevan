@@ -38,6 +38,7 @@ static int	chek_key(char *s)
 	write(1,"\n",1);
 	write(1,wrong_arg,ft_strlen(wrong_arg));
 	free(wrong_arg);
+	wrong_arg = NULL;
 	return (1);
 }
 

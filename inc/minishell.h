@@ -75,14 +75,17 @@ typedef struct s_src
 	int single_quotes;
 	int error;
 	int pipes_count;
+	int pip_doing;
 	int (*pip)[2];
-	int ciqel;
+	int cycle; 	//ciqel
 	char *home_path;
 	pid_t pid;
 	t_tokens *token_list;
 	t_env *env;
 	t_env *envhead;
 	t_env *envlast;
+	t_cl_in *clin_head;
+	t_cl_in * clin_last;
 	t_cl_in *cl_in;
 } t_src;
 
@@ -184,11 +187,11 @@ void free_env(t_src *data);
 void free_clin(t_src *data);
 void oll_free(t_src *data);
 void clin(t_src *data);
-void child(t_src *data);
+void child_coneqt(t_src *data);
 void realaysing(t_src *data);
 void logic(t_src *data);
 int alone_child(t_src *data);
-void	close_discriptor(t_src *data);
+void	close_discriptor(t_src *data, int d,int ds);
 void    shell_level(t_src *data, char ** av);
 
 #endif

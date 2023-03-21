@@ -86,7 +86,6 @@ int start_input_env(char **env, t_src *data)
 int all_input(t_src *data, char **env)
 {
 	data->env = NULL;
-	data->error = 0;
 	start_input(data);
 	data->home_path = getcwd(NULL,0);
 	return (start_input_env(env, data));
@@ -100,7 +99,8 @@ void start_input(t_src *data)
 	data->doubl_quotes = 0;
 	data->single_quotes = 0;
 	data->pipes_count = 0;
-	data->ciqel = 0;
+	data->pip_doing = 0;
+	data->cycle = 0;
 	data->token_list = NULL;
 	data->cl_in = NULL;
 	data->pid = 1;
