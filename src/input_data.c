@@ -20,21 +20,21 @@ t_env *new_node()
 	node = (t_env *)malloc(sizeof(t_env));
 	if (!node)
 	{
-		write(1,"can not env malloc\n",19);
+		write(1, "can not env malloc\n", 19);
 		return (NULL);
 	}
 	node->flag_p = 0;
-	node->place = 0 ;
+	node->place = 0;
 	node->key = NULL;
 	node->value = NULL;
 	node->next = NULL;
 	node->prev = NULL;
-	return(node);
+	return (node);
 }
 
 int put_env_node(t_src *data, t_env *node)
 {
-	if(data && node)
+	if (data && node)
 	{
 		if (!data->env)
 		{
@@ -42,13 +42,13 @@ int put_env_node(t_src *data, t_env *node)
 			data->envhead = node;
 			data->envlast = node;
 		}
-		else 
+		else
 		{
 			node->prev = data->envlast;
 			data->envlast->next = node;
 			data->envlast = node;
 		}
-		return(0);
+		return (0);
 	}
 	return (1);
 }
@@ -59,7 +59,7 @@ int start_input_env(char **env, t_src *data)
 	int k;
 	size_t len;
 	t_env *newnode;
-	
+
 	len = 0;
 	i = 0;
 	k = 0;
@@ -70,14 +70,14 @@ int start_input_env(char **env, t_src *data)
 		newnode = new_node();
 		if (!newnode)
 			return (1);
-		newnode->key = (char *) malloc(sizeof(char ) * (k + 1));
-		newnode->value = (char *) malloc (sizeof(char) * (len - k + 1));
-		if(!(newnode->key) && !(newnode->value))
+		newnode->key = (char *)malloc(sizeof(char) * (k + 1));
+		newnode->value = (char *)malloc(sizeof(char) * (len - k + 1));
+		if (!(newnode->key) && !(newnode->value))
 			return (1);
 		ft_strlcpy(newnode->key, env[i], k + 1);
 		ft_strlcpy(newnode->value, &(env[i][k + 1]), (len - k));
-		if(put_env_node(data,newnode))
-			return(1);
+		if (put_env_node(data, newnode))
+			return (1);
 		i++;
 	}
 	return (0);
@@ -86,8 +86,8 @@ int start_input_env(char **env, t_src *data)
 int all_input(t_src *data, char **env)
 {
 	data->env = NULL;
-	data->error = 0;
 	start_input(data);
+	data->home_path = getcwd(NULL,0);
 	return (start_input_env(env, data));
 }
 
@@ -99,9 +99,10 @@ void start_input(t_src *data)
 	data->doubl_quotes = 0;
 	data->single_quotes = 0;
 	data->pipes_count = 0;
-	data->ferst_child = 0;
-	data->ciqel = 0;
-	data->ferst_child = 0;
+	data->pip_doing = 0;
+	data->cycle = 0;
+	data->error = 0;
 	data->token_list = NULL;
 	data->cl_in = NULL;
+	data->pid = 1;
 }

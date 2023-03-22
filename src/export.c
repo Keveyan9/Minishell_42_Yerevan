@@ -24,7 +24,7 @@ int	find_index(char *s, char c)
 
 static int	chek_key(char *s)
 {
-	int	n;
+	size_t	n;
 	char *wrong_arg;
 
 	n = 0;
@@ -38,6 +38,7 @@ static int	chek_key(char *s)
 	write(1,"\n",1);
 	write(1,wrong_arg,ft_strlen(wrong_arg));
 	free(wrong_arg);
+	wrong_arg = NULL;
 	return (1);
 }
 
@@ -78,6 +79,7 @@ static int	creat_chanch_nod(t_export *var, t_src *data)
 		newnode->value = ft_strdup(var->value);
 		put_env_node(data,newnode);
 	}
+	return(0);
 }
 
 static int	campeyr (t_src *data, t_export *var)

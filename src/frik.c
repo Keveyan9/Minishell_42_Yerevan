@@ -19,7 +19,11 @@ void	frik(char **s1)
 	if (s1)
 	{
 		while (s1[i])
-			free(s1[i++]);
+		{
+			free(s1[i]);
+			s1[i++] = NULL;
+		}
 		free(s1);
+		s1 = NULL;
 	}
 }

@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* **************************safsa************************************************ */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
@@ -11,37 +11,40 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-static void	close_discriptor(t_src *data)
+void close_discriptor(t_src *data)
 {
-	int	n;
+	int n;
 
 	n = 0;
-	while (n <= data->ciqel)
+	while (n < data->pip_doing)
 	{
 		close(data->pip[n][0]);
-		close(data->pip[n++][1]);
+		close(data->pip[n][1]);
+		n++;
 	}
 }
 
-void	child(t_src *data)
+void child_coneqt(t_src *data)
 {
-	if (data->ferst_child == 0 && data->pipes_count > 0)
+	if (data->cycle == 0)
 	{
-		dup2(data->pip[data->ciqel][1], 1);
+		dup2(data->pip[data->cycle][1], 1);
 		close_discriptor(data);
 		logic(data);
 	}
-	else if (data->ferst_child > 0 && data->pipes_count == 0)
+	else if (data->cycle > 0 && !(data->cycle == data->pipes_count) && data->error == 0)
 	{
-		dup2(data->pip[data->ciqel][0], 0);
+		dup2(data->pip[data->cycle - 1][0], 0);
+		dup2(data->pip[data->cycle][1], 1);
 		close_discriptor(data);
 		logic(data);
 	}
-	else
+	else if (data->cycle == data->pipes_count )
 	{
-		dup2(data->pip[data->ciqel - 1][0], 0);
-		dup2(data->pip[data->ciqel][1], 1);
+		dup2(data->pip[data->cycle - 1][0], 0);
 		close_discriptor(data);
 		logic(data);
 	}
+	oll_free(data);
+	exit(data->error);
 }

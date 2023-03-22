@@ -41,9 +41,9 @@ t_src	*get_tokens(t_src *data)
 t_tokens	*new_node_tokens(char *s, int k, t_tokens *token_list)
 {
 	t_tokens	*node;
-	int			i;
+	// int			i;
 
-	i = 0;
+	// i = 0;
 	node = (t_tokens *)malloc(sizeof(t_tokens));
 	if (!node)
 		return (0);

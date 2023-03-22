@@ -13,15 +13,14 @@
 
 int	alone_child(t_src *data)
 {
-	pid_t	pid;
 
-	pid = 0;
-	pid = fork();
-	if (pid < 0)
+	data->pid = 0;
+	data->pid = fork();
+	if (data->pid < 0)
 		write(1, "can not creat child\n", 20);
-	else if (pid == 0)
-	{
-		coll_comands(data);
+	else if (data->pid == 0)
+	{	
+		logic(data);
 		oll_free(data);
 		exit(0);
 	}

@@ -14,17 +14,16 @@
 
 void ft_read_l(t_src *data)
 {
-	data->line = readline("mini$ ");
-		add_history(data->line);
-	// data->cl_in = malloc (sizeof(t_cl_in)*1);
-	// data->cl_in->oll = data->line;
-	// data->cl_in->word = ft_split(data->line, ' ');
-	// data->cl_in->id = ft_strdup("gago");
-	// data->cl_in->next = NULL;
-	// data->cl_in->prev = NULL;
-	// //data = ft_parser(data);
-	//	data->line = readline("mini$ ");
-	// //data = ft_parser(data);
-	// 	printf("[%s]\n", data->line);
-	// return ;
+	while (!(data->line) ||  data->line[0] == '\0')
+	{
+		data->line = readline("mini$ ");
+		if(data->line[0] != '\0')
+			add_history(data->line);
+		if(data->line[0] == '\0')
+		{
+			data->error = 130 ;
+			free(data->line);
+			data->line = NULL;
+		}
+	}
 }

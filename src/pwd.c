@@ -18,4 +18,5 @@ void	pwd()
 	v_pwd = getcwd(NULL,0);
 	printf("%s\n",v_pwd);
 	free(v_pwd);
+	v_pwd = NULL;
 }
