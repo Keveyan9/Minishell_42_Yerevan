@@ -70,6 +70,7 @@ void realaysing(t_src *data)
 		{
 			wait(&data->error);
 		}
+		printf("@@@@@@@@%d__\n",data->error);
 		free(data->pip);
 	}
 }

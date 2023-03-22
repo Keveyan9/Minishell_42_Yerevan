@@ -17,6 +17,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <stdlib.h>
+#include <errno.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include "../libft/libft.h"
@@ -169,7 +170,7 @@ void print_t_cl_in(t_src *data); // verjum jnji
 // builtins
 void echo(t_src *data);
 void cd(t_src *data);
-void pwd();
+void pwd(t_src *data);
 t_env *find_env(t_env *env, char *s);
 void env_f(t_src *data);
 void frik(char **s1);
@@ -193,5 +194,7 @@ void logic(t_src *data);
 int alone_child(t_src *data);
 void	close_discriptor(t_src *data );
 void    shell_level(t_src *data, char ** av);
+void alone(t_src *data);
+void exit_f(t_src *data);
 
 #endif

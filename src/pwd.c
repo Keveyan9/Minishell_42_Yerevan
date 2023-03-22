@@ -11,12 +11,21 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-void	pwd()
+void	pwd(t_src *data)
 {
 	char	*v_pwd;
 
 	v_pwd = getcwd(NULL,0);
-	printf("%s\n",v_pwd);
-	free(v_pwd);
-	v_pwd = NULL;
+	if(!v_pwd)
+	{
+		perror("pwd error");
+		data->error = 1;
+	}
+	else
+	{
+		printf("%s\n",v_pwd);
+		data->error = 0;
+		free(v_pwd);
+		v_pwd = NULL;
+	}
 }

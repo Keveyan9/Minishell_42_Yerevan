@@ -45,6 +45,4 @@ void child_coneqt(t_src *data)
 		close_discriptor(data);
 		logic(data);
 	}
-	oll_free(data);
-	exit(data->error);
 }
