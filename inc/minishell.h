@@ -191,7 +191,7 @@ void child_coneqt(t_src *data);
 void realaysing(t_src *data);
 void logic(t_src *data);
 int alone_child(t_src *data);
-void	close_discriptor(t_src *data, int d,int ds);
+void	close_discriptor(t_src *data );
 void    shell_level(t_src *data, char ** av);
 
 #endif

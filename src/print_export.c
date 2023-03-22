@@ -15,7 +15,7 @@ static void give_place(t_src *data)
 {
 	t_env *chek_place;
 	t_env *grup;
-	int len;
+	size_t len;
 	int len2;
 	int campeyer;
 
@@ -44,14 +44,14 @@ static void give_place(t_src *data)
 
 void print_export(t_src *data)
 {
-	int go_on;
+	// int go_on;
 	t_env *grup;
 	int big;
 	char c;
 
 	c = '"';
 	big = 0;
-	go_on = 1 ;
+	// go_on = 1 ;
 	give_place(data);
 	grup = data->env;
 	while (grup->next)

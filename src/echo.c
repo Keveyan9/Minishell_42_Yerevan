@@ -35,7 +35,7 @@ static void	call_dolar(char *s, t_src *data, int n)
 	}
 }
 
-static void	echo_print(t_src *data, int *calem, int *row, int *flag)
+static void	echo_print(t_src *data, size_t *calem, int *row, int *flag)
 {
 	while (data->cl_in->word[*calem])
 	{
@@ -61,7 +61,7 @@ static void	echo_print(t_src *data, int *calem, int *row, int *flag)
 
 void	echo(t_src *data)
 {
-	int	calem;
+	size_t	calem;
 	int	row;
 	int	flag;
 
@@ -72,7 +72,7 @@ void	echo(t_src *data)
 	{
 		while (data->cl_in->word[1][++calem] == 'n')
 			;
-		if (ft_strlen(data->cl_in->word[1]) == calem)
+		if ((ft_strlen(data->cl_in->word[1])) == calem)
 		{
 			calem = 2;
 			flag = 0;

@@ -60,9 +60,9 @@ void get_t_cl_in_list(t_src *data)
 t_cl_in *new_node_t_cl_in(char *str, t_cl_in *cl_in)
 {
 	t_cl_in *node;
-	int i;
+	// int i;
 
-	i = 0;
+	// i = 0;
 	node = (t_cl_in *)malloc(sizeof(t_cl_in));
 	if (!node)
 		return (0);

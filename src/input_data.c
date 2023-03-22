@@ -101,6 +101,7 @@ void start_input(t_src *data)
 	data->pipes_count = 0;
 	data->pip_doing = 0;
 	data->cycle = 0;
+	data->error = 0;
 	data->token_list = NULL;
 	data->cl_in = NULL;
 	data->pid = 1;

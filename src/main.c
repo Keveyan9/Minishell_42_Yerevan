@@ -28,7 +28,7 @@ int main(int ac, char **av, char **env)
 		start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
-		data->clin_head = data->cl_in;
+		printf("__%d__\n",data->pipes_count);
 		if (data->line)
 		{
 			free(data->line);
