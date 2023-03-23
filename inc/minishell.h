@@ -20,6 +20,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 #include "../libft/libft.h"
 
 typedef enum s_type
@@ -61,7 +62,8 @@ typedef struct s_cl_in
 	char *id;
 	char **word;
 	char *oll;
-	int	fd;
+	int	in_fd;
+	int out_fd;
 
 	struct s_cl_in *next;
 	struct s_cl_in *prev;
@@ -80,6 +82,8 @@ typedef struct s_src
 	int (*pip)[2];
 	int cycle; 	//ciqel
 	char *home_path;
+	int main_fd_in;
+	int	main_fd_out;
 	pid_t pid;
 	t_tokens *token_list;
 	t_env *env;
@@ -196,5 +200,8 @@ void	close_discriptor(t_src *data );
 void    shell_level(t_src *data, char ** av);
 void alone(t_src *data);
 void exit_f(t_src *data);
+void file_discriptor(t_src * data);
+void change_fd(t_src *data);
+
 
 #endif

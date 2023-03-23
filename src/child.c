@@ -11,19 +11,6 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-void close_discriptor(t_src *data)
-{
-	int n;
-
-	n = 0;
-	while (n < data->pip_doing)
-	{
-		close(data->pip[n][0]);
-		close(data->pip[n][1]);
-		n++;
-	}
-}
-
 void child_coneqt(t_src *data)
 {
 	if (data->cycle == 0)

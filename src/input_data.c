@@ -105,4 +105,6 @@ void start_input(t_src *data)
 	data->token_list = NULL;
 	data->cl_in = NULL;
 	data->pid = 1;
+	data->main_fd_in = -1;
+	data->main_fd_out = -1;
 }

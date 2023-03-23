@@ -23,6 +23,9 @@ int	alone_child(t_src *data)
 		write(1, "can not creat child\n", 20);
 	else if (data->pid == 0)
 	{	
+		file_discriptor(data);
+		change_fd(data);
+	//	data->cl_in->word[1] = NULL; // petq ejnjel esheto
 		coll_comands(data);
 		oll_free(data);
 	}
