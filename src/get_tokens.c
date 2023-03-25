@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:37:41 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/05 20:04:41 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:01:41 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ t_src	*get_tokens(t_src *data)
 t_tokens	*new_node_tokens(char *s, int k, t_tokens *token_list)
 {
 	t_tokens	*node;
-	// int			i;
 
-	// i = 0;
 	node = (t_tokens *)malloc(sizeof(t_tokens));
 	if (!node)
 		return (0);
@@ -75,4 +73,16 @@ void	tokens_list_last(t_src *data)
 	while (tmp && tmp->next)
 		tmp = tmp->next;
 	data->token_list = tmp;
+}
+
+void	token_line_dell(t_tokens *node)
+{
+	t_tokens	*tmp;
+
+	tmp = node;
+	free(node->token);
+	node->next->prev = tmp->prev;
+	node->prev->next = tmp->next;
+	free(tmp);
+	//return (node);
 }

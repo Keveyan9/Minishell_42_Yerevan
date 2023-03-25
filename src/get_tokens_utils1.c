@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:42:53 by artadevo          #+#    #+#             */
-/*   Updated: 2023/02/20 21:32:15 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/25 12:23:02 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,15 @@ t_src	*find_word(char *s, t_src *data)
 	if (i < k)
 	{
 		line = ft_substr(data->line, 0, i);
-		data->token_list = new_node_tokens(line,WORD, data->token_list);
+		data->token_list = new_node_tokens(line, WORD, data->token_list);
 		tmp = ft_substr(data->line, i, k);
 	}
 	else if (i == k)
 	{
 		line = ft_substr(data->line, 0, i + 1);
-		data->token_list = new_node_tokens(line,WORD, data->token_list);
+		data->token_list = new_node_tokens(line, WORD, data->token_list);
 		tmp = NULL;
 	}
-	//free(line);
 	free(data->line);
 	data->line = tmp;
 	return (data);
@@ -54,7 +53,7 @@ t_src	*find_space(char *s, t_src *data)
 	k = ft_strlen(data->line);
 	while (s[i] && s[i] == ' ')
 		i++;
-	data->token_list = new_node_tokens(" ", SPAC, data->token_list);
+	data->token_list = new_node_tokens(ft_strdup(" "), SPAC, data->token_list);
 	tmp = ft_substr(data->line, i, k);
 	free(data->line);
 	data->line = tmp;
@@ -66,7 +65,7 @@ t_src	*find_pipe(char *s, t_src *data)
 	char	*tmp;
 
 	(void)s;
-	data->token_list = new_node_tokens("|", PIPE, data->token_list);
+	data->token_list = new_node_tokens(ft_strdup("|"), PIPE, data->token_list);
 	if (data->line[1])
 		tmp = ft_substr(data->line, 1, (ft_strlen(data->line) - 1));
 	else
@@ -109,7 +108,7 @@ t_src	*find_single_quotes(char *s, t_src *data)
 t_src	*find_duobl_quotes(char *s, t_src *data)
 {
 	char	*tmp;
-	char 	*line;
+	char	*line;
 	int		i;
 	int		k;
 
@@ -124,17 +123,17 @@ t_src	*find_duobl_quotes(char *s, t_src *data)
 	line = ft_substr(data->line, 1, i - 1);
 	if (i < k)
 	{
-		data->token_list = new_node_tokens(line, EXP_QUOTES_DOUBL, data->token_list);
+		data->token_list = new_node_tokens(line,
+				EXP_QUOTES_DOUBL, data->token_list);
 		tmp = ft_substr(data->line, i + 1, k);
 	}
 	else if (i == k)
 	{
-		data->token_list = new_node_tokens(line,EXP_QUOTES_DOUBL, data->token_list);
+		data->token_list = new_node_tokens(line,
+				EXP_QUOTES_DOUBL, data->token_list);
 		tmp = NULL;
 	}
 	free(data->line);
-	//free(line); estex es em avelacrel ft_subdup darcrel em endhanur nuyn baner grvac 
-	//chgitem free petqa arvi te voch not
 	data->line = tmp;
 	return (data);
 }
