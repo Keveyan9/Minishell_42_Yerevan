@@ -22,19 +22,23 @@ static int is_builtin(t_src *data)
 
 void alone(t_src *data)
 {
-    //stex piti phail diskriptor baci paki bayc et en depqum erb biltin e ete voch childi mej piti ani
-    //Arturin asem vor ete word urish texel lini piti id vra dni 
     if(is_builtin(data))
     {
         file_discriptor(data);
 		data->main_fd_in = dup(0);
 		data->main_fd_out = dup(1);
 		change_fd(data);
-        chek_coll_builtin(data);
+    	chek_coll_builtin(data);
 		if(data->cl_in->in_fd > 0)
+		{	
 			dup2(data->main_fd_in,0);
+			close(data->cl_in->in_fd);
+		}
 		if(data->cl_in->out_fd)
+		{
 			dup2(data->main_fd_out,1);
+			close(data->cl_in->out_fd);
+		}
     }
     else
         alone_child(data);

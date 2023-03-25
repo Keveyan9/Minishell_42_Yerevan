@@ -16,6 +16,7 @@ int find_index(char *s, char c)
 	int i;
 
 	i = 0;
+	printf("find__%s__\n",s);
 	while (s[i])
 		if (s[i++] == c)
 			return (i);

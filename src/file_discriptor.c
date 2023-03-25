@@ -1,4 +1,18 @@
 #include "minishell.h"
+static int find_plase(char *s , char c)
+{
+    int n;
+
+    n = 0;
+    if(!s)
+        return(0);
+    while(s[n] && s[n] != c)
+        n++;
+    if(s[n] == c);
+    else
+        n++;
+    return(n);
+}
 
 static void chek_in_file(t_src *data, int *row)
      {
@@ -6,12 +20,12 @@ static void chek_in_file(t_src *data, int *row)
         int len;
 
         len = *row;
-        if(data->cl_in->in_fd > 0)
-            close(data->cl_in->in_fd);
-        while(data->cl_in->oll[len]!= ' ' && data->cl_in->oll[len])
-            len++;
+        if(data->cl_in->out_fd > 0)
+            close(data->cl_in->out_fd);
+        len   = find_plase(&(data->cl_in->oll[*row]),' ');
         name = ft_substr(data->cl_in->oll,*row,len);
         data->cl_in->out_fd = open (name, O_RDONLY, 0644);
+        (*row) = (*row) + len - 1;
         if(data->cl_in->out_fd == -1)
         {
             ft_putstr_fd(name,1);
@@ -29,27 +43,23 @@ static void chek_out_file(t_src *data, int *row)
 
     if(data->cl_in->out_fd > 0)
         close(data->cl_in->out_fd);
-    //printf("##__%s__\n",&(data->cl_in->oll[*row]));
     if(data->cl_in->oll[*row] == '>')
-     {  
-        printf("__%s__\n",&(data->cl_in->oll[*row]));
-        // if(data->cl_in->oll[*row]== ' ')
-        //     (*row)++;
-        // len = *row;
-        // while(data->cl_in->oll[len]!= ' ')
-        //     len++;
-        // name = ft_substr(data->cl_in->oll,*row,len);
-        //  printf("__%s__\n",name);
-        // data->cl_in->out_fd = open (name, O_RDWR | O_CREAT | O_APPEND, 0644);
+     { 
+        (*row)++;
+        if(data->cl_in->oll[*row]== ' ')
+            (*row)++;
+        len = find_plase(&(data->cl_in->oll[*row]),' ');
+        name = ft_substr(data->cl_in->oll,*row,len );
+        data->cl_in->out_fd = open (name, O_RDWR | O_CREAT | O_APPEND, 0644);
+        (*row) = (*row) + len;
     }
     else
-    {    
-        len = *row;
-        while(data->cl_in->oll[len]!= ' ' && data->cl_in->oll[len])
-            len++;
-        name = ft_substr(data->cl_in->oll,*row,len);
+    { 
+        len = find_plase(&(data->cl_in->oll[*row]),' ');
+        name = ft_substr(data->cl_in->oll,*row,len );
         data->cl_in->out_fd = open (name, O_RDWR | O_CREAT | O_TRUNC, 0644);
         data->error = errno;
+         (*row) = (*row) + len ;
     }
     free(name);
     name = NULL;

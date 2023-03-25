@@ -25,7 +25,10 @@ int	alone_child(t_src *data)
 	{	
 		file_discriptor(data);
 		change_fd(data);
-	//	data->cl_in->word[1] = NULL; // petq ejnjel esheto
+		if(data->cl_in->in_fd > 0)
+    		close(data->cl_in->in_fd);
+   		if(data->cl_in->out_fd > 0)
+        	close(data->cl_in->out_fd);
 		coll_comands(data);
 		oll_free(data);
 	}

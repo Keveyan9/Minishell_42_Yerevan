@@ -53,11 +53,6 @@ void coll_comands(t_src *data)
 	execve(comand_path, name_argument, env);
 	free(comand_path);
 	frik(name_argument);
-	////petq e jnjel es jamanakavor e minchev wori pahe kdzvi
-	// name_argument = (char **)malloc(sizeof(char *) * 3);
-	// name_argument[0] = ft_strdup(data->cl_in->id);
-	// name_argument[1] = ft_strdup("-la");
-	// name_argument[2] = NULL;
 	comand_path = find_comand_path(data);
 	if (comand_path)
 		 execve(comand_path, data->cl_in->word, env);

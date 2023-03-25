@@ -17,11 +17,11 @@ t_src	*find_redir_append(char *s, t_src *data)
 	char	*tmp;
 
 	(void)s;
-	if (data->line[3])
+	if (data->line[2])
 	{
 		data->token_list = new_node_tokens(">>",
 				REDIR_APPEND, data->token_list);
-		tmp = ft_substr(data->line, 3, ft_strlen(data->line));
+		tmp = ft_substr(data->line, 2, ft_strlen(data->line));
 	}
 	else
 	{

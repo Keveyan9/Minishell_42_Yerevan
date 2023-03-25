@@ -203,5 +203,4 @@ void exit_f(t_src *data);
 void file_discriptor(t_src * data);
 void change_fd(t_src *data);
 
-
 #endif

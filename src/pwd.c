@@ -23,7 +23,8 @@ void	pwd(t_src *data)
 	}
 	else
 	{
-		printf("%s\n",v_pwd);
+		ft_putstr_fd(v_pwd,1);
+		write(1,"\n",1);
 		data->error = 0;
 		free(v_pwd);
 		v_pwd = NULL;

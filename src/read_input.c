@@ -21,7 +21,6 @@ void ft_read_l(t_src *data)
 			add_history(data->line);
 		if(data->line[0] == '\0')
 		{
-			data->error = 130 ;
 			free(data->line);
 			data->line = NULL;
 		}

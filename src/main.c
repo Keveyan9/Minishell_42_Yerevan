@@ -11,10 +11,21 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
+static void handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+ 		write(1, "testjhjjjjjjjjjjj\n", 19);
+	}
+	write(1, "2testjjjjjjjjjjjjj\n", 20);
+}
+
 int main(int ac, char **av, char **env)
 {
 	t_src *data;
+	int flag;
 
+	flag = 1;
 	(void)ac;
 	
 	data = malloc(sizeof(t_src));
@@ -25,6 +36,12 @@ int main(int ac, char **av, char **env)
 	shell_level(data,av);
 	while (1 && data->pid > 0)
 	{
+		signal(SIGINT, handler);
+		if(flag == 1)
+			data->error = 0;
+		else
+			data->error = 1;
+		flag = 0;
 		start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
@@ -42,12 +59,12 @@ int main(int ac, char **av, char **env)
 			alone(data);
 		else
 			realaysing(data);
-			//stex karoxa petq cl_In hedov maqrel vor amen angam whilov chfra
 		data->cl_in = data->clin_head;
 		if (data->cl_in)
 			free_clin(data);
 		free(data->line);
 		data->line = NULL;
+		flag = 1;
 	}
 		oll_free(data);
 	return (0);
