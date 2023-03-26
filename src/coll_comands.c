@@ -43,27 +43,27 @@ void coll_comands(t_src *data)
 	char *comand_path;
 	char **env;
 	char **name_argument;
-	env = list_to_array(data);
 
+	env = list_to_array(data);
 	comand_path = ft_strjoin(data->home_path, &(data->cl_in->id[1]));
 	name_argument = (char **)malloc(sizeof(char *) * 3);
 	name_argument[0] = ft_strdup(data->cl_in->id);
 	name_argument[1] = ft_strdup("1");
 	name_argument[2] = NULL;
-	data->error = execve(comand_path, name_argument, env);
+	execve(comand_path, name_argument, env);
 	free(comand_path);
 	frik(name_argument);
 	comand_path = find_comand_path(data);
 	if (comand_path)
-		data->error = execve(comand_path, data->cl_in->word, env);
+		 execve(comand_path, data->cl_in->word, env);
+	else
+	{
+		ft_putstr_fd(data->cl_in->word[0],1);
+		ft_putstr_fd("  : comand can not faund\n",1);
+		data->error = 127;
+	}
 	frik(env);
 	free(comand_path);
 	oll_free(data);
-	if (data->error != 0)
-		perror("execve_");
 	exit(data->error);
 }
-
-/// stex karoxa petq e exit avelcanel vor ete execve
-// chashxati free ani durs ga
-// bayc ed en depqum erb inqe chayldi mej e

@@ -19,7 +19,7 @@ static void *now_nod_clin()
 	nod =  malloc(sizeof(t_cl_in));
 	if (!nod)
 		return(NULL);
-	nod->fd = 0;
+	//nod->fd = 0;
 	nod->id = NULL;
 	nod->next = NULL;
 	nod->oll = NULL;

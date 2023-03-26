@@ -98,7 +98,8 @@ t_cl_in	*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in)
 		node->id = ft_strdup(node->word[0]);
 	else
 		node->id = NULL;
-	node->fd = -1;
+	node->in_fd = -2;
+	node->out_fd = -2 ;
 	node->next = NULL;
 	node->prev = cl_in;
 	if (cl_in)

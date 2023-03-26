@@ -16,14 +16,29 @@ int	alone_child(t_src *data)
 
 	data->pid = 0;
 	data->pid = fork();
+	int d;
+
+	d = 0;
 	if (data->pid < 0)
 		write(1, "can not creat child\n", 20);
 	else if (data->pid == 0)
 	{	
-		logic(data);
+		//signal(SIGINT,SIG_DFL);
+		file_discriptor(data);
+		change_fd(data);
+		if(data->cl_in->in_fd > 0)
+    		close(data->cl_in->in_fd);
+   		if(data->cl_in->out_fd > 0)
+        	close(data->cl_in->out_fd);
+		coll_comands(data);
 		oll_free(data);
-		exit(0);
 	}
-	wait(0);
-	return(0);
+	else if (data->pid > 0)
+	{
+		 wait(&d);
+		data->error = WEXITSTATUS(d);
+		return(0);
+	}
+	oll_free(data);
+	exit(data->error);
 }

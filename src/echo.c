@@ -57,6 +57,7 @@ static void	echo_print(t_src *data, size_t *calem, int *row, int *flag)
 	}
 		if (*flag)
 			write(1, "\n", 1);
+	data->error = 0;
 }
 
 void	echo(t_src *data)

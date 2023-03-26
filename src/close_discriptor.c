@@ -1,6 +1,6 @@
 #include "minishell.h"
 
- void	close_discriptor(t_src *data)
+void	close_discriptor(t_src *data)
 {
 	int	n;
 
