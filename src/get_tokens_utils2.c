@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 21:26:29 by artadevo          #+#    #+#             */
-/*   Updated: 2023/02/22 17:54:06 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/25 12:31:47 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ t_src	*find_redir_append(char *s, t_src *data)
 	(void)s;
 	if (data->line[2])
 	{
-		data->token_list = new_node_tokens(">>",
+		data->token_list = new_node_tokens(ft_strdup(">>"),
 				REDIR_APPEND, data->token_list);
 		tmp = ft_substr(data->line, 2, ft_strlen(data->line));
 	}
 	else
 	{
-		data->token_list = new_node_tokens(">>",
+		data->token_list = new_node_tokens(ft_strdup(">>"),
 				REDIR_APPEND, data->token_list);
 		tmp = NULL;
 	}
@@ -41,12 +41,14 @@ t_src	*find_hierdoc(char *s, t_src *data)
 	(void)s;
 	if (data->line[2])
 	{
-		data->token_list = new_node_tokens("<<", HEREDOC, data->token_list);
+		data->token_list = new_node_tokens(ft_strdup("<<"),
+				HEREDOC, data->token_list);
 		tmp = ft_substr(data->line, 2, ft_strlen(data->line));
 	}
 	else
 	{
-		data->token_list = new_node_tokens("<<", HEREDOC, data->token_list);
+		data->token_list = new_node_tokens(ft_strdup("<<"),
+				HEREDOC, data->token_list);
 		tmp = NULL;
 	}
 	free(data->line);
@@ -61,12 +63,14 @@ t_src	*find_redir_in(char *s, t_src *data)
 	(void)s;
 	if (data->line[1])
 	{
-		data->token_list = new_node_tokens("<", REDIR_IN, data->token_list);
+		data->token_list = new_node_tokens(ft_strdup("<"),
+				REDIR_IN, data->token_list);
 		tmp = ft_substr(data->line, 1, ft_strlen(data->line));
 	}
 	else
 	{
-		data->token_list = new_node_tokens("<", REDIR_IN, data->token_list);
+		data->token_list = new_node_tokens(ft_strdup("<"),
+				REDIR_IN, data->token_list);
 		tmp = NULL;
 	}
 	free(data->line);
@@ -81,12 +85,14 @@ t_src	*find_redir_out(char *s, t_src *data)
 	(void)s;
 	if (data->line[1])
 	{
-		data->token_list = new_node_tokens(">", REDIR_OUT, data->token_list);
+		data->token_list = new_node_tokens(ft_strdup(">"),
+				REDIR_OUT, data->token_list);
 		tmp = ft_substr(data->line, 1, ft_strlen(data->line));
 	}
 	else
 	{
-		data->token_list = new_node_tokens(">", REDIR_OUT, data->token_list);
+		data->token_list = new_node_tokens(ft_strdup(">"),
+				REDIR_OUT, data->token_list);
 		tmp = NULL;
 	}
 	free(data->line);
@@ -102,10 +108,7 @@ void	print_tokens(t_src *data)
 	t_tokens	*tmp;
 
 	tmp = data->token_list;
-	// while (tmp->prev != NULL)
-	// {
-	// 	tmp = tmp->prev;
-	// }
+
 	while (tmp)
 	{
 		printf("type = %d,\ttoken = %s,\tline = %d\n",tmp->type, tmp->token, tmp->len);

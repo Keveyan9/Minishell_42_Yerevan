@@ -108,6 +108,6 @@ t_src *syntax_error(t_src *data)
 		print_eyntax_err(data); // grel exit funkcia
 		return (data);
 	}	 data = get_tokens(data);
-	 add_sintex_error(data);
+	  add_sintex_error(data);
 	return (data);
 }
