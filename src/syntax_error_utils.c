@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 20:50:29 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/26 22:40:26 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/27 01:35:05 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@ void	get_frst_element(t_src *data)
 
 void	print_syntax_err(t_src *data)
 {
-	printf("{{%d}}\n",data->syntax_err);
 	if (data->syntax_err > 0 && data->syntax_err < 127)
-		printf("++syntax error near unexpected token `%c\"\n", (char)(data->syntax_err));
+	{
+		ft_putstr_fd("syntax error near unexpected token `", 2);
+		ft_putchar_fd((char)(data->syntax_err), 2);
+		ft_putstr_fd("\"\n", 2);
+	}
+	else if (data->syntax_err == 250)
+		ft_putstr_fd("syntax error near unexpected token `>>\"\n", 2);
+	else if (data->syntax_err == 350)
+		ft_putstr_fd("syntax error near unexpected token `<<\"\n", 2);
 	else
-		printf("syntax error near unexpected token `%s\"\n", "newline");
+		ft_putstr_fd("syntax error near unexpected token `newline\"\n", 2);
 }
 
 void	get_short_line(t_src *data)
