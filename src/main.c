@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 17:50:44 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/27 01:35:48 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/27 01:39:02 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int main(int ac, char **av, char **env)
 		data = syntax_error(data);
 		if (data->syntax_err != 0)
 			print_syntax_err(data); // grel exit funkcia
+
 		printf("__%d__\n",data->pipes_count);
 		if (data->line)
 		{
