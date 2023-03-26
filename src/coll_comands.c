@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   coll_comands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:06:41 by skeveyan          #+#    #+#             */
-/*   Updated: 2023/02/28 16:06:44 by skeveyan         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:54:58 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "minishell.h"
+
+#include "../inc/minishell.h"
 
 static char **list_to_array(t_src *data)
 {

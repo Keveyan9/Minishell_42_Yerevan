@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:52:54 by skeveyan          #+#    #+#             */
-/*   Updated: 2023/02/28 15:52:58 by skeveyan         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:24:32 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	void	cd_half(t_src *data)
+static void	cd_half(t_src *data)
 {
 	t_env		*oldpwd;
 	t_env		*pwd;
 	static int	pwd_flag;
-	t_env	*newnode;
+	t_env		*newnode;
 
 	oldpwd = find_env(data->env, "OLDPWD");
 	pwd = find_env(data->env, "PWD");
@@ -37,7 +37,7 @@ static	void	cd_half(t_src *data)
 		newnode = new_node();
 		newnode->key = ft_strdup("OLDPWD");
 		newnode->value = pwd->value;
-		put_env_node(data,newnode);
+		put_env_node(data, newnode);
 	}
 	if (pwd)
 		pwd->value = getcwd(NULL, 0);
