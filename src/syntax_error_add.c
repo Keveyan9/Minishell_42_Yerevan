@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:10:31 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/05 12:57:54 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:46:14 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,27 @@ int	get_redir_syntax_err(t_src *data)
 	t_tokens	*tmp;
 
 	tmp = data->token_list;
-	while (tmp)
+	while (tmp && (tmp->type >= 1 && tmp->type <= 4))
 	{
-		if (tmp->type >= 1 && tmp->type <= 4)
-		{
-			if (tmp->next == NULL)
-				return (1);
-			else if (tmp->next->type >= 0 && tmp->next->type <= 4)
-				return (2);
-			else if (tmp->next->type == 8
-				&& (tmp->next->type >= 0 && tmp->next->type <= 4))
-				return (3);
-			else if (tmp->next->type == 8 && tmp->next->next == NULL )
-				return (4);
-		}
+		if ((tmp->type >= 1 && tmp->type <= 4) && tmp->next == NULL)
+			return (registor_syn_err(data, 150));
+		else if (tmp->next->type >= 0 && tmp->next->type <= 4)
+			return (2);
+		else if (tmp->next->type == 8
+			&& (tmp->next->type >= 0 && tmp->next->type <= 4))
+			return (3);
+		else if (tmp->next->type == 8 && tmp->next->next == NULL )
+			return (4);
 		tmp = tmp->next;
 	}
 	return (0);
+}
+
+int	registor_syn_err(t_src *data, int syntax_err)
+{
+	data->token_list->syn_err = syntax_err;
+	data->syntax_err = syntax_err;
+	return (syntax_err);
 }
 
 void	add_sintex_error(t_src *data)

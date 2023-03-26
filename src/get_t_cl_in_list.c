@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 22:35:47 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/25 15:33:43 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/26 16:11:13 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ static void	free_token(t_src *data)
 
 char	*get_t_cl_in_list_heredoc(t_src *data, char *str1, char **str)
 {
-	// char	*str1;
-
-	//str1 = NULL;
 	str1 = ft_strjoin(str1, data->token_list->token);
 	if (data->token_list->next->type == 8)
 		token_line_dell(data->token_list->next);
@@ -48,35 +45,38 @@ char	*get_t_cl_in_list_heredoc(t_src *data, char *str1, char **str)
 	return (str1);
 }
 
+void	func_norm_get_t_cl_in_list(char **str, char **str1, char **str2)
+{
+	free(*str);
+	free(*str1);
+	free(*str2);
+	*str = NULL;
+	*str1 = NULL;
+	*str2 = NULL;
+}
+
 void	get_t_cl_in_list(t_src *data)
 {
-	char	*str;
-	char	*str1;
-	char	*str2;
+	char	*str[3];
 
-	str = NULL;
-	str1 = NULL;
-	str2 = NULL;
+	str[0] = NULL;
+	str[1] = NULL;
+	str[2] = NULL;
 	tokens_list_start(data);
 	while (data->token_list)
 	{
 		if (data->token_list->type != 0)
 		{
-			str = ft_strjoin(str, data->token_list->token);
+			str[0] = ft_strjoin(str[0], data->token_list->token);
 			if (data->token_list->type > 0 && data->token_list->type < 5)
-				str1 = get_t_cl_in_list_heredoc(data, str1, &str);
+				str[1] = get_t_cl_in_list_heredoc(data, str[1], &str[0]);
 			else
-				str2 = ft_strjoin(str2, data->token_list->token);
+				str[2] = ft_strjoin(str[2], data->token_list->token);
 		}
 		if (data->token_list->type == 0 || data->token_list->next == NULL)
 		{
-			data->cl_in = new_node_t_cl_in(str, str1, str2, data->cl_in);
-			free(str);
-			free(str1);
-			free(str2);
-			str = NULL;
-			str1 = NULL;
-			str2 = NULL;
+			data->cl_in = new_node_t_cl_in(str[0], str[1], str[2], data->cl_in);
+			func_norm_get_t_cl_in_list(&str[0], &str[1], &str[2]);
 		}
 		data->token_list = data->token_list->next;
 	}
@@ -92,8 +92,10 @@ t_cl_in	*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in)
 	if (!node)
 		return (0);
 	node->oll = ft_strdup(str);
-	node->word = ft_split(str2, ' ');
-	node->heredoc = ft_split(str1, ' ');
+	if (str2)
+		node->word = ft_split(str2, ' ');
+	if (str1)
+		node->heredoc = ft_split(str1, ' ');
 	if (node->word[0])
 		node->id = ft_strdup(node->word[0]);
 	else
@@ -115,8 +117,9 @@ void	print_t_cl_in(t_src *data)
 	t_cl_in	*tmp;
 	int i = -1;
 
+	// printf("%p",data->cl_in);
 	tmp = data->cl_in;
-	while (tmp->prev != NULL)
+	while (tmp && tmp->prev != NULL)
 	{
 		tmp = tmp->prev;
 	}
@@ -124,10 +127,10 @@ void	print_t_cl_in(t_src *data)
 	{
 		printf("id = [%s]\n", tmp->id);
 		i = -1;
-		while(tmp->word[++i])
+		while(tmp->word && tmp->word[++i])
 			printf("word%d = [%s] \n",i, tmp->word[i]);
 		i = -1;
-		while(tmp->heredoc[++i])
+		while(tmp->heredoc && tmp->heredoc[++i])
 			printf("heredoc%d = [%s] \n",i, tmp->heredoc[i]);
 		printf("oll = [%s]\n", tmp->oll);
 		tmp = tmp->next;

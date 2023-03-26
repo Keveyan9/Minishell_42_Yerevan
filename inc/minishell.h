@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 16:55:16 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/25 14:54:37 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:47:01 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_env
 typedef struct s_tokens
 {
 	int				len;
+	int				syn_err;
 	char			*token;
 	int				type;
 
@@ -151,6 +152,7 @@ int			check_and_break_parentheses(t_src *data);
 void		add_sintex_error(t_src *data);
 int			get_pipe_syntax_err(t_src *data);
 int			get_redir_syntax_err(t_src *data);
+int			registor_syn_err(t_src *data, int syntax_err);
 //------src------syntax_error_utils.c-------
 void		get_frst_element(char *s, t_src *data);
 void		print_eyntax_err(t_src *data);
