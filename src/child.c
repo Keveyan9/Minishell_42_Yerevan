@@ -13,8 +13,7 @@
 
 void child_coneqt(t_src *data)
 { 
-	//signali funkcian stex grem
-	
+	//signal(SIGINT,SIG_DFL);
 	if (data->cycle == 0)
 	{
 		dup2(data->pip[data->cycle][1], 1);

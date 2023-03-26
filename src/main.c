@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-static void handler(int sig)
-{
-	if (sig == SIGINT)
-	{
- 		write(1, "testjhjjjjjjjjjjj\n", 19);
-	}
-	write(1, "2testjjjjjjjjjjjjj\n", 20);
-}
+// static void handler(int sig)
+// {
+// 	if (sig == SIGINT)
+// 	{
+//  		write(1, "test\n", 5);
+// 	}
+// 	//exit(1);
+// }
 
 int main(int ac, char **av, char **env)
 {
@@ -36,7 +36,7 @@ int main(int ac, char **av, char **env)
 	shell_level(data,av);
 	while (1 && data->pid > 0)
 	{
-		signal(SIGINT, handler);
+		//signal(SIGINT, handler);
 		if(flag == 1)
 			data->error = 0;
 		else
