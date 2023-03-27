@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:28:12 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/05 14:26:03 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/26 22:08:55 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int all_input(t_src *data, char **env)
 void start_input(t_src *data)
 {
 	data->line = NULL;
-	data->index_s_err = 0;
+	data->index_s_err = -1;
 	data->syntax_err = 0;
 	data->doubl_quotes = 0;
 	data->single_quotes = 0;

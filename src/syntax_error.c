@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 19:30:42 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/04 21:58:20 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/26 22:41:17 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,17 @@ static int get_index_quotes_2(t_src *data)
 	return (i);
 }
 
-int get_index_quotes(t_src *data)
+int	get_index_quotes(t_src *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!data->doubl_quotes && !data->single_quotes)
 	{
 		i = 0;
-		if ((data->line[0] == '\'' || data->line[0] == '\"') && (get_count(data->line, '\'') == 1 || get_count(data->line, '\"') == 1))
+		if ((data->line[0] == '\'' || data->line[0] == '\"')
+			&& (get_count(data->line, '\'') == 1
+				|| get_count(data->line, '\"') == 1))
 		{
 			i = -1;
 			data->index_s_err = 0;
@@ -65,9 +67,9 @@ int get_index_quotes(t_src *data)
 	return (i);
 }
 
-int check_and_break_parentheses(t_src *data)
+int	check_and_break_parentheses(t_src *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (data->line[++i] && i <= (int)ft_strlen(data->line))
@@ -94,20 +96,24 @@ int check_and_break_parentheses(t_src *data)
 	return (get_index_quotes(data));
 }
 
-t_src *syntax_error(t_src *data)
+t_src	*syntax_error(t_src *data)
 {
 	data->line = line_corector(data->line);
-	if (data->line[0] == '|' || data->line[0] == ')' || data->line[0] == ';')
+	if (data->line[0] == '|')
 	{
-		get_frst_element(data->line, data);
-		print_eyntax_err(data); // grel exit funkcia
+		get_frst_element(data);
 		return (data);
 	}
 	if (check_and_break_parentheses(data))
 	{
-		print_eyntax_err(data); // grel exit funkcia
+		if (data->index_s_err != 0)
+			get_short_line(data);
 		return (data);
-	}	 data = get_tokens(data);
-	  add_sintex_error(data);
+	}
+	else
+		data->syntax_err = 0;
+	data = get_tokens(data);
+	add_sintex_error(data);
+// printf("barev0\n");
 	return (data);
 }
