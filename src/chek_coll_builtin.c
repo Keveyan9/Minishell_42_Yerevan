@@ -22,7 +22,7 @@ int	chek_coll_builtin(t_src *data)
 	else if ( ft_strlen(data->cl_in->id) == 2 && ft_strncmp(data->cl_in->id, "cd", 2) == 0)
 		cd(data);
 	else if (ft_strlen(data->cl_in->id) == 3 && ft_strncmp(data->cl_in->id, "pwd", 3) == 0)
-		pwd();
+		pwd(data);
 	else if (ft_strlen(data->cl_in->id) == 6 && ft_strncmp(data->cl_in->id, "export",6) == 0 )
 		export(data);
 	else if (ft_strlen(data->cl_in->id) == 5 && ft_strncmp(data->cl_in->id, "unset", 5) == 0 )
@@ -30,7 +30,7 @@ int	chek_coll_builtin(t_src *data)
 	else if (ft_strlen(data->cl_in->id) == 3 && ft_strncmp(data->cl_in->id, "env", 3) == 0 )
 		env_f(data);
 	else if (ft_strlen(data->cl_in->id) == 4 && ft_strncmp(data->cl_in->id, "exit", 4) == 0)
-		printf("#############exit############\n");
+		exit_f(data);
 	else
 		return (1);
 	}

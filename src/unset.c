@@ -23,4 +23,5 @@ void	unset(t_src *data)
 		if (cat_segment)
 			delet_env(cat_segment);
 	}
+	data->error = 0 ;
 }

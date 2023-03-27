@@ -63,8 +63,9 @@ void	get_t_cl_in_list(t_src *data)
 	str[1] = NULL;
 	str[2] = NULL;
 	tokens_list_start(data);
-	while (data->token_list && data->token_list->next != NULL)
+	while (data->token_list )
 	{
+		//&& data->token_list->next != NULL whilic jnjel em
 		if (data->token_list && data->token_list->type != 0)
 		{
 			str[0] = ft_strjoin(str[0], data->token_list->token);
@@ -77,12 +78,19 @@ void	get_t_cl_in_list(t_src *data)
 				|| data->token_list->next == NULL))
 		{
 			data->cl_in = new_node_t_cl_in(str[0], str[1], str[2], data->cl_in);
+			if(data->cl_in->prev == NULL)
+				data->clin_head = data->cl_in;
 			func_norm_get_t_cl_in_list(&str[0], &str[1], &str[2]);
 		}
 		data->token_list = data->token_list->next;
 	}
+	data->clin_last = data->cl_in;
+	data->cl_in = data->clin_head ;
+	//print_t_cl_in(data);
 	free_token(data);
 }
+
+
 
 t_cl_in	*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in)
 {
@@ -98,12 +106,11 @@ t_cl_in	*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in)
 	if (str1)
 		node->heredoc = ft_split(str1, ' ');
 	if (node->word && node->word[0])
-	{
 		node->id = ft_strdup(node->word[0]);
-	}
 	else
 		node->id = NULL;
-	node->fd = -1;
+	node->in_fd = -2;
+	node->out_fd = -2 ;
 	node->next = NULL;
 	node->prev = cl_in;
 	if (cl_in)
@@ -118,8 +125,6 @@ void	print_t_cl_in(t_src *data)
 {
 	t_cl_in	*tmp;
 	int i = -1;
-
-	// printf("%p",data->cl_in);
 	tmp = data->cl_in;
 	while (tmp && tmp->prev != NULL)
 	{
@@ -132,8 +137,8 @@ void	print_t_cl_in(t_src *data)
 		while(tmp->word && tmp->word[++i])
 			printf("word%d = [%s] \n",i, tmp->word[i]);
 		i = -1;
-		while(tmp->heredoc && tmp->heredoc[++i])
-			printf("heredoc%d = [%s] \n",i, tmp->heredoc[i]);
+		// while(tmp->heredoc && tmp->heredoc[++i])
+		// 	printf("heredoc%d = [%s] \n",i, tmp->heredoc[i]);
 		printf("oll = [%s]\n", tmp->oll);
 		tmp = tmp->next;
 	}

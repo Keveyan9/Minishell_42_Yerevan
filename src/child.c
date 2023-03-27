@@ -11,21 +11,10 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-void close_discriptor(t_src *data)
-{
-	int n;
-
-	n = 0;
-	while (n < data->pip_doing)
-	{
-		close(data->pip[n][0]);
-		close(data->pip[n][1]);
-		n++;
-	}
-}
-
 void child_coneqt(t_src *data)
-{
+{ 
+	signal(SIGINT,SIG_DFL);
+	signal(SIGQUIT, SIG_IGN);
 	if (data->cycle == 0)
 	{
 		dup2(data->pip[data->cycle][1], 1);
@@ -45,6 +34,4 @@ void child_coneqt(t_src *data)
 		close_discriptor(data);
 		logic(data);
 	}
-	oll_free(data);
-	exit(data->error);
 }
