@@ -1,5 +1,5 @@
 #include "minishell.h"
-static int find_plase(char *s , char c)
+int find_plase(char *s , char c)
 {
     int n;
 
@@ -24,9 +24,9 @@ static void chek_in_file(t_src *data, int *row)
             close(data->cl_in->out_fd);
         len   = find_plase(&(data->cl_in->oll[*row]),' ');
         name = ft_substr(data->cl_in->oll,*row,len);
-        data->cl_in->out_fd = open (name, O_RDONLY, 0644);
+        data->cl_in->in_fd = open (name, O_RDONLY, 0644);
         (*row) = (*row) + len - 1;
-        if(data->cl_in->out_fd == -1)
+        if(data->cl_in->in_fd == -1)
         {
             ft_putstr_fd(name,1);
             ft_putstr_fd(" : No such file or directory\n",1);
@@ -80,12 +80,15 @@ void file_discriptor(t_src * data)
                 row++;
            chek_out_file(data,&row);
         }     
-        else if (data->cl_in->oll[row] == '<' && (data->cl_in->oll[row + 1] != '<'))
+        else if (data->cl_in->oll[row] == '<' && (data->cl_in->oll[row + 1] != '<')) 
         { 
-            row++;
-            if(data->cl_in->oll[row] == ' ')
+            if(  row == 0 || ( row > 0 && (data->cl_in->oll[row - 1] != '<' ) ))
+            {
                 row++;
-            chek_in_file(data,&row);
+                if(data->cl_in->oll[row] == ' ')
+                    row++;
+                 chek_in_file(data,&row);
+            }
          }
         row++;
     }

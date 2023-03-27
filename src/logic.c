@@ -13,7 +13,8 @@ void logic(t_src *data)
     {
         close(data->cl_in->out_fd);
     }
-    if (chek_coll_builtin(data) == 0);
-    else
-        coll_comands(data);
+    // if (chek_coll_builtin(data) == 0);
+    // else
+    //     coll_comands(data);
+    while(1);
 }

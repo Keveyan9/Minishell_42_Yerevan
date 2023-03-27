@@ -202,6 +202,10 @@ void	close_discriptor(t_src *data );
 void    shell_level(t_src *data, char ** av);
 void alone(t_src *data);
 void exit_f(t_src *data);
+int find_plase(char *s , char c);
 void file_discriptor(t_src * data);
 void change_fd(t_src *data);
+void creat_here_doc(t_src *data);
+void close_herdoq_fd(t_src *data);
+
 #endif

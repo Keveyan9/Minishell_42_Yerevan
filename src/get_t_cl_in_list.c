@@ -76,10 +76,14 @@ void	get_t_cl_in_list(t_src *data)
 		if (data->token_list->type == 0 || data->token_list->next == NULL)
 		{
 			data->cl_in = new_node_t_cl_in(str[0], str[1], str[2], data->cl_in);
+			if(data->cl_in->prev == NULL)
+				data->clin_head = data->cl_in;
 			func_norm_get_t_cl_in_list(&str[0], &str[1], &str[2]);
 		}
 		data->token_list = data->token_list->next;
 	}
+	data->clin_last = data->cl_in;
+	data->cl_in = data->clin_head ;
 	free_token(data);
 	print_t_cl_in(data);
 }
@@ -91,12 +95,13 @@ t_cl_in	*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in)
 	node = (t_cl_in *)malloc(sizeof(t_cl_in));
 	if (!node)
 		return (0);
-	node->oll = ft_strdup(str);
+	if(str)
+		node->oll = ft_strdup(str);
 	if (str2)
 		node->word = ft_split(str2, ' ');
 	if (str1)
 		node->heredoc = ft_split(str1, ' ');
-	if (node->word[0])
+	if (node->word && node->word[0])
 		node->id = ft_strdup(node->word[0]);
 	else
 		node->id = NULL;
@@ -130,8 +135,8 @@ void	print_t_cl_in(t_src *data)
 		while(tmp->word && tmp->word[++i])
 			printf("word%d = [%s] \n",i, tmp->word[i]);
 		i = -1;
-		while(tmp->heredoc && tmp->heredoc[++i])
-			printf("heredoc%d = [%s] \n",i, tmp->heredoc[i]);
+		// while(tmp->heredoc && tmp->heredoc[++i])
+		// 	printf("heredoc%d = [%s] \n",i, tmp->heredoc[i]);
 		printf("oll = [%s]\n", tmp->oll);
 		tmp = tmp->next;
 	}

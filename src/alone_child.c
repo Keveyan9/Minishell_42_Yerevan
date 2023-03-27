@@ -23,13 +23,10 @@ int	alone_child(t_src *data)
 		write(1, "can not creat child\n", 20);
 	else if (data->pid == 0)
 	{	
-		//signal(SIGINT,SIG_DFL);
+		signal(SIGINT,SIG_DFL);
 		file_discriptor(data);
 		change_fd(data);
-		if(data->cl_in->in_fd > 0)
-    		close(data->cl_in->in_fd);
-   		if(data->cl_in->out_fd > 0)
-        	close(data->cl_in->out_fd);
+		close_herdoq_fd(data);
 		coll_comands(data);
 		oll_free(data);
 	}
