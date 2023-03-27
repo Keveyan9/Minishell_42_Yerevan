@@ -63,8 +63,9 @@ void	get_t_cl_in_list(t_src *data)
 	str[1] = NULL;
 	str[2] = NULL;
 	tokens_list_start(data);
-	while (data->token_list && data->token_list->next != NULL)
+	while (data->token_list )
 	{
+		//&& data->token_list->next != NULL whilic jnjel em
 		if (data->token_list && data->token_list->type != 0)
 		{
 			str[0] = ft_strjoin(str[0], data->token_list->token);
@@ -85,8 +86,11 @@ void	get_t_cl_in_list(t_src *data)
 	}
 	data->clin_last = data->cl_in;
 	data->cl_in = data->clin_head ;
+	//print_t_cl_in(data);
 	free_token(data);
 }
+
+
 
 t_cl_in	*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in)
 {
@@ -121,8 +125,6 @@ void	print_t_cl_in(t_src *data)
 {
 	t_cl_in	*tmp;
 	int i = -1;
-
-	// printf("%p",data->cl_in);
 	tmp = data->cl_in;
 	while (tmp && tmp->prev != NULL)
 	{

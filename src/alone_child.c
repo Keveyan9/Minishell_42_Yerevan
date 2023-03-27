@@ -24,6 +24,7 @@ int	alone_child(t_src *data)
 	else if (data->pid == 0)
 	{	
 		signal(SIGINT,SIG_DFL);
+		signal(SIGQUIT, SIG_IGN);
 		file_discriptor(data);
 		change_fd(data);
 		close_herdoq_fd(data);

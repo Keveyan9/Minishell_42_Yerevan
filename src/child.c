@@ -14,6 +14,7 @@
 void child_coneqt(t_src *data)
 { 
 	signal(SIGINT,SIG_DFL);
+	signal(SIGQUIT, SIG_IGN);
 	if (data->cycle == 0)
 	{
 		dup2(data->pip[data->cycle][1], 1);

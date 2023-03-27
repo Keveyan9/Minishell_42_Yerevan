@@ -206,7 +206,7 @@ void exit_f(t_src *data);
 int find_plase(char *s , char c);
 void file_discriptor(t_src * data);
 void change_fd(t_src *data);
-void creat_here_doc(t_src *data);
+int creat_here_doc(t_src *data);
 void close_herdoq_fd(t_src *data);
 
 #endif

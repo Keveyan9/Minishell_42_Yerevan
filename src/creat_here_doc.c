@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void coll_hear_doc(t_src *data, int *row)
+static int coll_hear_doc(t_src *data, int *row)
 {
     int fd[2];
     int len;
@@ -15,6 +15,11 @@ static void coll_hear_doc(t_src *data, int *row)
     while (1)
     {
         her_line = readline(">");
+        if (her_line == NULL)
+        {
+            data->error = 1;
+            return(1);
+        }
         if(ft_strncmp(her_line,close_name,ft_strlen(close_name)) == 0)
             break;
         write(fd[1],her_line,ft_strlen(her_line));
@@ -26,22 +31,24 @@ static void coll_hear_doc(t_src *data, int *row)
     data->cl_in->in_fd = fd[0];
     free(close_name);
     close_name = NULL;  
+    return(0);
 }
 
-void creat_here_doc(t_src *data)
+int creat_here_doc(t_src *data)
 {
     int row;
 
     row = 0;
-    while (data->cl_in != NULL)
-    {
-        while(data->cl_in->oll[row] != '\0')
+    while (data->cl_in != NULL )
+    {   
+        while(data->cl_in->oll[row] != '\0' )
         {
             if(data->cl_in->oll[row] == '<' && data->cl_in->oll[ ++ row] == '<')
             {
                  if( data->cl_in->oll[row] == ' ')
                     row++;
-                coll_hear_doc(data,&row);
+               if(coll_hear_doc(data,&row))
+                    return(1);
             }
             row++;
         }
@@ -49,4 +56,5 @@ void creat_here_doc(t_src *data)
         data->cl_in = data->cl_in->next;
     }
     data->cl_in = data->clin_head;
+    return(0);
 }

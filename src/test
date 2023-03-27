@@ -1,0 +1,66 @@
+void	get_t_cl_in_list(t_src *data)
+{
+	char	*str[3];
+
+	str[0] = NULL;
+	str[1] = NULL;
+	str[2] = NULL;
+	tokens_list_start(data);
+	while (data->token_list)
+	{
+		if (data->token_list->type != 0)
+		{
+			str[0] = ft_strjoin(str[0], data->token_list->token);
+			if (data->token_list->type > 0 && data->token_list->type < 5)
+				str[1] = get_t_cl_in_list_heredoc(data, str[1], &str[0]);
+			else
+				str[2] = ft_strjoin(str[2], data->token_list->token);
+		}
+		if (data->token_list->type == 0 || data->token_list->next == NULL)
+		{
+			data->cl_in = new_node_t_cl_in(str[0], str[1], str[2], data->cl_in);
+			if(data->cl_in->prev == NULL)
+				data->clin_head = data->cl_in;
+			func_norm_get_t_cl_in_list(&str[0], &str[1], &str[2]);
+		}
+		data->token_list = data->token_list->next;
+	}
+	data->clin_last = data->cl_in;
+	data->cl_in = data->clin_head ;
+	free_token(data);
+	print_t_cl_in(data);
+}
+// void	get_t_cl_in_list(t_src *data)
+// {
+// 	char	*str[3];
+
+// 	str[0] = NULL;
+// 	str[1] = NULL;
+// 	str[2] = NULL;
+// 	tokens_list_start(data);
+// 	printf("token __%s__\n",data->token_list->token);
+// 	while (data->token_list && data->token_list->next != NULL)
+// 	{
+// 		if (data->token_list && data->token_list->type != 0)
+// 		{
+// 			str[0] = ft_strjoin(str[0], data->token_list->token);
+// 			if (data->token_list->type > 0 && data->token_list->type < 5)
+// 				str[1] = get_t_cl_in_list_heredoc(data, str[1], &str[0]);
+// 			else
+// 				str[2] = ft_strjoin(str[2], data->token_list->token);
+// 		}
+// 		if (data->token_list && (data->token_list->type == 0
+// 				|| data->token_list->next == NULL))
+// 		{
+// 			data->cl_in = new_node_t_cl_in(str[0], str[1], str[2], data->cl_in);
+// 			if(data->cl_in->prev == NULL)
+// 				data->clin_head = data->cl_in;
+// 			func_norm_get_t_cl_in_list(&str[0], &str[1], &str[2]);
+// 		}
+// 		data->token_list = data->token_list->next;
+// 	}
+// 	data->clin_last = data->cl_in;
+// 	data->cl_in = data->clin_head ;
+// 	print_t_cl_in(data);
+// 	free_token(data);
+// }

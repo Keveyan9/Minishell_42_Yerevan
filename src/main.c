@@ -17,14 +17,14 @@
 // 		write(1,"\n",1);
 // 	exit(1);
 // }
-//pwd | >a <<h <<
+//pwd | >a <<h << es stex mtacel em vor koxqe hastat anun ka ete anun chka piti ta anexpedit token ta u 
+//pwd | wc -l >b |  >a <<h >>  orinak es paragayum el b piti chstexci
 
 int main(int ac, char **av, char **env)
 {
 	t_src *data;
-	int flag;
+	//char *s;
 
-	flag = 1;
 	(void)ac;
 
 	data = malloc(sizeof(t_src));
@@ -35,35 +35,32 @@ int main(int ac, char **av, char **env)
 	shell_level(data, av);
 	while (1 && data->pid > 0)
 	{
-		//signal(SIGINT, handler);
-		if(flag == 1)
-			data->error = 0;
-		else
-			data->error = 1;
-		flag = 0;
+		
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
-		creat_here_doc(data);
-		if (data->syntax_err != 0)
-			print_syntax_err(data); // grel exit funkcia
-		printf("__%d__\n",data->pipes_count);
-		
-		if (data->line)
+		if(creat_here_doc(data) == 0 && data->syntax_err)
 		{
+			printf("__%d__\n",data->pipes_count);
+			if (data->line)
+			{
+				free(data->line);
+				data->line = NULL;
+			}
+			if (data->pipes_count == 0)
+				alone(data);
+			else
+				realaysing(data);
+			data->cl_in = data->clin_head;
+			if (data->cl_in)
+				free_clin(data);
 			free(data->line);
 			data->line = NULL;
 		}
-		if (data->pipes_count == 0)
-			alone(data);
-		else
-			realaysing(data);
-		data->cl_in = data->clin_head;
-		if (data->cl_in)
-			free_clin(data);
-		free(data->line);
-		data->line = NULL;
-		flag = 1;
+		if (data->syntax_err != 0)
+			print_syntax_err(data); // grel exit funkcia
 	}
 	oll_free(data);
 	return (0);

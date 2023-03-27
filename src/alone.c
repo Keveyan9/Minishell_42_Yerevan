@@ -44,5 +44,5 @@ void alone(t_src *data)
 		}
     }
     else
-        alone_child(data);
+		alone_child(data);
 }
