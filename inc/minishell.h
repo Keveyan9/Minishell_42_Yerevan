@@ -22,6 +22,9 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include "../libft/libft.h"
+#include <sys/ioctl.h>
+
+extern int g_flags;
 
 typedef enum s_type
 {
@@ -66,6 +69,7 @@ typedef struct s_cl_in
 	char	**heredoc;
 	int		in_fd;
 	int 	out_fd;
+	int 	pip_her_doc[2];
 	struct s_cl_in	*next;
 	struct s_cl_in	*prev;
 }t_cl_in;

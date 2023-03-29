@@ -114,6 +114,7 @@ t_src	*syntax_error(t_src *data)
 		data->syntax_err = 0;
 	data = get_tokens(data);
 	add_sintex_error(data);
+	//stex em avelacrel vor hankarc liak chmna
 // printf("barev0\n");
 	return (data);
 }

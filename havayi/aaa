@@ -1,0 +1,12 @@
+total 5
+-rw-r--r-- 1 go go   0 Mar 29 02:01 aaa
+-rw-rw-r-- 1 go go 107 Mar 29 00:34 ez
+-rw-r--r-- 1 go go   0 Mar 29 00:32 heto
+-rw-r--r-- 1 go go   0 Mar 29 00:32 heto1
+-rw-rw-r-- 1 go go 102 Mar 29 00:34 out
+total 9
+-rw-r--r-- 1 go go 210 Mar 29 02:01 aaa
+-rw-rw-r-- 1 go go 107 Mar 29 00:34 ez
+-rw-r--r-- 1 go go   0 Mar 29 00:32 heto
+-rw-r--r-- 1 go go   0 Mar 29 00:32 heto1
+-rw-rw-r-- 1 go go 102 Mar 29 00:34 out

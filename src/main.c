@@ -11,22 +11,30 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-// static void handler(int sig)
-// {
-// 	if (sig == SIGINT)
-// 		write(1,"\n",1);
-// 	exit(1);
-// }
 //pwd | >a <<h << es stex mtacel em vor koxqe hastat anun ka ete anun chka piti ta anexpedit token ta u 
 //pwd | wc -l >b |  >a <<h >>  orinak es paragayum el b piti chstexci
+
+
+static void start_doing(t_src *data)
+{
+	printf("__%d__\n",data->pipes_count);
+	if (data->pipes_count == 0)
+		alone(data);
+	else
+		realaysing(data);
+	data->cl_in = data->clin_head;
+	if (data->cl_in)
+		free_clin(data);
+	free(data->line);
+	data->line = NULL;
+
+}
 
 int main(int ac, char **av, char **env)
 {
 	t_src *data;
-	//char *s;
 
 	(void)ac;
-
 	data = malloc(sizeof(t_src));
 	if (!data)
 		return (0);
@@ -34,33 +42,18 @@ int main(int ac, char **av, char **env)
 		return (0);
 	shell_level(data, av);
 	while (1 && data->pid > 0)
-	{
-		
+	{ 
+		g_flags = 0;
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 		start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
-		if(creat_here_doc(data) == 0 && data->syntax_err)
-		{
-			printf("__%d__\n",data->pipes_count);
-			if (data->line)
-			{
-				free(data->line);
-				data->line = NULL;
-			}
-			if (data->pipes_count == 0)
-				alone(data);
-			else
-				realaysing(data);
-			data->cl_in = data->clin_head;
-			if (data->cl_in)
-				free_clin(data);
-			free(data->line);
-			data->line = NULL;
-		}
-		if (data->syntax_err != 0)
-			print_syntax_err(data); // grel exit funkcia
+		creat_here_doc(data) ;
+		if(!g_flags && data->syntax_err == 0 && data->cl_in)
+			start_doing(data);
+		if(data->syntax_err != 0)
+			print_syntax_err(data);
 	}
 	oll_free(data);
 	return (0);

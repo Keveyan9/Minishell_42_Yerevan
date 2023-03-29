@@ -27,21 +27,21 @@ void alone(t_src *data)
         file_discriptor(data);
 		if(data->error == 0)
 		{
-			data->main_fd_in = dup(0);
-			data->main_fd_out = dup(1);
 			change_fd(data);
 			chek_coll_builtin(data);
-			if(data->cl_in->in_fd > 0)
+		
+			if(data->cl_in->pip_her_doc[0] > 0)
 			{	
 				dup2(data->main_fd_in,0);
-				close(data->cl_in->in_fd);
+				close(data->cl_in->pip_her_doc[0]);
 			}
-			if(data->cl_in->out_fd)
+			if(data->cl_in->pip_her_doc[1] > 0)
 			{
 				dup2(data->main_fd_out,1);
 				close(data->cl_in->out_fd);
 			}
 		}
+		
     }
     else
 		alone_child(data);

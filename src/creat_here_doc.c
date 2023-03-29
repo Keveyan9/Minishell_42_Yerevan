@@ -1,34 +1,54 @@
 #include "minishell.h"
 
-static int coll_hear_doc(t_src *data, int *row)
+int g_flags;
+static void handler(int sig)
 {
-    int fd[2];
-    int len;
+    (void)sig;
+    g_flags = 1;
+    ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+}
+
+static void readline_heredoc(t_src *data,char *close_name)
+{
     char *her_line;
-    char *close_name;
-    (*row)++;
-    len = 0;
-    len = find_plase(&(data->cl_in->oll[*row ]),' ');
-    close_name = ft_substr(data->cl_in->oll,*row,len );
-    pipe(fd);
-    her_line = NULL;
-    while (1)
+    signal(SIGINT, handler);
+    g_flags = 0;
+    while(!g_flags)
     {
-        her_line = readline(">");
+        her_line = readline(">");   
         if (her_line == NULL)
         {
             data->error = 1;
-            return(1);
-        }
-        if(ft_strncmp(her_line,close_name,ft_strlen(close_name)) == 0)
             break;
-        write(fd[1],her_line,ft_strlen(her_line));
-        write(fd[1],"\n",1);
+        }
+        if(ft_strncmp(her_line, close_name, ft_strlen(close_name) + ft_strlen(her_line)) == 0)
+           break;
+        write(data->cl_in->pip_her_doc[1],her_line,ft_strlen(her_line));
+        write(data->cl_in->pip_her_doc[1],"\n",1);
+        free(her_line);
     }
-    close(fd[1]);
-    if(data->cl_in->in_fd > 0)
-        close(data->cl_in->in_fd);
-    data->cl_in->in_fd = fd[0];
+    if(g_flags)
+        data->error = 130;
+    signal(SIGINT, SIG_IGN);
+}
+
+
+static int coll_hear_doc(t_src *data, int *row)
+{
+    int len;
+    char *close_name;
+
+    (*row)++;
+    len = 0;
+    len = find_plase(&(data->cl_in->oll[*row]),' ');
+    close_name = ft_substr(data->cl_in->oll,*row,len );
+    if(data->cl_in->pip_her_doc[0] > 0 )
+        close(data->cl_in->pip_her_doc[0]);
+    pipe(data->cl_in->pip_her_doc);
+    readline_heredoc(data,close_name);
+    close(data->cl_in->pip_her_doc[1]);
     free(close_name);
     close_name = NULL;  
     return(0);
@@ -39,13 +59,14 @@ int creat_here_doc(t_src *data)
     int row;
 
     row = 0;
-    while (data->cl_in != NULL )
+    while (data->cl_in != NULL  ) 
     {   
-        while(data->cl_in->oll[row] != '\0' )
+        while(data->cl_in->oll[row] != '\0')
         {
             if(data->cl_in->oll[row] == '<' && data->cl_in->oll[ ++ row] == '<')
             {
-                 if( data->cl_in->oll[row] == ' ')
+                data->error = 0;
+                if( data->cl_in->oll[row] == ' ')
                     row++;
                if(coll_hear_doc(data,&row))
                     return(1);
