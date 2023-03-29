@@ -1,0 +1,38 @@
+total 11
+-rw-r--r-- 1 go go   0 Mar 29 02:02 aa1
+-rw-r--r-- 1 go go 420 Mar 29 02:02 aaa
+-rw-rw-r-- 1 go go 107 Mar 29 00:34 ez
+-rw-r--r-- 1 go go   0 Mar 29 00:32 heto
+-rw-r--r-- 1 go go   0 Mar 29 00:32 heto1
+-rw-rw-r-- 1 go go 102 Mar 29 00:34 out
+-rw-r--r-- 1 go go   0 Mar 29 02:02 ww
+total 19
+-rw-r--r-- 1 go go 290 Mar 29 02:02 aa1
+-rw-r--r-- 1 go go 420 Mar 29 02:02 aaa
+-rw-rw-r-- 1 go go 107 Mar 29 00:34 ez
+-rw-r--r-- 1 go go   0 Mar 29 00:32 heto
+-rw-r--r-- 1 go go   0 Mar 29 00:32 heto1
+-rw-rw-r-- 1 go go 102 Mar 29 00:34 out
+-rw-r--r-- 1 go go 290 Mar 29 02:02 ww
+total 38
+drwxrwxr-x  2 go go  10 Mar 29 02:03 .
+drwxrwxr-x 12 go go  17 Mar 29 02:03 ..
+-rw-r--r--  1 go go   0 Mar 29 02:03 a
+-rw-r--r--  1 go go 580 Mar 29 02:03 aa1
+-rw-r--r--  1 go go 420 Mar 29 02:02 aaa
+-rw-rw-r--  1 go go 107 Mar 29 00:34 ez
+-rw-r--r--  1 go go   0 Mar 29 00:32 heto
+-rw-r--r--  1 go go   0 Mar 29 00:32 heto1
+-rw-rw-r--  1 go go 102 Mar 29 00:34 out
+-rw-r--r--  1 go go 580 Mar 29 02:03 ww
+total 42
+drwxrwxr-x  2 go go  10 Mar 29 02:03 .
+drwxrwxr-x 12 go go  17 Mar 29 02:03 ..
+-rw-r--r--  1 go go   0 Mar 29 02:04 a
+-rw-r--r--  1 go go 580 Mar 29 02:03 aa1
+-rw-r--r--  1 go go 420 Mar 29 02:02 aaa
+-rw-rw-r--  1 go go 107 Mar 29 00:34 ez
+-rw-r--r--  1 go go   0 Mar 29 00:32 heto
+-rw-r--r--  1 go go   0 Mar 29 00:32 heto1
+-rw-rw-r--  1 go go 102 Mar 29 00:34 out
+-rw-r--r--  1 go go 995 Mar 29 02:03 ww

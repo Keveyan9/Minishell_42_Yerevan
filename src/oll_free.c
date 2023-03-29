@@ -13,6 +13,11 @@
 
 void	oll_free(t_src *data)
 {
+	if (data->line)
+	{
+		free(data->line);
+		data->line = NULL;
+	}
 	if(data->home_path)
 	{
 		free(data->home_path);

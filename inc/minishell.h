@@ -22,6 +22,10 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include "../libft/libft.h"
+#include <sys/ioctl.h>
+
+extern int g_flags;
+
 
 typedef enum s_type
 {
@@ -60,6 +64,8 @@ typedef struct s_tokens
 
 typedef struct s_cl_in
 {
+
+	int 	pip_her_doc[2];
 	int		index_herdoc;
 	char	*id;
 	char 	**word;
@@ -68,6 +74,7 @@ typedef struct s_cl_in
 	int		counthirdoc;
 	int		in_fd;
 	int 	out_fd;
+
 	struct s_cl_in	*next;
 	struct s_cl_in	*prev;
 }t_cl_in;
@@ -211,6 +218,5 @@ void change_fd(t_src *data);
 int creat_here_doc(t_src *data);
 void close_herdoq_fd(t_src *data);
 t_cl_in	*new_node_t_cl_inPPP(t_cl_in *cl_in);
-
 
 #endif

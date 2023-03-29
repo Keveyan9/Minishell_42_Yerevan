@@ -75,7 +75,11 @@ void	get_t_cl_in_list(t_src *data)
 	str[1] = NULL;
 	str[2] = NULL;
 	tokens_list_start(data);
+<<<<<<< HEAD
+	while (data->token_list )
+=======
 	while (data->token_list)
+>>>>>>> Artur
 	{
 		//&& data->token_list->next != NULL whilic jnjel em
 		if (data->token_list && data->token_list->type != 0)
@@ -99,7 +103,11 @@ void	get_t_cl_in_list(t_src *data)
 				|| data->token_list->next == NULL))
 		{
 			data->cl_in = new_node_t_cl_in(str[0], str[1], str[2], data->cl_in);
+<<<<<<< HEAD
+			if(data->cl_in->prev == NULL)
+=======
 			if (data->cl_in->prev == NULL)
+>>>>>>> Artur
 				data->clin_head = data->cl_in;
 			func_norm_get_t_cl_in_list(&str[0], &str[1], &str[2]);
 		}
@@ -178,14 +186,6 @@ void	get_t_cl_in_list(t_src *data)
 	}
 }
 
-
-
-
-
-
-
-
-
 t_cl_in	*new_node_t_cl_inPPP(t_cl_in *cl_in)
 {
 	t_cl_in	*node;
@@ -207,9 +207,6 @@ t_cl_in	*new_node_t_cl_inPPP(t_cl_in *cl_in)
 	return (node);
 }
 
-
-
-
 t_cl_in	*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in)
 {
 	t_cl_in	*node;
@@ -227,8 +224,8 @@ t_cl_in	*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in)
 		node->id = ft_strdup(node->word[0]);
 	else
 		node->id = NULL;
-	node->in_fd = -2;
-	node->out_fd = -2 ;
+	node->pip_her_doc[0] = -2;
+	node->pip_her_doc[1] = -2 ;
 	node->next = NULL;
 	node->prev = cl_in;
 	if (cl_in)

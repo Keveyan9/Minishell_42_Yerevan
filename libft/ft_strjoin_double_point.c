@@ -21,9 +21,7 @@ char	**ft_strjoin_double_point(char **split, char *str)
 {
 	char	**new_split;
 	int		n;
-	char	ss;
-
-	ss = 0;
+	
 	n = 0;
 	new_split = 0;
 	if (str)
