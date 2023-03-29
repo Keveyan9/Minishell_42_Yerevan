@@ -39,9 +39,9 @@ int creat_here_doc(t_src *data)
     int row;
 
     row = 0;
-    while (data->cl_in != NULL )
-    {   
-        while(data->cl_in->oll[row] != '\0' )
+    while (data->cl_in != NULL)
+    {
+        while(data->cl_in->oll && data->cl_in->oll[row] != '\0' )
         {
             if(data->cl_in->oll[row] == '<' && data->cl_in->oll[ ++ row] == '<')
             {

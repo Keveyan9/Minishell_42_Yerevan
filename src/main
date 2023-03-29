@@ -6,9 +6,10 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 17:50:44 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/27 01:39:02 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/27 21:49:09 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 // static void handler(int sig)
@@ -35,13 +36,19 @@ int main(int ac, char **av, char **env)
 	shell_level(data, av);
 	while (1 && data->pid > 0)
 	{
+		// signal(SIGINT, SIG_IGN);
+		// signal(SIGQUIT, SIG_IGN);
+
 		
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
 		start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
-		if(creat_here_doc(data) == 0 && data->syntax_err)
+
+		
+
+
+		print_t_cl_in(data);
+		if(creat_here_doc(data) == 0 && data->syntax_err == 0)
 		{
 			printf("__%d__\n",data->pipes_count);
 			if (data->line)
@@ -49,10 +56,10 @@ int main(int ac, char **av, char **env)
 				free(data->line);
 				data->line = NULL;
 			}
-			if (data->pipes_count == 0)
-				alone(data);
-			else
-				realaysing(data);
+			// if (data->pipes_count == 0)
+			// 	alone(data);
+			// else
+			// 	realaysing(data);
 			data->cl_in = data->clin_head;
 			if (data->cl_in)
 				free_clin(data);

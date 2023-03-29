@@ -60,10 +60,12 @@ typedef struct s_tokens
 
 typedef struct s_cl_in
 {
-	char	 *id;
+	int		index_herdoc;
+	char	*id;
 	char 	**word;
 	char 	*oll;
 	char	**heredoc;
+	int		counthirdoc;
 	int		in_fd;
 	int 	out_fd;
 	struct s_cl_in	*next;
@@ -208,5 +210,7 @@ void file_discriptor(t_src * data);
 void change_fd(t_src *data);
 int creat_here_doc(t_src *data);
 void close_herdoq_fd(t_src *data);
+t_cl_in	*new_node_t_cl_inPPP(t_cl_in *cl_in);
+
 
 #endif

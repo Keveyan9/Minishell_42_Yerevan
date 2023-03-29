@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 23:10:31 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/27 01:39:26 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/27 21:56:17 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	registor_syn_err(t_src *data, t_tokens *tmp, int syntax_err)
 void	add_sintex_error(t_src *data)
 {
 	t_tokens	*tmp;
-
 	tokens_list_start(data);
 	get_pipe_syntax_err(data);
 	tokens_list_start(data);
@@ -97,6 +96,8 @@ void	add_sintex_error(t_src *data)
 		tmp = tmp->next;
 	}
 	get_t_cl_in_list(data);
+
+	
 }
 
 // 
