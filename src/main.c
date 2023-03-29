@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
+// #include <termios.h>
 
 //pwd | >a <<h << es stex mtacel em vor koxqe hastat anun ka ete anun chka piti ta anexpedit token ta u 
 //pwd | wc -l >b |  >a <<h >>  orinak es paragayum el b piti chstexci
@@ -30,6 +31,15 @@ static void start_doing(t_src *data)
 
 }
 
+static void handler_main(int sig)
+{
+    (void)sig;
+    ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	
+}
+
 int main(int ac, char **av, char **env)
 {
 	t_src *data;
@@ -44,7 +54,7 @@ int main(int ac, char **av, char **env)
 	while (1 && data->pid > 0)
 	{ 
 		g_flags = 0;
-		signal(SIGINT, SIG_IGN);
+		signal(SIGINT, handler_main);
 		signal(SIGQUIT, SIG_IGN);
 		start_input(data);
 		ft_read_l(data);

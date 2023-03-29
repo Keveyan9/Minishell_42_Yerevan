@@ -1,0 +1,19 @@
+total 162
+drwxrwxr-x 12 go go    18 Mar 29 19:09 .
+drwxr-xr-x 11 go go    16 Mar 27 22:11 ..
+-rw-r--r--  1 go go   780 Mar 29 02:03 a
+drwxrwxr-x  2 go go     5 Mar 26 16:34 documentation
+-rw-rw-r--  1 go go  6148 Mar 27 13:31 .DS_Store
+drwxrwxr-x  8 go go    16 Mar 29 17:04 .git
+drwxrwxr-x  2 go go    22 Mar 29 19:07 havayi
+drwxrwxr-x  2 go go     3 Mar 27 13:31 inc
+drwxrwxr-x  3 go go    75 Mar 29 00:39 libft
+-rw-rw-r--  1 go go     0 Mar 29 19:09 lsa
+-rw-rw-r--  1 go go  3298 Mar 27 13:31 Makefile
+-rwxrwxr-x  1 go go 52040 Mar 29 18:13 minishell
+drwxrwxr-x  2 go go    46 Mar 29 18:13 objs
+drwxrwxr-x  2 go go    19 Mar 10 00:23 printf
+-rw-r--r--  1 go go    20 Mar 27 21:34 q
+drwxrwxr-x  7 go go   128 Mar 26 20:04 readline
+drwxrwxr-x  2 go go    47 Mar 27 14:36 src
+drwxrwxr-x  3 go go     6 Mar 26 16:34 .vscode

@@ -1,6 +1,7 @@
 #include "minishell.h"
 
 int g_flags;
+
 static void handler(int sig)
 {
     (void)sig;
@@ -43,12 +44,13 @@ static int coll_hear_doc(t_src *data, int *row)
     (*row)++;
     len = 0;
     len = find_plase(&(data->cl_in->oll[*row]),' ');
-    close_name = ft_substr(data->cl_in->oll,*row,len );
+    close_name = ft_substr(data->cl_in->oll,*row,len);
     if(data->cl_in->pip_her_doc[0] > 0 )
         close(data->cl_in->pip_her_doc[0]);
     pipe(data->cl_in->pip_her_doc);
     readline_heredoc(data,close_name);
     close(data->cl_in->pip_her_doc[1]);
+    data->cl_in->pip_her_doc[1] = 0;
     free(close_name);
     close_name = NULL;  
     return(0);

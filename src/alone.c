@@ -25,12 +25,12 @@ void alone(t_src *data)
     if(is_builtin(data))
     {
         file_discriptor(data);
-		if(data->error == 0)
+		if(!g_flags)
 		{
 			change_fd(data);
 			chek_coll_builtin(data);
-		
-			if(data->cl_in->pip_her_doc[0] > 0)
+			close_herdoq_fd(data);
+			if(data->cl_in->pip_her_doc[0] > 0 /* && printf("alone")*/)
 			{	
 				dup2(data->main_fd_in,0);
 				close(data->cl_in->pip_her_doc[0]);
