@@ -41,7 +41,6 @@ void alone(t_src *data)
 				close(data->cl_in->out_fd);
 			}
 		}
-		
     }
     else
 		alone_child(data);

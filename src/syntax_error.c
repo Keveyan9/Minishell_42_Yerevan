@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 19:30:42 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/26 22:41:17 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/27 21:50:19 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,5 @@ t_src	*syntax_error(t_src *data)
 		data->syntax_err = 0;
 	data = get_tokens(data);
 	add_sintex_error(data);
-	//stex em avelacrel vor hankarc liak chmna
-// printf("barev0\n");
 	return (data);
 }

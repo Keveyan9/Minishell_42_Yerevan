@@ -30,6 +30,7 @@ static void cheak_old_fd(t_src *data, int *fd, int *n)
         close(*fd);
 }
 
+
 static void chek_in_file(t_src *data, int *row)
      {
         char *name;

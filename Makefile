@@ -6,7 +6,7 @@
 #    By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/23 15:15:32 by artadevo          #+#    #+#              #
-#    Updated: 2023/01/22 22:42:41 by artadevo         ###   ########.fr        #
+#    Updated: 2023/03/27 22:11:11 by artadevo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ INCLUDES		=	$(INC) $(READLINE)
 
 LINKERS			=	-L$(READLINE_LIB) -lreadline -L$(LIBFT_DIR) -lft
 
-CFLAGS			=	-Wall -Wextra #-Werror # m-fsanitize=address -g
+CFLAGS			=	-Wall -Wextra -Werror #-fsanitize=address -g
 
 OBJS_DIR		=	objs
 

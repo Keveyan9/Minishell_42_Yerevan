@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 17:50:44 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/27 01:39:02 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/27 21:49:09 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -16,20 +16,19 @@
 //pwd | wc -l >b |  >a <<h >>  orinak es paragayum el b piti chstexci
 
 
-static void start_doing(t_src *data)
-{
-	printf("__%d__\n",data->pipes_count);
-	if (data->pipes_count == 0)
-		alone(data);
-	else
-		realaysing(data);
-	data->cl_in = data->clin_head;
-	if (data->cl_in)
-		free_clin(data);
-	free(data->line);
-	data->line = NULL;
-
-}
+// static void start_doing(t_src *data)
+// {
+// 	printf("__%d__\n",data->pipes_count);
+// 	if (data->pipes_count == 0)
+// 		alone(data);
+// 	else
+// 		realaysing(data);
+// 	data->cl_in = data->clin_head;
+// 	if (data->cl_in)
+// 		free_clin(data);
+// 	free(data->line);
+// 	data->line = NULL;
+// }
 
 static void handler_main(int sig)
 {
@@ -39,6 +38,7 @@ static void handler_main(int sig)
 	rl_on_new_line();
 	
 }
+
 
 int main(int ac, char **av, char **env)
 {
@@ -60,10 +60,11 @@ int main(int ac, char **av, char **env)
 		ft_read_l(data);
 		data = syntax_error(data);
 		creat_here_doc(data) ;
-		if(!g_flags && data->syntax_err == 0 && data->cl_in)
-			start_doing(data);
-		if(data->syntax_err != 0)
-			print_syntax_err(data);
+		// if(!g_flags && data->syntax_err == 0 && data->cl_in)
+		// 	start_doing(data);
+		// if(data->syntax_err != 0)
+		// 	print_syntax_err(data);
+
 	}
 	oll_free(data);
 	return (0);

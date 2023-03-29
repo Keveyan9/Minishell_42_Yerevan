@@ -20,7 +20,7 @@ void ft_read_l(t_src *data)
 		if(data->line == NULL)
 		{
 			oll_free(data);
-			exit(0); // last error code
+			exit(data->error); // last error code
 		}
 		if(data->line[0] != '\0')
 			add_history(data->line);

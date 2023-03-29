@@ -26,6 +26,7 @@
 
 extern int g_flags;
 
+
 typedef enum s_type
 {
 	PIPE,			   // |		0
@@ -63,13 +64,17 @@ typedef struct s_tokens
 
 typedef struct s_cl_in
 {
-	char	 *id;
+
+	int 	pip_her_doc[2];
+	int		index_herdoc;
+	char	*id;
 	char 	**word;
 	char 	*oll;
 	char	**heredoc;
+	int		counthirdoc;
 	int		in_fd;
 	int 	out_fd;
-	int 	pip_her_doc[2];
+
 	struct s_cl_in	*next;
 	struct s_cl_in	*prev;
 }t_cl_in;
@@ -212,5 +217,6 @@ void file_discriptor(t_src * data);
 void change_fd(t_src *data);
 int creat_here_doc(t_src *data);
 void close_herdoq_fd(t_src *data);
+t_cl_in	*new_node_t_cl_inPPP(t_cl_in *cl_in);
 
 #endif
