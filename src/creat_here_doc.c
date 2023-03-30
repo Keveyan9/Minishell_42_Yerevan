@@ -2,19 +2,19 @@
 
 int g_flags;
 
-static void handler(int sig)
-{
-    (void)sig;
-    g_flags = 1;
-    ioctl(STDIN_FILENO, TIOCSTI, "\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-}
+// static void handler(int sig)
+// {
+//     (void)sig;
+//     g_flags = 1;
+//     ioctl(STDIN_FILENO, TIOCSTI, "\n");
+// 	rl_replace_line("", 0);
+// 	rl_on_new_line();
+// }
 
 static void readline_heredoc(t_src *data,char *close_name)
 {
     char *her_line;
-    signal(SIGINT, handler);
+   // signal(SIGINT, handler);
     g_flags = 0;
     while(!g_flags)
     {
@@ -34,7 +34,6 @@ static void readline_heredoc(t_src *data,char *close_name)
         data->error = 130;
     signal(SIGINT, SIG_IGN);
 }
-
 
 static int coll_hear_doc(t_src *data, int *row)
 {

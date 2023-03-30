@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 16:55:16 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/26 23:29:22 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/31 00:10:11 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ typedef struct s_cl_in
 	char 	*oll;
 	char	**heredoc;
 	int		counthirdoc;
-	int		in_fd;
-	int 	out_fd;
+	int		flag_have_bracket;//0 == note   // 1 == have bracket
 
 	struct s_cl_in	*next;
 	struct s_cl_in	*prev;
@@ -154,18 +153,33 @@ t_env		*new_node(void);
 int			put_env_node(t_src *data, t_env *node);
 //------src------syntax_error.c-------
 t_src		*syntax_error(t_src *data);
-int			get_count(char *s, char c);
-int			get_index_quotes(t_src *data);
-int			check_and_break_parentheses(t_src *data);
+void		is_len_delet_spaces(t_src *data, char *s);
+int			syntacs_error_redir(char *str, t_src *data, int i);
+void		get_pipe_syntax_err2(t_src *data, char *str);
+
+int			syntax_error_search(t_src *data);
 //------src------syntax_error_add.c-------
+
+// int			get_pipe_syntax_err(t_src *data);
+int			get_pipe_syntax_err(char tokin);
 void		add_sintex_error(t_src *data);
-int			get_pipe_syntax_err(t_src *data);
-int			get_redir_syntax_err(t_src *data);
-int			registor_syn_err(t_src *data, t_tokens *tmp, int syntax_err);
+int			get_redir_syntax_err(char *tokin, int *i);
+int			char_tokin1(char *tokin, int *i);
+int			char_tokin1_norm(char *tokin, int *i);
+
+// int			get_redir_syntax_err2(t_src *data);
+// int			registor_syn_err(t_src *data, t_tokens *tmp, int syntax_err);
+
 //------src------syntax_error_utils.c-------
+void		new_line(t_src *data, int j, int k);
 void		get_frst_element(t_src *data);
 void		print_syntax_err(t_src *data);
 void		get_short_line(t_src *data);
+//------src------syntax_error_utils1.c-------
+char		*ft_str_n_dup(const char *s, int x);
+int			check_quots(t_src *data);
+void		check_quots_norm(char *str, int *j, int *i);
+
 //------src------input_data.c------------
 int			all_input(t_src *data, char **env);
 void		start_input(t_src *data);
@@ -180,9 +194,10 @@ void		write_env_list(t_env *node, char **env); // verjum jnji
 
 //------src------get_t_clin_list.c------------
 void		get_t_cl_in_list(t_src *data);
-t_cl_in		*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in);
+// t_cl_in		*new_node_t_cl_in(t_cl_in *cl_in);
 void		print_t_cl_in(t_src *data); // verjum jnji
 
+t_cl_in		*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in);
 // builtins
 void echo(t_src *data);
 void cd(t_src *data);
@@ -217,6 +232,20 @@ void file_discriptor(t_src * data);
 void change_fd(t_src *data);
 int creat_here_doc(t_src *data);
 void close_herdoq_fd(t_src *data);
-t_cl_in	*new_node_t_cl_inPPP(t_cl_in *cl_in);
 
+
+// _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+//------src------syntax_error_1.c-------
+
+
+
+int	when_find_tokin(t_src *data, char *str, int *i, int j);
+int	pipe_last(t_src *data, char *str, int j);
+void	syntax_last_nothing(t_src *data, int i, int j);
+
+
+
+int		error_search_error2(t_src *data, char *str, int *i);
+// void	get_t_cl_in_list_all(t_src *data);
 #endif

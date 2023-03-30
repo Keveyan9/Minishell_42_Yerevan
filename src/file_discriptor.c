@@ -41,8 +41,8 @@ static void chek_in_file(t_src *data, int *row)
         fd = 0;
         len = *row;
         n = *row;
-        if(data->cl_in->out_fd > 0)
-            close(data->cl_in->out_fd);
+        if(data->cl_in->pip_her_doc[0] > 0)
+            close(data->cl_in->pip_her_doc[0]);
         len   = find_plase(&(data->cl_in->oll[*row]),' ');
         name = ft_substr(data->cl_in->oll,*row,len);
         fd = open (name, O_RDONLY, 0644);
@@ -65,8 +65,8 @@ static void chek_out_file(t_src *data, int *row)
   char *name;
     int len;
 
-    if(data->cl_in->out_fd > 0)
-        close(data->cl_in->out_fd);
+    if(data->cl_in->pip_her_doc[0] > 0)
+        close(data->cl_in->pip_her_doc[0]);//out poxel em
     if(data->cl_in->oll[*row] == '>')
      { 
         (*row)++;

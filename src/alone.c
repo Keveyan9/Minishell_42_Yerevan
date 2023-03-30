@@ -38,7 +38,7 @@ void alone(t_src *data)
 			if(data->cl_in->pip_her_doc[1] > 0)
 			{
 				dup2(data->main_fd_out,1);
-				close(data->cl_in->out_fd);
+				close(data->cl_in->pip_her_doc[1]);
 			}
 		}
     }

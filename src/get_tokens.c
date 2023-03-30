@@ -35,6 +35,7 @@ t_src	*get_tokens(t_src *data)
 		else
 			data = find_word(data->line, data);
 	}
+	free(data->line);
 	//get_token_corect(data);
 	return (data);
 }

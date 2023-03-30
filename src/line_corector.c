@@ -6,49 +6,80 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 17:46:31 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/04 22:13:06 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/30 20:47:32 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static int	get_start(const char *str)
+int	when_find_tokin(t_src *data, char *str, int *i, int j)
 {
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] != ' ')
-			return (i);
+	while (str[*i] && str[*i] == ' ')
+		(*i)++;
+	if (!str[*i])
+	{
+		str = ft_str_n_dup(data->line, j);
+		free(data->line);
+		data->line = str;
+		return (1);
+	}
+	else if (char_tokin1(str, i) != 0)
+	{
+		str = ft_str_n_dup(data->line, j);
+		free(data->line);
+		data->line = str;
+		return (1);
+	}
+	j = 0;
 	return (0);
 }
 
-static int	get_end(const char *str)
+int	pipe_last(t_src *data, char *str, int j)
 {
-	int	i;
+	int	l;
 
-	i = 0;
-	while (str[i])
-		i++;
-	i--;
-	while (i >= 0)
+	l = j;
+	if (str[l] == '|')
 	{
-		if (str[i] != ' ')
-			return (i);
-		i--;
+		while (str[l] && str[++l] == 32)
+			;
+		if (!str[l])
+		{
+			str = ft_str_n_dup(data->line, j);
+			free(data->line);
+			data->line = str;
+			data->syntax_err = '|';
+			return (1);
+		}
 	}
 	return (0);
 }
 
-char	*line_corector(char *line)
+void	syntax_last_nothing(t_src *data, int i, int j)
 {
-	int		start;
-	int		end;
-	char	*tmp;
+	char	*str;
+	int		k;
 
-	start = get_start(line);
-	end = get_end(line);
-	tmp = ft_str_env_cmp(line, start, end);
-	free(line);
-	return (tmp);
+	i = 0;
+	j = 0;
+	k = 0;
+	str = data->line;
+	while (data && str && str[i])
+	{
+		j = i;
+		if (pipe_last(data, str, j) == 1)
+			return ;
+		k = get_redir_syntax_err(str, &i);
+		if (k != 0)
+		{
+			if (when_find_tokin(data, str, &i, j) != 0)
+			{
+				data->syntax_err = k;
+				return ;
+			}
+			k = 0;
+		}
+		else
+			i++;
+	}
 }

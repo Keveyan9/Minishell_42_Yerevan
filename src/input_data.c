@@ -111,4 +111,16 @@ void start_input(t_src *data)
 	data->pid = 1;
 	data->main_fd_in = -1;
 	data->main_fd_out = -1;
+	int i = 0;
+	if (data->cl_in && data->cl_in->heredoc && data->cl_in->heredoc[i])
+	{
+		while (data->cl_in->heredoc && data->cl_in->heredoc[i])
+		{
+			free(data->cl_in->heredoc[i]);
+			data->cl_in->heredoc[i] = 0;
+			i++;
+		}
+		free(data->cl_in->heredoc);
+		data->cl_in->heredoc = 0;
+	}
 }
