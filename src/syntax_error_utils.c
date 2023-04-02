@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 20:50:29 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/27 01:35:05 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/30 19:28:33 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,15 @@ void	get_short_line(t_src *data)
 		data->line = tmp;
 		tmp = NULL;
 	}
+}
+
+void	new_line(t_src *data, int j, int k)
+{
+	char	*str;
+
+	str = ft_str_n_dup(data->line, j);
+	free(data->line);
+	data->line = str;
+	str = 0;
+	data->syntax_err = k;
 }

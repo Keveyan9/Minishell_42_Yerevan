@@ -39,6 +39,7 @@ t_src	*find_word(char *s, t_src *data)
 		tmp = NULL;
 	}
 	free(data->line);
+	data->line = NULL;
 	data->line = tmp;
 	return (data);
 }
@@ -56,6 +57,7 @@ t_src	*find_space(char *s, t_src *data)
 	data->token_list = new_node_tokens(ft_strdup(" "), SPAC, data->token_list);
 	tmp = ft_substr(data->line, i, k);
 	free(data->line);
+	data->line = NULL;
 	data->line = tmp;
 	return (data);
 }
@@ -71,6 +73,7 @@ t_src	*find_pipe(char *s, t_src *data)
 	else
 		tmp = NULL;
 	free(data->line);
+	data->line = NULL;
 	data->line = tmp;
 	return (data);
 }
@@ -101,6 +104,7 @@ t_src	*find_single_quotes(char *s, t_src *data)
 		tmp = NULL;
 	}
 	free(data->line);
+	data->line = NULL;
 	data->line = tmp;
 	return (data);
 }
@@ -134,6 +138,7 @@ t_src	*find_duobl_quotes(char *s, t_src *data)
 		tmp = NULL;
 	}
 	free(data->line);
+	data->line = NULL;
 	data->line = tmp;
 	return (data);
 }

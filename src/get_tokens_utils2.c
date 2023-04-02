@@ -30,6 +30,7 @@ t_src	*find_redir_append(char *s, t_src *data)
 		tmp = NULL;
 	}
 	free(data->line);
+	data->line = NULL;
 	data->line = tmp;
 	return (data);
 }
@@ -52,6 +53,7 @@ t_src	*find_hierdoc(char *s, t_src *data)
 		tmp = NULL;
 	}
 	free(data->line);
+	data->line = NULL;
 	data->line = tmp;
 	return (data);
 }
@@ -74,6 +76,7 @@ t_src	*find_redir_in(char *s, t_src *data)
 		tmp = NULL;
 	}
 	free(data->line);
+	data->line = NULL;
 	data->line = tmp;
 	return (data);
 }
@@ -96,6 +99,7 @@ t_src	*find_redir_out(char *s, t_src *data)
 		tmp = NULL;
 	}
 	free(data->line);
+	data->line = NULL;
 	data->line = tmp;
 	return (data);
 }
