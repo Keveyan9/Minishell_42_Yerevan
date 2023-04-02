@@ -13,11 +13,11 @@
 
 static void give_place(t_src *data)
 {
-	t_env *chek_place;
-	t_env *grup;
-	size_t len;
-	int len2;
-	int campeyer;
+	t_env	*chek_place;
+	t_env	*grup;
+	size_t	len;
+	int		len2;
+	int		campeyer;
 
 	campeyer = 0;
 	chek_place = data->env;
@@ -42,7 +42,7 @@ static void give_place(t_src *data)
 	}
 }
 
-void print_export(t_src *data)
+void	print_export(t_src *data)
 {
 	// int go_on;
 	t_env *grup;

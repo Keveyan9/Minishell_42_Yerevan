@@ -147,8 +147,6 @@ t_src		*find_redir_in(char *s, t_src *data);
 t_src		*find_redir_out(char *s, t_src *data);
 void		print_tokens(t_src *data); // heto jnji
 
-//------src-------start_pars.c------------
-t_src		*ft_parser(t_src *data);
 //------src------read_input.c------------
 void		ft_read_l(t_src *data);
 t_env		*new_node(void);
@@ -192,7 +190,6 @@ char		*line_corector(char *line);
 int			ft_strchr_mod(const char *s, char c);
 char		*ft_str_env_cmp(char const *s, int start, int end);
 void		error_print(char *s, char *c);
-void		write_env_list(t_env *node, char **env); // verjum jnji
 
 //------src------get_t_clin_list.c------------
 void		get_t_cl_in_list(t_src *data);
@@ -240,7 +237,6 @@ void dolar_change(t_env *env , char **key, int n);
 // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 
 //------src------syntax_error_1.c-------
-
 
 
 int	when_find_tokin(t_src *data, char *str, int *i, int j);

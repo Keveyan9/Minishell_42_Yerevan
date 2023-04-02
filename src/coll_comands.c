@@ -12,9 +12,9 @@
 
 #include "../inc/minishell.h"
 
-static char **list_to_array(t_src *data)
+static char	**list_to_array(t_src *data)
 {
-	t_coll_comand var;
+	t_coll_comand	var;
 
 	var.i = 0;
 	var.origin = data->env;
@@ -39,11 +39,11 @@ static char **list_to_array(t_src *data)
 	return (var.env_aray);
 }
 
-void coll_comands(t_src *data)
+void	coll_comands(t_src *data)
 {
-	char *comand_path;
-	char **env;
-	char **name_argument;
+	char	*comand_path;
+	char	**env;
+	char	**name_argument;
 
 	env = list_to_array(data);
 	comand_path = ft_strjoin(data->home_path, &(data->cl_in->word[0][1]));
@@ -56,11 +56,11 @@ void coll_comands(t_src *data)
 	frik(name_argument);
 	comand_path = find_comand_path(data);
 	if (comand_path)
-		 execve(comand_path, data->cl_in->word, env);
+		execve(comand_path, data->cl_in->word, env);
 	else
 	{
-		ft_putstr_fd(data->cl_in->word[0],1);
-		ft_putstr_fd("  : comand can not faund\n",1);
+		ft_putstr_fd(data->cl_in->word[0], 1);
+		ft_putstr_fd("  : comand can not faund\n", 1);
 		data->error = 127;
 	}
 	frik(env);

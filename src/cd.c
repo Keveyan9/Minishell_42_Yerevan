@@ -46,6 +46,7 @@ static void	cd_half(t_src *data)
 void	cd(t_src *data)
 {
 	char	*error_string;
+
 	if (data->cl_in->word[2])
 	{
 		printf("cd : too many arguments");
@@ -53,7 +54,7 @@ void	cd(t_src *data)
 		g_flags = 1;
 		return ;
 	}
-	if(data->cl_in->word[1])
+	if (data->cl_in->word[1])
 	{
 		data->error = chdir(data->cl_in->word[1]);
 		if (!g_flags)

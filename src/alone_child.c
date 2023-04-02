@@ -9,15 +9,15 @@
 /*   Updated: 2023/02/28 15:49:46 by skeveyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
 int	alone_child(t_src *data)
 {
+	int		d;
 
 	data->pid = 0;
 	data->pid = fork();
-	int d;
-
 	d = 0;
 	if (data->pid < 0)
 	{
@@ -26,10 +26,10 @@ int	alone_child(t_src *data)
 	}
 	else if (data->pid == 0)
 	{	
-		signal(SIGINT,SIG_DFL);
+		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_IGN);
 		file_discriptor(data);
-		if(!g_flags)
+		if (!g_flags)
 		{
 			change_fd(data);
 			close_herdoq_fd(data);
@@ -40,9 +40,9 @@ int	alone_child(t_src *data)
 	}
 	else if (data->pid > 0)
 	{
-		 wait(&d);
+		wait(&d);
 		data->error = WEXITSTATUS(d);
-		return(0);
+		return (0);
 	}
-	return(0);
+	return (0);
 }

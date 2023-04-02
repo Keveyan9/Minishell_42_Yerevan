@@ -37,7 +37,6 @@ t_src	*get_tokens(t_src *data)
 	}
 	free(data->line);
 	data->line = NULL;
-	//get_token_corect(data);
 	return (data);
 }
 
