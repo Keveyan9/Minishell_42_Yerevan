@@ -14,15 +14,9 @@
 
 void	free_clin(t_src *data)
 {
-	while (data->cl_in->prev)
-		data->cl_in = data->cl_in->prev;
+	data->cl_in = data->clin_head;
 	while (data->cl_in)
 	{
-		if (data->cl_in->id)
-		{
-			free(data->cl_in->id);
-			data->cl_in->id = NULL;
-		}
 		if (data->cl_in->word)
 		{
 			frik(data->cl_in->word);

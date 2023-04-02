@@ -24,10 +24,10 @@ char	*find_comand_path(t_src *data)
 	env_list = find_env(data->env, "PATH");
 	if (!env_list)
 	{
-		printf("%s: No such file or directory \n", data->cl_in->id);
+		printf("%s: No such file or directory \n", data->cl_in->word[0]);
 		return (NULL);
 	}
-	comand_slesh = ft_strjoin("/", data->cl_in->id);
+	comand_slesh = ft_strjoin("/", data->cl_in->word[0]);
 	oll_path = ft_split(env_list->value, ':');
 	while (oll_path[n])
 	{

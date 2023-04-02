@@ -15,6 +15,7 @@
 void	is_len_delet_spaces(t_src *data, char *s)
 {
 	int		i;
+	char	*d;
 
 	i = 0;
 	if (data && s && s[i] == ' ')
@@ -22,9 +23,12 @@ void	is_len_delet_spaces(t_src *data, char *s)
 		while (data && s && s[i] == ' ')
 			i++;
 	}
+	d = ft_strdup(data->line);
 	free(data->line);
 	data->line = 0;
-	data->line = ft_strjoin(&s[i], "");
+	data->line = ft_strjoin(&d[i], "");
+	free(d);
+	d = 0;
 }
 
 int	syntacs_error_redir(char *str, t_src *data, int i)

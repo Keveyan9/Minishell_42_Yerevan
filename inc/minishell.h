@@ -67,12 +67,13 @@ typedef struct s_cl_in
 
 	int 	pip_her_doc[2];
 	int		index_herdoc;
-	char	*id;
+	//char	*id;
 	char 	**word;
 	char 	*oll;
-	char	**heredoc;
-	int		counthirdoc;
-	int		flag_have_bracket;//0 == note   // 1 == have bracket
+	
+	// char	**heredoc;
+	// int		counthirdoc;
+	// int		flag_have_bracket;//0 == note   // 1 == have bracket
 
 	struct s_cl_in	*next;
 	struct s_cl_in	*prev;
@@ -95,6 +96,7 @@ typedef struct s_src
 	int	main_fd_out;
 	pid_t pid;
 	t_tokens *token_list;
+	t_tokens *tokens_head;
 	t_env *env;
 	t_env *envhead;
 	t_env *envlast;
@@ -197,7 +199,6 @@ void		get_t_cl_in_list(t_src *data);
 // t_cl_in		*new_node_t_cl_in(t_cl_in *cl_in);
 void		print_t_cl_in(t_src *data); // verjum jnji
 
-t_cl_in		*new_node_t_cl_in(char *str, char *str1, char *str2, t_cl_in *cl_in);
 // builtins
 void echo(t_src *data);
 void cd(t_src *data);
@@ -232,6 +233,8 @@ void file_discriptor(t_src * data);
 void change_fd(t_src *data);
 int creat_here_doc(t_src *data);
 void close_herdoq_fd(t_src *data);
+void	free_token(t_src *data);
+void dolar_change(t_env *env , char **key, int n);
 
 
 // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-

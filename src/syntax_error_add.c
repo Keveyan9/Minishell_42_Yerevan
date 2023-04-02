@@ -106,8 +106,6 @@ void	add_sintex_error(t_src *data)
 			data->pipes_count += 1;
 		tmp = tmp->next;
 	}
-	get_t_cl_in_list(data);
-	// print_t_cl_in(data);
 }
 
 // 

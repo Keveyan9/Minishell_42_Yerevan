@@ -50,20 +50,24 @@ void	cd(t_src *data)
 	{
 		printf("cd : too many arguments");
 		data->error = 1;
+		g_flags = 1;
 		return ;
 	}
-	data->error = chdir(data->cl_in->word[1]);
-	if (data->error == 0)
+	if(data->cl_in->word[1])
 	{
-		cd_half(data);
-		data->error = errno;
-	}
-	else if (data->cl_in->word[1])
-	{
-		error_string = ft_strjoin("minishell: cd: ", data->cl_in->word[1]);
-		data->error = 1;
-		perror(error_string);
-		free(error_string);
-		error_string = NULL;
+		data->error = chdir(data->cl_in->word[1]);
+		if (!g_flags)
+		{
+			cd_half(data);
+			data->error = errno;
+		}
+		else if (data->cl_in->word[1])
+		{
+			error_string = ft_strjoin("minishell: cd: ", data->cl_in->word[1]);
+			data->error = 1;
+			perror(error_string);
+			free(error_string);
+			error_string = NULL;
+		}
 	}
 }
