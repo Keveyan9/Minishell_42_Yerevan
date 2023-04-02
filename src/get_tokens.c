@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:37:41 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/25 15:01:41 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:34:20 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ t_src	*get_tokens(t_src *data)
 		else
 			data = find_word(data->line, data);
 	}
+	free(data->line);
+	data->line = NULL;
+	//get_token_corect(data);
 	return (data);
 }
 
@@ -48,6 +51,7 @@ t_tokens	*new_node_tokens(char *s, int k, t_tokens *token_list)
 	node->len = (int)ft_strlen(s);
 	node->token = s;
 	node->type = k;
+	node->syn_err = -1;
 	node->next = NULL;
 	node->prev = token_list;
 	if (token_list)
@@ -84,5 +88,4 @@ void	token_line_dell(t_tokens *node)
 	node->next->prev = tmp->prev;
 	node->prev->next = tmp->next;
 	free(tmp);
-	//return (node);
 }

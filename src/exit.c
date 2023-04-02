@@ -16,7 +16,7 @@ void exit_f(t_src *data)
                     break;
                  }
             }
-            if(n == ft_strlen(data->cl_in->word[1]) + 1)
+            if(n == ft_strlen(data->cl_in->word[1]))
                 data->error = ft_atoi(data->cl_in->word[1]);
             else
                 data->error = 2;

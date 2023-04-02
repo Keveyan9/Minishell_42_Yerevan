@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 19:28:12 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/05 14:26:03 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/26 22:08:55 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int start_input_env(char **env, t_src *data)
 int all_input(t_src *data, char **env)
 {
 	data->env = NULL;
+	data->envhead = NULL;
+	data->envlast = NULL;
 	start_input(data);
 	data->home_path = getcwd(NULL,0);
 	data->error = 0;
@@ -95,7 +97,7 @@ int all_input(t_src *data, char **env)
 void start_input(t_src *data)
 {
 	data->line = NULL;
-	data->index_s_err = 0;
+	data->index_s_err = -1;
 	data->syntax_err = 0;
 	data->doubl_quotes = 0;
 	data->single_quotes = 0;
@@ -104,6 +106,8 @@ void start_input(t_src *data)
 	data->cycle = 0;
 	data->token_list = NULL;
 	data->cl_in = NULL;
+	data->clin_head = NULL;
+	data->clin_last = NULL;
 	data->pid = 1;
 	data->main_fd_in = -1;
 	data->main_fd_out = -1;

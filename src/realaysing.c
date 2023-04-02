@@ -66,6 +66,7 @@ void realaysing(t_src *data)
 	if (data->pid > 0)
 	{
 		close_discriptor(data);
+		close_herdoq_fd(data);
 		while (data->cycle--)
 		{
 			wait(&data->error);

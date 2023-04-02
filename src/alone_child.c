@@ -20,18 +20,23 @@ int	alone_child(t_src *data)
 
 	d = 0;
 	if (data->pid < 0)
+	{
 		write(1, "can not creat child\n", 20);
+		data->error = errno;
+	}
 	else if (data->pid == 0)
 	{	
-		//signal(SIGINT,SIG_DFL);
+		signal(SIGINT,SIG_DFL);
+		signal(SIGQUIT, SIG_IGN);
 		file_discriptor(data);
-		change_fd(data);
-		if(data->cl_in->in_fd > 0)
-    		close(data->cl_in->in_fd);
-   		if(data->cl_in->out_fd > 0)
-        	close(data->cl_in->out_fd);
-		coll_comands(data);
+		if(!g_flags)
+		{
+			change_fd(data);
+			close_herdoq_fd(data);
+			coll_comands(data);
+		}
 		oll_free(data);
+		exit(data->error);
 	}
 	else if (data->pid > 0)
 	{
@@ -39,6 +44,5 @@ int	alone_child(t_src *data)
 		data->error = WEXITSTATUS(d);
 		return(0);
 	}
-	oll_free(data);
-	exit(data->error);
+	return(0);
 }

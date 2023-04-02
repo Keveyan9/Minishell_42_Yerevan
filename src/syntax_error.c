@@ -6,108 +6,109 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 19:30:42 by artadevo          #+#    #+#             */
-/*   Updated: 2023/03/04 21:58:20 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/30 22:51:02 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int get_count(char *s, char c)
+void	is_len_delet_spaces(t_src *data, char *s)
 {
-	int i;
-	int count;
-
-	i = -1;
-	count = 0;
-	while (s[++i])
-	{
-		if (s[i] == c)
-			count++;
-	}
-	return (count);
-}
-
-static int get_index_quotes_2(t_src *data)
-{
-	int i;
+	int		i;
+	char	*d;
 
 	i = 0;
-	if (data->doubl_quotes > data->single_quotes)
-		i = data->single_quotes;
-	else
-		i = data->doubl_quotes;
-	return (i);
+	if (data && s && s[i] == ' ')
+	{
+		while (data && s && s[i] == ' ')
+			i++;
+	}
+	d = ft_strdup(data->line);
+	free(data->line);
+	data->line = 0;
+	data->line = ft_strjoin(&d[i], "");
+	free(d);
+	d = 0;
 }
 
-int get_index_quotes(t_src *data)
+int	syntacs_error_redir(char *str, t_src *data, int i)
 {
-	int i;
+	if (get_redir_syntax_err(str, &i) != 0)
+	{
+		while (str && str[i] && str[i] == 32)
+		i++;
+		if (!str[i])
+		{
+			data->syntax_err = 150;
+			return (1);
+		}
+	}
+	return (0);
+}
+
+void	get_pipe_syntax_err2(t_src *data, char *str)
+{
+	int	i;
+	int	j;
 
 	i = 0;
-	if (!data->doubl_quotes && !data->single_quotes)
+	j = 0;
+	while (str && str[i])
 	{
-		i = 0;
-		if ((data->line[0] == '\'' || data->line[0] == '\"') && (get_count(data->line, '\'') == 1 || get_count(data->line, '\"') == 1))
+		if (str[i] == '|')
 		{
-			i = -1;
-			data->index_s_err = 0;
+			j = i;
+			i++;
+			while (str && str[i] && str[i] == 32)
+			i++;
+			if (!str[i] || (str[i] && str[i] == '|'))
+			{
+				data->syntax_err = '|';
+				new_line(data, j - 1, '|');
+			}
 		}
+		i++;
 	}
-	else if (data->doubl_quotes && data->single_quotes)
-		i = get_index_quotes_2(data);
-	else if (data->doubl_quotes && !data->single_quotes)
-		i = data->doubl_quotes;
-	else if (!data->doubl_quotes && data->single_quotes)
-		i = data->single_quotes;
-	if (i >= 0)
-		data->index_s_err = i;
-	data->syntax_err = (int)(data->line[data->index_s_err]);
-	return (i);
 }
 
-int check_and_break_parentheses(t_src *data)
+int	syntax_error_search(t_src *data)
 {
-	int i;
+	char	*str;
+	int		i;
+	int		j;
 
-	i = -1;
-	while (data->line[++i] && i <= (int)ft_strlen(data->line))
+	i = 0;
+	j = 0;
+	str = data->line;
+	if (data && str)
 	{
-		if (data->line[i] == '\'')
+		if (str && str[i] && get_pipe_syntax_err(str[i]) != 0)
 		{
-			data->single_quotes = i++;
-			if (ft_strchr_mod(data->line + i, '\'') || data->line[i] == '\'')
-				data->single_quotes = 0;
-			i += ft_strchr_mod(data->line + i, '\'');
-			if (data->single_quotes != 0)
-				data->index_s_err = i;
+			data->syntax_err = get_pipe_syntax_err(str[i]);
+			return (1);
 		}
-		else if (data->line[i] == '\"')
-		{
-			data->doubl_quotes = i++;
-			if (ft_strchr_mod(data->line + i, '\"') || data->line[i] == '\"')
-				data->doubl_quotes = 0;
-			i += ft_strchr_mod(data->line + i, '\"');
-			if (data->doubl_quotes != 0)
-				data->index_s_err = i;
-		}
+		if (syntacs_error_redir(str, data, i) == 1)
+			return (1);
+		get_pipe_syntax_err2(data, str);
+		check_quots(data);
+		syntax_last_nothing(data, i, j);
 	}
-	return (get_index_quotes(data));
+	return (0);
 }
 
-t_src *syntax_error(t_src *data)
+t_src	*syntax_error(t_src *data)
 {
-	data->line = line_corector(data->line);
-	if (data->line[0] == '|' || data->line[0] == ')' || data->line[0] == ';')
+	is_len_delet_spaces(data, data->line);
+	if (data->line[0] == '|')
 	{
-		get_frst_element(data->line, data);
-		print_eyntax_err(data); // grel exit funkcia
+		get_frst_element(data);
 		return (data);
 	}
-	if (check_and_break_parentheses(data))
+	if (syntax_error_search(data))
 	{
-		print_eyntax_err(data); // grel exit funkcia
 		return (data);
-	}	 data = get_tokens(data);
-	  add_sintex_error(data);
+	}
+	data = get_tokens(data);
+	add_sintex_error(data);
 	return (data);
 }

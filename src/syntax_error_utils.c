@@ -6,44 +6,56 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 20:50:29 by artadevo          #+#    #+#             */
-/*   Updated: 2023/02/27 21:46:48 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/03/30 19:28:33 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	get_frst_element(char *s, t_src *data)
+void	get_frst_element(t_src *data)
 {
-	int	i;
+	data->index_s_err = 0;
+	data->syntax_err = 124;
+	return ;
+}
 
-	i = -1;
-	while (s[++i])
+void	print_syntax_err(t_src *data)
+{
+	if (data->syntax_err > 0 && data->syntax_err < 127)
 	{
-		if (s[i] == '|')
-		{
-			data->index_s_err = i;
-			data->syntax_err = 124;
-			return ;
-		}
-		else if (s[i] == ')')
-		{
-			data->index_s_err = i;
-			data->syntax_err = 41;
-			return ;
-		}
-		else if (s[i] == ';')
-		{
-			data->index_s_err = i;
-			data->syntax_err = 59;
-			return ;
-		}
+		ft_putstr_fd("syntax error near unexpected token `", 2);
+		ft_putchar_fd((char)(data->syntax_err), 2);
+		ft_putstr_fd("\"\n", 2);
+	}
+	else if (data->syntax_err == 250)
+		ft_putstr_fd("syntax error near unexpected token `>>\"\n", 2);
+	else if (data->syntax_err == 350)
+		ft_putstr_fd("syntax error near unexpected token `<<\"\n", 2);
+	else
+		ft_putstr_fd("syntax error near unexpected token `newline\"\n", 2);
+}
+
+void	get_short_line(t_src *data)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	if (data->line)
+	{
+		tmp = ft_substr(data->line, 0, data->index_s_err);
+		free(data->line);
+		data->line = tmp;
+		tmp = NULL;
 	}
 }
 
-void	print_eyntax_err(t_src *data)
+void	new_line(t_src *data, int j, int k)
 {
-	if (data->syntax_err >= 0 && data->syntax_err < 127)
-		printf("mint$ syntax error near unexpected token `%c\"\n", (char)(data->syntax_err));
-	else
-		printf("mint$ syntax error near unexpected token `%s\"\n", "newline");
+	char	*str;
+
+	str = ft_str_n_dup(data->line, j);
+	free(data->line);
+	data->line = str;
+	str = 0;
+	data->syntax_err = k;
 }

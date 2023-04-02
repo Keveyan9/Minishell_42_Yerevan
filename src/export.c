@@ -16,7 +16,6 @@ int find_index(char *s, char c)
 	int i;
 
 	i = 0;
-	printf("find__%s__\n",s);
 	while (s[i])
 		if (s[i++] == c)
 			return (i);
@@ -141,17 +140,19 @@ void export(t_src *data)
 				write(1, "\n", 1);
 				free(non_valid_arg);
 				data->error = 1;
-				break;
-			}
-			var.i = find_index(data->cl_in->word[var.row], '=');
-			var.string_len = ft_strlen(data->cl_in->word[var.row]);
-			if (campeyr(data, &var))
-			{
-				data->error = 1;
-				break;
 			}
 			else
-				data->error = 0;
+			{
+				var.i = find_index(data->cl_in->word[var.row], '=');
+				var.string_len = ft_strlen(data->cl_in->word[var.row]);
+				if (campeyr(data, &var))
+				{
+					data->error = 1;
+					break;
+				}
+				else
+					data->error = 0;
+			}
 			var.row++;
 		}
 	}
