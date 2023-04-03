@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-int find_index(char *s, char c)
+int	find_index(char *s, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -22,13 +22,12 @@ int find_index(char *s, char c)
 	return (0);
 }
 
-static int chek_key(char *s)
+static int	chek_key(char *s)
 {
-	size_t n;
-	char *wrong_arg;
+	size_t	n;
+	char	*wrong_arg;
 
 	n = 0;
-
 	if (ft_isalpha(s[0]))
 		while (s[n] == '_' || ft_isalnum(s[n]))
 			n++;
@@ -42,7 +41,7 @@ static int chek_key(char *s)
 	return (1);
 }
 
-static int clin_creat(char **s, int lenqt)
+static int	clin_creat(char **s, int lenqt)
 {
 	*s = (char *)malloc(sizeof(char) * lenqt);
 	if (!s)
@@ -50,9 +49,9 @@ static int clin_creat(char **s, int lenqt)
 	return (0);
 }
 
-static int creat_chanch_nod(t_export *var, t_src *data)
+static int	creat_chanch_nod(t_export *var, t_src *data)
 {
-	t_env *newnode;
+	t_env	*newnode;
 
 	newnode = NULL;
 	var->find_key = find_env(data->env, var->key);
@@ -82,9 +81,9 @@ static int creat_chanch_nod(t_export *var, t_src *data)
 	return (0);
 }
 
-static int campeyr(t_src *data, t_export *var)
+static int	campeyr(t_src *data, t_export *var)
 {
-	t_env *newnode;
+	t_env	*newnode;
 
 	newnode = NULL;
 	if (var->i)
@@ -118,10 +117,10 @@ static int campeyr(t_src *data, t_export *var)
 	return (0);
 }
 
-void export(t_src *data)
+void	export(t_src *data)
 {
-	t_export var;
-	char *non_valid_arg;
+	t_export	var;
+	char		*non_valid_arg;
 
 	var.value = NULL;
 	var.key = NULL;
@@ -148,7 +147,7 @@ void export(t_src *data)
 				if (campeyr(data, &var))
 				{
 					data->error = 1;
-					break;
+					break ;
 				}
 				else
 					data->error = 0;

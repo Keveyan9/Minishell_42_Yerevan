@@ -6,7 +6,7 @@
 #    By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/23 15:15:32 by artadevo          #+#    #+#              #
-#    Updated: 2023/03/27 22:11:11 by artadevo         ###   ########.fr        #
+#    Updated: 2023/04/02 16:25:31 by skeveyan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,13 @@ LIBFT_DIR		=	libft
 
 LIBFT			=	$(LIBFT_DIR)/libft.a
 
-PREFIX			=	$(shell find ${HOME} -type d -name readline_out)
+PREFIX			=	$(shell find ${PWD} -type d -name readline_out)
 
 INC				=	-Iinc -I$(LIBFT_DIR)
 
 READLINE_DIR	=	readline
 
-READLINE_OUT	=	"${HOME}/readline_out/"
+READLINE_OUT	=	"${PWD}/readline_out/"
 
 READLINE_INC	=	-I$(READLINE_OUT)/include
 
@@ -49,7 +49,7 @@ RM				=	rm -rf
 .DEFAULT_GOAL	=	all
 
 $(OBJS_DIR)/%.o: src/%.c | $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) $(READLINE_INC) -c $< -o $@
 
 all: $(NAME)
 $(OBJS_DIR):

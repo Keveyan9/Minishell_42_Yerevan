@@ -9,13 +9,11 @@
 /*   Updated: 2023/03/26 22:08:55 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// #include "../inc/minishell.h"
 #include "minishell.h"
 
-t_env *new_node()
+t_env	*new_node(void)
 {
-	t_env *node;
+	t_env	*node;
 
 	node = (t_env *)malloc(sizeof(t_env));
 	if (!node)
@@ -32,7 +30,7 @@ t_env *new_node()
 	return (node);
 }
 
-int put_env_node(t_src *data, t_env *node)
+int	put_env_node(t_src *data, t_env *node)
 {
 	if (data && node)
 	{
@@ -53,16 +51,14 @@ int put_env_node(t_src *data, t_env *node)
 	return (1);
 }
 
-int start_input_env(char **env, t_src *data)
+int	start_input_env(char **env, t_src *data)
 {
-	int i;
-	int k;
-	size_t len;
-	t_env *newnode;
+	int		i;
+	int		k;
+	size_t	len;
+	t_env	*newnode;
 
-	len = 0;
 	i = 0;
-	k = 0;
 	while (env[i])
 	{
 		len = ft_strlen(env[i]);
@@ -83,18 +79,18 @@ int start_input_env(char **env, t_src *data)
 	return (0);
 }
 
-int all_input(t_src *data, char **env)
+int	all_input(t_src *data, char **env)
 {
 	data->env = NULL;
 	data->envhead = NULL;
 	data->envlast = NULL;
 	start_input(data);
-	data->home_path = getcwd(NULL,0);
+	data->home_path = getcwd(NULL, 0);
 	data->error = 0;
 	return (start_input_env(env, data));
 }
 
-void start_input(t_src *data)
+void	start_input(t_src *data)
 {
 	data->line = NULL;
 	data->index_s_err = -1;

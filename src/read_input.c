@@ -12,19 +12,19 @@
 
 #include "../inc/minishell.h"
 
-void ft_read_l(t_src *data)
+void	ft_read_l(t_src *data)
 {
-	while (!(data->line) ||  data->line[0] == '\0')
+	while (!(data->line) || data->line[0] == '\0')
 	{
 		data->line = readline("mini$ ");
-		if(data->line == NULL)
+		if (data->line == NULL)
 		{
 			oll_free(data);
-			exit(data->error); // last error code
+			exit(data->error);
 		}
-		if(data->line[0] != '\0')
+		if (data->line[0] != '\0')
 			add_history(data->line);
-		if(data->line[0] == '\0')
+		if (data->line[0] == '\0')
 		{
 			free(data->line);
 			data->line = NULL;

@@ -18,16 +18,15 @@ void	oll_free(t_src *data)
 		free(data->line);
 		data->line = NULL;
 	}
-	if(data->home_path)
+	if (data->home_path)
 	{
 		free(data->home_path);
 		data->home_path = NULL;
 	}
-	if(data->env)
+	if (data->env)
 		free_env(data);
-	 if(data->cl_in)
-	 	free_clin(data);
+	if (data->cl_in)
+		free_clin(data);
 	free(data);
 	data = NULL;
-
 }

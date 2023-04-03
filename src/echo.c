@@ -13,7 +13,8 @@
 
 static void	call_dolar(char *s, t_src *data, int n)
 {
-	char *error;
+	char	*error;
+
 	n++;
 	while (s[n] && !(s[n] > 20 && s[n] < 65))
 		n++;
@@ -21,10 +22,10 @@ static void	call_dolar(char *s, t_src *data, int n)
 	{
 		if (s[n - 1] == '$' && s[n] == '?')
 		{
-			 error = ft_itoa(data->error);
-			 write(1,error,ft_strlen(error));
-			 free(error);
-			 error = NULL;
+			error = ft_itoa(data->error);
+			write(1, error, ft_strlen(error));
+			free (error);
+			error = NULL;
 			n = n + 2;
 		}
 		else
@@ -55,21 +56,22 @@ static void	echo_print(t_src *data, size_t *calem, int *row, int *flag)
 		*row = 0;
 		(*calem)++;
 	}
-		if (*flag)
-			write(1, "\n", 1);
+	if (*flag)
+		write(1, "\n", 1);
 	data->error = 0;
 }
 
 void	echo(t_src *data)
 {
 	size_t	calem;
-	int	row;
-	int	flag;
+	int		row;
+	int		flag;
 
 	calem = 1;
 	flag = 1;
 	row = 0;
-	if (data->cl_in->word[1] && data->cl_in->word[1][0] == '-' && data->cl_in->word[1][1] == 'n')
+	if (data->cl_in->word[1] && data->cl_in->word[1][0] == '-'
+		&& data->cl_in->word[1][1] == 'n')
 	{
 		while (data->cl_in->word[1][++calem] == 'n')
 			;

@@ -14,12 +14,12 @@
 void	env_f(t_src *data)
 {
 	t_env	*origin;
-	
+
 	origin = data->envhead;
 	while (origin)
 	{
 		if (origin->value)
-		printf("%s=%s\n", origin->key, origin->value);
+			printf("%s=%s\n", origin->key, origin->value);
 		origin = origin->next;
 	}
 	data->error = 0;
