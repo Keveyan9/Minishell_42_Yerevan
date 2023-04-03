@@ -23,39 +23,45 @@ static void	handler(int sig)
 	rl_on_new_line();
 }
 
-static void	chek_dolar_push(t_src *data, char *her_line, int flag_doing_dolar)
+static void	chek_dolar_push(t_src *data, char **her_line, int flag_doing_dolar)
 {
 	char	**her_line_s;
 	int		n;
+	size_t	word_len;
 
+	word_len = 0;
 	n = 0;
 	her_line_s = NULL;
 	if (!flag_doing_dolar)
 	{
-		her_line_s = ft_split(her_line, ' ');
+		her_line_s = ft_split(*her_line, ' ');
 		while (her_line_s[n])
 		{
 			if (her_line_s[n][0] == '$')
 				dolar_change(data->env, &(her_line_s[n]), 1);
-			write (data->cl_in->pip_her_doc[1], her_line_s[n], ft_strlen(her_line_s[n]));
+			word_len = ft_strlen(her_line_s[n]);
+			write (data->cl_in->pip_her_doc[1], her_line_s[n], word_len);
 			n++;
 		}
 		frik(her_line_s);
 	}
 	else
-		write(data->cl_in->pip_her_doc[1], her_line, ft_strlen(her_line));
-	write(data->cl_in->pip_her_doc[1],"\n", 1);
+		write(data->cl_in->pip_her_doc[1], *her_line, ft_strlen(*her_line));
+	write(data->cl_in->pip_her_doc[1], "\n", 1);
+	free(*her_line);
+	*her_line = NULL;
 }
 
 static void	readline_heredoc(t_src *data, char *close_name)
 {
 	char	*her_line;
-	int		flag_doing_dolar;
+	int		fl_doing_dolar;
+	size_t	chek_len;
 
 	g_flags = 0;
-	flag_doing_dolar = 0;
+	fl_doing_dolar = 0;
 	if (close_name[1] && close_name[1] != 39)
-		flag_doing_dolar = 1;
+		fl_doing_dolar = 1;
 	signal(SIGINT, handler);
 	while (!g_flags)
 	{
@@ -65,14 +71,13 @@ static void	readline_heredoc(t_src *data, char *close_name)
 			data->error = 1;
 			break ;
 		}
-		if (ft_strncmp(her_line, &(close_name[flag_doing_dolar]),(ft_strlen(close_name) + ft_strlen(her_line))) == 0)
+		chek_len = ft_strlen(close_name) + ft_strlen(her_line);
+		if (ft_strncmp(her_line, &(close_name[fl_doing_dolar]), chek_len) == 0)
 		{
 			free(her_line);
 			break ;
 		}
-		chek_dolar_push(data, her_line, flag_doing_dolar);
-		free(her_line);
-		her_line = NULL;
+		chek_dolar_push(data, &her_line, fl_doing_dolar);
 	}
 }
 

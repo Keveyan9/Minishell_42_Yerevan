@@ -12,6 +12,13 @@
 
 #include "../inc/minishell.h"
 
+static void	can_not_coll_comand(t_src *data)
+{
+	ft_putstr_fd(data->cl_in->word[0], 1);
+	ft_putstr_fd("  : comand can not faund\n", 1);
+	data->error = 127;
+}
+
 static char	**list_to_array(t_src *data)
 {
 	t_coll_comand	var;
@@ -58,11 +65,7 @@ void	coll_comands(t_src *data)
 	if (comand_path)
 		execve(comand_path, data->cl_in->word, env);
 	else
-	{
-		ft_putstr_fd(data->cl_in->word[0], 1);
-		ft_putstr_fd("  : comand can not faund\n", 1);
-		data->error = 127;
-	}
+		can_not_coll_comand(data);
 	frik(env);
 	free(comand_path);
 	oll_free(data);

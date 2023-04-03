@@ -34,7 +34,18 @@ static void	start_doing(t_src *data)
 	data->line = NULL;
 }
 
-int	main (int ac, char **av, char **env)
+static void	main_logica(t_src data)
+{
+	get_t_cl_in_list(data);
+	free_token(data);
+	creat_here_doc(data);
+	if (!g_flags && data->syntax_err == 0 && data->cl_in)
+		start_doing(data);
+	if (data->syntax_err != 0)
+		print_syntax_err(data);
+}
+
+int	main(int ac, char **av, char **env)
 {
 	t_src	*data;
 
@@ -53,13 +64,7 @@ int	main (int ac, char **av, char **env)
 		start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
-		get_t_cl_in_list(data);
-		free_token(data);
-		creat_here_doc(data);
-		if (!g_flags && data->syntax_err == 0 && data->cl_in)
-			start_doing(data);
-		if (data->syntax_err != 0)
-			print_syntax_err(data);
+		main_logica(data);
 	}
 	oll_free(data);
 	return (0);

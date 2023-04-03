@@ -70,7 +70,8 @@ void	echo(t_src *data)
 	calem = 1;
 	flag = 1;
 	row = 0;
-	if (data->cl_in->word[1] && data->cl_in->word[1][0] == '-' && data->cl_in->word[1][1] == 'n')
+	if (data->cl_in->word[1] && data->cl_in->word[1][0] == '-'
+		&& data->cl_in->word[1][1] == 'n')
 	{
 		while (data->cl_in->word[1][++calem] == 'n')
 			;

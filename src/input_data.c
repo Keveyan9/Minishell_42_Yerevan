@@ -58,9 +58,7 @@ int	start_input_env(char **env, t_src *data)
 	size_t	len;
 	t_env	*newnode;
 
-	len = 0;
 	i = 0;
-	k = 0;
 	while (env[i])
 	{
 		len = ft_strlen(env[i]);

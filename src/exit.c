@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	exit_many_argument(void)
+static void	exit_many_argument(t_src *data)
 {
 	printf("too many arguments  exit for minishell\n");
 	data->error = 2;
@@ -40,7 +40,7 @@ void	exit_f(t_src *data)
 			data->error = 2;
 	}
 	else if (data->cl_in->word[2])
-		exit_many_argument();
+		exit_many_argument(data);
 	oll_free(data);
 	exit(data->error);
 }

@@ -193,6 +193,7 @@ void		error_print(char *s, char *c);
 
 //------src------get_t_clin_list.c------------
 void		get_t_cl_in_list(t_src *data);
+void	join_token_for_clean(t_src *data);
 // t_cl_in		*new_node_t_cl_in(t_cl_in *cl_in);
 void		print_t_cl_in(t_src *data); // verjum jnji
 
@@ -227,6 +228,7 @@ void alone(t_src *data);
 void exit_f(t_src *data);
 int find_plase(char *s , char c);
 void file_discriptor(t_src * data);
+void	chek_out_file(t_src *data, int *row);
 void change_fd(t_src *data);
 int creat_here_doc(t_src *data);
 void close_herdoq_fd(t_src *data);

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-static void	free_clin_half(t_srs *data)
+static void	free_clin_half(t_src *data)
 {
 	if (data->cl_in->word)
 	{

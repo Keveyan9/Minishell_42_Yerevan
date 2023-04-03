@@ -147,7 +147,7 @@ void	export(t_src *data)
 				if (campeyr(data, &var))
 				{
 					data->error = 1;
-					break;
+					break ;
 				}
 				else
 					data->error = 0;
