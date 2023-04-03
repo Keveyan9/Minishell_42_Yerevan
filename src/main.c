@@ -34,7 +34,7 @@ static void	start_doing(t_src *data)
 	data->line = NULL;
 }
 
-static void	main_logica(t_src data)
+static void	main_logica(t_src *data)
 {
 	get_t_cl_in_list(data);
 	free_token(data);
