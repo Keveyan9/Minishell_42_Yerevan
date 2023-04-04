@@ -93,7 +93,7 @@ void	print_t_cl_in(t_src *data)
 		// i = -1;
 		// while(tmp->heredoc && tmp->heredoc[++i])
 		// 	printf("heredoc%d = [%s] \n",i, tmp->heredoc[i]);
-		printf("oll = [%s]__%d\n", tmp->oll,n++);
+		printf("oll = [%s]__%d\n\n", tmp->oll,n++);
 
 		tmp = tmp->next;
 	}

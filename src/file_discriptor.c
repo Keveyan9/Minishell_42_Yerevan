@@ -18,12 +18,17 @@ static void	cheak_old_fd(t_src *data, int *fd, int *n)
 		(*n)++;
 	if (data->cl_in->oll[*n] == '\0')
 	{
+		printf("last fd\n");
 		if (data->cl_in->pip_her_doc[0] > 0)
 			close(data->cl_in->pip_her_doc[0]);
 		data->cl_in->pip_her_doc[0] = *fd;
 	}
 	else
+	{
+		printf("not last  fd\n");
 		close(*fd);
+		*fd = 0;
+	}
 }
 
 static void	chek_in_file(t_src *data, int *row)
@@ -36,8 +41,6 @@ static void	chek_in_file(t_src *data, int *row)
 	fd = 0;
 	len = *row;
 	n = *row;
-	if (data->cl_in->pip_her_doc[0] > 0)
-		close(data->cl_in->pip_her_doc[0]);
 	len = find_plase (&(data->cl_in->oll[*row]), ' ');
 	name = ft_substr(data->cl_in->oll, *row, len);
 	fd = open (name, O_RDONLY, 0644);

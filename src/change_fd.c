@@ -13,8 +13,12 @@
 
 void	change_fd(t_src *data)
 {
-	if (data->cl_in->pip_her_doc[1] > 0)
-		dup2(data->cl_in->pip_her_doc[1], 1);
 	if (data->cl_in->pip_her_doc[0] > 0)
+	{
 		dup2(data->cl_in->pip_her_doc[0], 0);
+	}
+	if (data->cl_in->pip_her_doc[1] > 0)
+	{
+		dup2(data->cl_in->pip_her_doc[1], 1);
+	}
 }
