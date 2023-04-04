@@ -42,6 +42,8 @@ void	alone(t_src *data)
 {
 	if (is_builtin(data))
 	{
+		data->main_fd_0 = dup(1);
+		data->main_fd_1 = dup(0);
 		file_discriptor(data);
 		if (!g_flags)
 		{
@@ -50,12 +52,12 @@ void	alone(t_src *data)
 			close_herdoq_fd(data);
 			if (data->cl_in->pip_her_doc[0] > 0)
 			{	
-				dup2(data->main_fd_in, 0);
+				dup2(data->main_fd_0, 0);
 				close(data->cl_in->pip_her_doc[0]);
 			}
 			if (data->cl_in->pip_her_doc[1] > 0)
 			{
-				dup2(data->main_fd_out, 1);
+				dup2(data->main_fd_1, 1);
 				close(data->cl_in->pip_her_doc[1]);
 			}
 		}

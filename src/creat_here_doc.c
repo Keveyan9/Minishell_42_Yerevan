@@ -60,7 +60,7 @@ static void	readline_heredoc(t_src *data, char *close_name)
 
 	g_flags = 0;
 	fl_doing_dolar = 0;
-	if (close_name[1] && close_name[1] != 39)
+	if (close_name[0] && close_name[0] == 39)
 		fl_doing_dolar = 1;
 	signal(SIGINT, handler);
 	while (!g_flags)
@@ -72,13 +72,17 @@ static void	readline_heredoc(t_src *data, char *close_name)
 			break ;
 		}
 		chek_len = ft_strlen(close_name) + ft_strlen(her_line);
-		if (ft_strncmp(her_line, &(close_name[fl_doing_dolar]), chek_len) == 0)
+		if (ft_strncmp(her_line,&(close_name[fl_doing_dolar]), chek_len) == 0)
 		{
 			free(her_line);
+			her_line = NULL;
 			break ;
 		}
 		chek_dolar_push(data, &her_line, fl_doing_dolar);
 	}
+	signal(SIGINT, SIG_IGN);
+	if(her_line)
+		free(her_line);
 }
 
 static int	coll_hear_doc(t_src *data, int *row)
@@ -109,7 +113,7 @@ int	creat_here_doc(t_src *data)
 	int	row;
 
 	row = 0;
-	while (data->cl_in != NULL)
+	while (data->cl_in != NULL && data->cl_in->oll)
 	{
 		while (data->cl_in->oll[row] != '\0')
 		{

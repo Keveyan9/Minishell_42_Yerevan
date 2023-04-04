@@ -67,14 +67,8 @@ typedef struct s_cl_in
 
 	int 	pip_her_doc[2];
 	int		index_herdoc;
-	//char	*id;
 	char 	**word;
 	char 	*oll;
-	
-	// char	**heredoc;
-	// int		counthirdoc;
-	// int		flag_have_bracket;//0 == note   // 1 == have bracket
-
 	struct s_cl_in	*next;
 	struct s_cl_in	*prev;
 }t_cl_in;
@@ -92,8 +86,8 @@ typedef struct s_src
 	int (*pip)[2];
 	int cycle; 	//ciqel
 	char *home_path;
-	int main_fd_in;
-	int	main_fd_out;
+	int main_fd_0;
+	int	main_fd_1;
 	pid_t pid;
 	t_tokens *token_list;
 	t_tokens *tokens_head;

@@ -20,29 +20,28 @@ static void	handler_main(int sig)
 	rl_on_new_line();
 }
 
-static void	start_doing(t_src *data)
-{
-	printf("__%d__\n", data->pipes_count);
-	if (data->pipes_count == 0 && data->cl_in->word)
-		alone(data);
-	else
-		realaysing(data);
-	data->cl_in = data->clin_head;
-	if (data->cl_in)
-		free_clin(data);
-	free(data->line);
-	data->line = NULL;
-}
-
 static void	main_logica(t_src *data)
 {
 	get_t_cl_in_list(data);
 	free_token(data);
-	creat_here_doc(data);
-	if (!g_flags && data->syntax_err == 0 && data->cl_in)
-		start_doing(data);
+	// print_t_cl_in(data);
 	if (data->syntax_err != 0)
 		print_syntax_err(data);
+ 	creat_here_doc(data);
+	if (!g_flags && data->syntax_err == 0 && data->cl_in
+		 && data->cl_in->word)
+	{
+		printf("__%d__\n", data->pipes_count);
+		if (data->pipes_count == 0)
+			alone(data);
+		else
+			realaysing(data);
+		data->cl_in = data->clin_head;
+		if (data->cl_in)
+			free_clin(data);
+		free(data->line);
+		data->line = NULL;
+	}
 }
 
 int	main(int ac, char **av, char **env)

@@ -61,6 +61,7 @@ void	get_t_cl_in_list(t_src *data)
 		if (data->token_list && (data->token_list->type == 0
 				|| data->token_list->next == NULL))
 		{
+			data->pipes_count++;
 			nod = new_node_t_cl_in();
 			if (!nod)
 				return ;
@@ -77,6 +78,8 @@ void	print_t_cl_in(t_src *data)
 	t_cl_in	*tmp;
 
 	int i = -1;
+	int n = 1;
+
 	tmp = data->cl_in;
 	while (tmp && tmp->prev != NULL)
 	{
@@ -90,7 +93,8 @@ void	print_t_cl_in(t_src *data)
 		// i = -1;
 		// while(tmp->heredoc && tmp->heredoc[++i])
 		// 	printf("heredoc%d = [%s] \n",i, tmp->heredoc[i]);
-		printf("oll = [%s]\n", tmp->oll);
+		printf("oll = [%s]__%d\n", tmp->oll,n++);
+
 		tmp = tmp->next;
 	}
 }

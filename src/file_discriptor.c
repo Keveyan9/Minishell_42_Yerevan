@@ -18,7 +18,6 @@ static void	cheak_old_fd(t_src *data, int *fd, int *n)
 		(*n)++;
 	if (data->cl_in->oll[*n] == '\0')
 	{
-		printf("last fd\n");
 		if (data->cl_in->pip_her_doc[0] > 0)
 			close(data->cl_in->pip_her_doc[0]);
 		data->cl_in->pip_her_doc[0] = *fd;
@@ -56,7 +55,7 @@ static void	chek_in_file(t_src *data, int *row)
 	name = NULL;
 }
 
-static void	coll_chek_file(t_src *data, int *row)
+static void	coll_chek_in_file(t_src *data, int *row)
 {
 	data->error = 0;
 	if (*row == 0 || (*row > 0 && (data->cl_in->oll[(*row) - 1] != '<')))
@@ -87,7 +86,7 @@ void	file_discriptor(t_src *data)
 		}
 		else if (data->cl_in->oll[row] == '<'
 			&& (data->cl_in->oll[row + 1] != '<'))
-			coll_chek_file(data, &row);
+			coll_chek_in_file(data, &row);
 		row++;
 	}
 }
