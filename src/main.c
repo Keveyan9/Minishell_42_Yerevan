@@ -37,6 +37,7 @@ static void	start_doing(t_src *data)
 static void	main_logica(t_src *data)
 {
 	get_t_cl_in_list(data);
+	print_t_cl_in(data);
 	free_token(data);
 	creat_here_doc(data);
 	if (!g_flags && data->syntax_err == 0 && data->cl_in)
