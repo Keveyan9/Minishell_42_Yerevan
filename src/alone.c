@@ -55,13 +55,24 @@ void	alone(t_src *data)
 				close(data->cl_in->pip_her_doc[0]);
 				data->cl_in->pip_her_doc[0] = -1;
 			}
+			else
+				close(data->main_fd_0);
 			if (data->cl_in->pip_her_doc[1] > 0)
 			{
 				dup2(data->main_fd_1, 1);
 				close(data->cl_in->pip_her_doc[1]);
 				data->cl_in->pip_her_doc[1] = -1;
 			}
+			else
+				close(data->main_fd_1);
+
 		}
+		else
+		{
+			close(data->main_fd_1);
+			close(data->main_fd_0);
+		}
+		close_herdoq_fd(data);
 	}
 	else
 		alone_child(data);

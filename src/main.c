@@ -24,7 +24,6 @@ static void	main_logica(t_src *data)
 {
 	get_t_cl_in_list(data);
 	free_token(data);
-	// print_t_cl_in(data);
 	if (data->syntax_err != 0)
 		print_syntax_err(data);
  	creat_here_doc(data);
@@ -32,16 +31,18 @@ static void	main_logica(t_src *data)
 		 && data->cl_in->word)
 	{
 		printf("__%d__\n", data->pipes_count);
-		if (data->pipes_count == 0)
+		if (data->pipes_count == 0 && data->cl_in->word [0])
 			alone(data);
 		else
 			realaysing(data);
 		data->cl_in = data->clin_head;
-		if (data->cl_in)
-			free_clin(data);
-		free(data->line);
-		data->line = NULL;
 	}
+	else
+		close_herdoq_fd(data);
+	if (data->cl_in)
+		free_clin(data);
+	free(data->line);
+	data->line = NULL;
 }
 
 int	main(int ac, char **av, char **env)

@@ -15,12 +15,10 @@ void	change_fd(t_src *data)
 {
 	if (data->cl_in->pip_her_doc[0] > 0)
 	{
-		printf("chench statndart _0 \n");
 		dup2(data->cl_in->pip_her_doc[0], 0);
 	}
 	if (data->cl_in->pip_her_doc[1] > 0)
 	{
-		printf("chench statndart _1 \n");
 		dup2(data->cl_in->pip_her_doc[1], 1);
 	}
 }

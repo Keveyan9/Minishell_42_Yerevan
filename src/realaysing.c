@@ -37,9 +37,12 @@ void	create_child(t_src *data)
 		if (create_pipe(data))
 			break ;
 		data->pid = fork();
+		if (data->pid == 0)
+			child_coneqt(data);
 		if (data->pid > 0)
 		{
-			data->cl_in = data->cl_in->next;
+			if(data->pipes_count > data->cycle)
+				data->cl_in = data->cl_in->next;
 			data->cycle++;
 		}
 		if (data->pid < 0)
@@ -53,7 +56,6 @@ void	create_child(t_src *data)
 
 void	realaysing(t_src *data)
 {
-	printf("start_realayizin\n");
 	data->pip = malloc(sizeof(*(data->pip)) * data->pipes_count);
 	if (!data->pip)
 	{
@@ -61,8 +63,6 @@ void	realaysing(t_src *data)
 		return ;
 	}
 	create_child(data);
-	if (data->pid == 0)
-		child_coneqt(data);
 	if (data->pid > 0)
 	{
 		close_discriptor(data);

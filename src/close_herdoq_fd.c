@@ -13,6 +13,7 @@
 
 void	close_herdoq_fd(t_src *data)
 {
+
 	data->cl_in = data->clin_head;
 	while (data->cl_in)
 	{
