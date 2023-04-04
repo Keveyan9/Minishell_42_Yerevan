@@ -53,6 +53,7 @@ void	create_child(t_src *data)
 
 void	realaysing(t_src *data)
 {
+	printf("start_realayizin\n");
 	data->pip = malloc(sizeof(*(data->pip)) * data->pipes_count);
 	if (!data->pip)
 	{

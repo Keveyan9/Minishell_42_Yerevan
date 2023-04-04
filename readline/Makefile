@@ -31,7 +31,11 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
+<<<<<<< HEAD
+BUILD_DIR = /home/go/Desktop/Minishell/readline
+=======
 BUILD_DIR = /Users/skeveyan/Desktop/Minishell/readline
+>>>>>>> main
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +52,11 @@ MV = mv
 
 SHELL = /bin/sh
 
+<<<<<<< HEAD
+prefix = /home/go/Desktop/Minishell/readline_out
+=======
 prefix = /Users/skeveyan/Desktop/Minishell/readline_out
+>>>>>>> main
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share

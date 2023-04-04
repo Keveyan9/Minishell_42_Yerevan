@@ -105,6 +105,6 @@ void	start_input(t_src *data)
 	data->clin_head = NULL;
 	data->clin_last = NULL;
 	data->pid = 1;
-	data->main_fd_in = -1;
-	data->main_fd_out = -1;
+	data->main_fd_0 = -1;
+	data->main_fd_1 = -1;
 }
