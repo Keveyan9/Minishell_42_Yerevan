@@ -1,0 +1,21 @@
+total 156
+drwxrwxr-x 13 go go    20 Apr  4 19:42 .
+drwxr-xr-x 11 go go    14 Apr  4 19:37 ..
+-rw-rw-r--  1 go go     0 Apr  4 19:37 a
+drwxrwxr-x  2 go go     5 Apr  4 19:37 documentation
+-rw-rw-r--  1 go go  8196 Apr  4 19:37 .DS_Store
+drwxrwxr-x  8 go go    13 Apr  4 19:37 .git
+drwxrwxr-x  2 go go     5 Apr  4 19:43 havayi
+drwxrwxr-x  2 go go     3 Apr  4 19:37 inc
+drwxrwxr-x  3 go go    77 Apr  4 19:37 libft
+-rw-rw-r--  1 go go  2540 Apr  4 19:37 Makefile
+-rwxrwxr-x  1 go go 57088 Apr  4 19:41 minishell
+-rw-r--r--  1 go go     0 Apr  4 19:43 no1
+-rw-r--r--  1 go go     2 Apr  4 19:42 nowes
+drwxrwxr-x  2 go go    49 Apr  4 19:41 objs
+drwxrwxr-x  2 go go    19 Apr  4 19:37 printf
+drwxrwxr-x  7 go go   128 Apr  4 19:37 readline
+drwxrwxr-x  5 go go     5 Apr  4 19:37 readline_out
+drwxrwxr-x  2 go go    50 Apr  4 19:37 src
+-rw-rw-r--  1 go go     0 Apr  4 19:37 test
+drwxrwxr-x  3 go go     6 Apr  4 19:37 .vscode
