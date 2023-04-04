@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-static int create_pipe(t_src *data)
+static int	create_pipe(t_src *data)
 {
-	int pip_eror ; 
+	int	pip_eror;
 
 	pip_eror = 0 ;
 	if (data->pipes_count > data->cycle)
@@ -23,22 +23,21 @@ static int create_pipe(t_src *data)
 		{
 			perror("pip");
 			data->error = pip_eror;
-			return(1);
+			return (1);
 		}
 			data->pip_doing++;
 	}
-	return(0);
+	return (0);
 }
 
-void create_child(t_src *data)
+void	create_child(t_src *data)
 {
-	while ( data->pid > 0 && data->pipes_count >= data->cycle)
+	while (data->pid > 0 && data->pipes_count >= data->cycle)
 	{
-
-		if(create_pipe(data))
-			break;
+		if (create_pipe(data))
+			break ;
 		data->pid = fork();
-		if (data->pid > 0 )
+		if (data->pid > 0)
 		{
 			data->cl_in = data->cl_in->next;
 			data->cycle++;
@@ -47,18 +46,19 @@ void create_child(t_src *data)
 		{
 			perror(" child problems ");
 			data->error = data->pid;
-			break;
+			break ;
 		}
 	}
 }
 
-void realaysing(t_src *data)
+void	realaysing(t_src *data)
 {
+	printf("start_realayizin\n");
 	data->pip = malloc(sizeof(*(data->pip)) * data->pipes_count);
 	if (!data->pip)
 	{
 		write(1, "can not duing malloc\n", 22);
-		return;
+		return ;
 	}
 	create_child(data);
 	if (data->pid == 0)

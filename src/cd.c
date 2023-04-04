@@ -12,12 +12,32 @@
 
 #include "minishell.h"
 
+static void	cd_mistake(t_src *data)
+{
+	char	*error_string;
+
+	error_string = ft_strjoin("minishell: cd: ", data->cl_in->word[1]);
+	data->error = 1;
+	perror(error_string);
+	free(error_string);
+	error_string = NULL;
+}
+
+static void	creat_pwd(t_src *data, t_env *pwd)
+{
+	t_env	*newnode;
+
+	newnode = new_node();
+	newnode->key = ft_strdup("OLDPWD");
+	newnode->value = pwd->value;
+	put_env_node(data, newnode);
+}
+
 static void	cd_half(t_src *data)
 {
 	t_env		*oldpwd;
 	t_env		*pwd;
-	static int	pwd_flag;
-	t_env		*newnode;
+	static int	pwd_flag = 0;
 
 	oldpwd = find_env(data->env, "OLDPWD");
 	pwd = find_env(data->env, "PWD");
@@ -33,11 +53,8 @@ static void	cd_half(t_src *data)
 	}
 	else if (!pwd_flag && pwd)
 	{
+		creat_pwd(data, pwd);
 		pwd_flag = 1;
-		newnode = new_node();
-		newnode->key = ft_strdup("OLDPWD");
-		newnode->value = pwd->value;
-		put_env_node(data, newnode);
 	}
 	if (pwd)
 		pwd->value = getcwd(NULL, 0);
@@ -45,7 +62,6 @@ static void	cd_half(t_src *data)
 
 void	cd(t_src *data)
 {
-	char	*error_string;
 	if (data->cl_in->word[2])
 	{
 		printf("cd : too many arguments");
@@ -53,7 +69,7 @@ void	cd(t_src *data)
 		g_flags = 1;
 		return ;
 	}
-	if(data->cl_in->word[1])
+	if (data->cl_in->word[1])
 	{
 		data->error = chdir(data->cl_in->word[1]);
 		if (!g_flags)
@@ -62,12 +78,6 @@ void	cd(t_src *data)
 			data->error = errno;
 		}
 		else if (data->cl_in->word[1])
-		{
-			error_string = ft_strjoin("minishell: cd: ", data->cl_in->word[1]);
-			data->error = 1;
-			perror(error_string);
-			free(error_string);
-			error_string = NULL;
-		}
+			cd_mistake(data);
 	}
 }

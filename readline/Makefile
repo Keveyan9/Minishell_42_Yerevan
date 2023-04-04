@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/artadevo/Desktop/Minishell/readline
+BUILD_DIR = /home/go/Desktop/Minishell/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -48,7 +48,7 @@ MV = mv
 
 SHELL = /bin/sh
 
-prefix = /Users/artadevo/readline_out
+prefix = /home/go/Desktop/Minishell/readline_out
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share

@@ -9,15 +9,30 @@
 /*   Updated: 2023/02/28 15:49:46 by skeveyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
+
+static void	doing_alon_chaild(t_src *data)
+{	
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_IGN);
+	file_discriptor(data);
+	if (!g_flags)
+	{
+		change_fd(data);
+		close_herdoq_fd(data);
+		coll_comands(data);
+	}
+	oll_free(data);
+	exit(data->error);
+}
 
 int	alone_child(t_src *data)
 {
+	int		d;
 
 	data->pid = 0;
 	data->pid = fork();
-	int d;
-
 	d = 0;
 	if (data->pid < 0)
 	{
@@ -25,24 +40,12 @@ int	alone_child(t_src *data)
 		data->error = errno;
 	}
 	else if (data->pid == 0)
-	{	
-		signal(SIGINT,SIG_DFL);
-		signal(SIGQUIT, SIG_IGN);
-		file_discriptor(data);
-		if(!g_flags)
-		{
-			change_fd(data);
-			close_herdoq_fd(data);
-			coll_comands(data);
-		}
-		oll_free(data);
-		exit(data->error);
-	}
+		doing_alon_chaild(data);
 	else if (data->pid > 0)
 	{
-		 wait(&d);
+		wait(&d);
 		data->error = WEXITSTATUS(d);
-		return(0);
+		return (0);
 	}
-	return(0);
+	return (0);
 }

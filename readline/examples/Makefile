@@ -21,7 +21,7 @@ RL_LIBRARY_VERSION = 8.2
 SHELL = /bin/sh
 RM = rm -f
 
-prefix = /Users/artadevo/readline_out
+prefix = /home/go/Desktop/Minishell/readline_out
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /Users/artadevo/Desktop/Minishell/readline
+BUILD_DIR = /home/go/Desktop/Minishell/readline
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c

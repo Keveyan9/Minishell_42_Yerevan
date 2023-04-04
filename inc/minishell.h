@@ -67,14 +67,8 @@ typedef struct s_cl_in
 
 	int 	pip_her_doc[2];
 	int		index_herdoc;
-	//char	*id;
 	char 	**word;
 	char 	*oll;
-	
-	// char	**heredoc;
-	// int		counthirdoc;
-	// int		flag_have_bracket;//0 == note   // 1 == have bracket
-
 	struct s_cl_in	*next;
 	struct s_cl_in	*prev;
 }t_cl_in;
@@ -92,8 +86,8 @@ typedef struct s_src
 	int (*pip)[2];
 	int cycle; 	//ciqel
 	char *home_path;
-	int main_fd_in;
-	int	main_fd_out;
+	int main_fd_0;
+	int	main_fd_1;
 	pid_t pid;
 	t_tokens *token_list;
 	t_tokens *tokens_head;
@@ -147,8 +141,6 @@ t_src		*find_redir_in(char *s, t_src *data);
 t_src		*find_redir_out(char *s, t_src *data);
 void		print_tokens(t_src *data); // heto jnji
 
-//------src-------start_pars.c------------
-t_src		*ft_parser(t_src *data);
 //------src------read_input.c------------
 void		ft_read_l(t_src *data);
 t_env		*new_node(void);
@@ -192,10 +184,10 @@ char		*line_corector(char *line);
 int			ft_strchr_mod(const char *s, char c);
 char		*ft_str_env_cmp(char const *s, int start, int end);
 void		error_print(char *s, char *c);
-void		write_env_list(t_env *node, char **env); // verjum jnji
 
 //------src------get_t_clin_list.c------------
 void		get_t_cl_in_list(t_src *data);
+void	join_token_for_clean(t_src *data);
 // t_cl_in		*new_node_t_cl_in(t_cl_in *cl_in);
 void		print_t_cl_in(t_src *data); // verjum jnji
 
@@ -230,6 +222,7 @@ void alone(t_src *data);
 void exit_f(t_src *data);
 int find_plase(char *s , char c);
 void file_discriptor(t_src * data);
+void	chek_out_file(t_src *data, int *row);
 void change_fd(t_src *data);
 int creat_here_doc(t_src *data);
 void close_herdoq_fd(t_src *data);
@@ -240,7 +233,6 @@ void dolar_change(t_env *env , char **key, int n);
 // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 
 //------src------syntax_error_1.c-------
-
 
 
 int	when_find_tokin(t_src *data, char *str, int *i, int j);
