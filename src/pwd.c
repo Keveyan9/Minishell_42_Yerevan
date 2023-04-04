@@ -14,7 +14,6 @@
 void	pwd(t_src *data)
 {
 	char	*v_pwd;
-
 	v_pwd = getcwd(NULL, 0);
 	if (!v_pwd)
 	{
