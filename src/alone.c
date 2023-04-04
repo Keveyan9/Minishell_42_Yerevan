@@ -42,23 +42,24 @@ void	alone(t_src *data)
 {
 	if (is_builtin(data))
 	{
-		data->main_fd_0 = dup(1);
-		data->main_fd_1 = dup(0);
+		data->main_fd_0 = dup(0);
+		data->main_fd_1 = dup(1);
 		file_discriptor(data);
 		if (!g_flags)
 		{
 			change_fd(data);
 			chek_coll_builtin(data);
-			close_herdoq_fd(data);
 			if (data->cl_in->pip_her_doc[0] > 0)
 			{	
 				dup2(data->main_fd_0, 0);
 				close(data->cl_in->pip_her_doc[0]);
+				data->cl_in->pip_her_doc[0] = -1;
 			}
 			if (data->cl_in->pip_her_doc[1] > 0)
 			{
 				dup2(data->main_fd_1, 1);
 				close(data->cl_in->pip_her_doc[1]);
+				data->cl_in->pip_her_doc[1] = -1;
 			}
 		}
 	}

@@ -19,6 +19,7 @@ static void	doing_alon_chaild(t_src *data)
 	file_discriptor(data);
 	if (!g_flags)
 	{
+		printf("test_work_chaild\n");
 		change_fd(data);
 		close_herdoq_fd(data);
 		coll_comands(data);

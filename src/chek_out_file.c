@@ -30,7 +30,7 @@ void	chek_out_file(t_src *data, int *row)
 {
 	char	*name;
 	int		len;
-
+	printf("start_work_outfile\n");
 	if (data->cl_in->pip_her_doc[1] > 0)
 		close(data->cl_in->pip_her_doc[1]);
 	if (data->cl_in->oll[*row] == '>')
