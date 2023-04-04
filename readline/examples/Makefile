@@ -21,7 +21,11 @@ RL_LIBRARY_VERSION = 8.2
 SHELL = /bin/sh
 RM = rm -f
 
+<<<<<<< HEAD
 prefix = /home/go/Desktop/Minishell/readline_out
+=======
+prefix = /Users/skeveyan/Desktop/Minishell/readline_out
+>>>>>>> main
 exec_prefix = ${prefix}
 
 datarootdir = ${prefix}/share
@@ -32,7 +36,11 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
+<<<<<<< HEAD
 BUILD_DIR = /home/go/Desktop/Minishell/readline
+=======
+BUILD_DIR = /Users/skeveyan/Desktop/Minishell/readline
+>>>>>>> main
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c

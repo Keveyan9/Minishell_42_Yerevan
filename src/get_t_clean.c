@@ -55,7 +55,7 @@ void	get_t_cl_in_list(t_src *data)
 	if (!nod)
 		return ;
 	cneqt_clin_nod(data, nod);
-	while (data->token_list )
+	while (data->token_list)
 	{
 		join_token_for_clean(data);
 		if (data->token_list && (data->token_list->type == 0
@@ -79,6 +79,7 @@ void	print_t_cl_in(t_src *data)
 
 	int i = -1;
 	int n = 1;
+
 	tmp = data->cl_in;
 	while (tmp && tmp->prev != NULL)
 	{
@@ -93,6 +94,7 @@ void	print_t_cl_in(t_src *data)
 		// while(tmp->heredoc && tmp->heredoc[++i])
 		// 	printf("heredoc%d = [%s] \n",i, tmp->heredoc[i]);
 		printf("oll = [%s]__%d\n", tmp->oll,n++);
+
 		tmp = tmp->next;
 	}
 }

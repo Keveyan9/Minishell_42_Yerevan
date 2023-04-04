@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/23 15:15:32 by artadevo          #+#    #+#              #
-#    Updated: 2023/04/02 16:25:31 by skeveyan         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 # NAME			=	minishell
 
@@ -119,7 +108,7 @@ RM				=	rm -rf
 .DEFAULT_GOAL	=	all
 
 $(OBJS_DIR)/%.o: src/%.c | $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) $(READLINE_INC) -c $< -o $@
 
 all: $(NAME)
 $(OBJS_DIR):

@@ -22,6 +22,8 @@ static void	cheak_old_fd(t_src *data, int *fd, int *n)
 			close(data->cl_in->pip_her_doc[0]);
 		data->cl_in->pip_her_doc[0] = *fd;
 	}
+	else
+		close(*fd);
 }
 
 static void	chek_in_file(t_src *data, int *row)

@@ -14,7 +14,7 @@
 void	logic(t_src *data)
 {
 	file_discriptor(data);
-	//change_fd(data);
+	change_fd(data);
 	if (data->cl_in->pip_her_doc[1] > 0)
 	{
 		close(data->cl_in->pip_her_doc[1]);

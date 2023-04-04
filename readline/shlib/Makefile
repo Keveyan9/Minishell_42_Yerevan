@@ -32,7 +32,11 @@ datarootdir = ${prefix}/share
 srcdir = .
 VPATH = ..
 topdir = ..
+<<<<<<< HEAD
 BUILD_DIR = /home/go/Desktop/Minishell/readline
+=======
+BUILD_DIR = /Users/skeveyan/Desktop/Minishell/readline
+>>>>>>> main
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -52,7 +56,11 @@ SHELL = /bin/sh
 host_os = linux-gnu
 host_vendor = pc
 
+<<<<<<< HEAD
 prefix = /home/go/Desktop/Minishell/readline_out
+=======
+prefix = /Users/skeveyan/Desktop/Minishell/readline_out
+>>>>>>> main
 exec_prefix = ${prefix}
 includedir = ${prefix}/include
 bindir = ${exec_prefix}/bin

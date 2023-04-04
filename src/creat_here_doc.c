@@ -104,6 +104,7 @@ static int	coll_hear_doc(t_src *data, int *row)
 	data->cl_in->pip_her_doc[1] = 0;
 	free(close_name);
 	close_name = NULL;
+	signal(SIGINT, SIG_IGN);
 	return (0);
 }
 
