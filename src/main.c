@@ -32,7 +32,6 @@ static void	main_logica(t_src *data)
 	if (!g_flags && data->syntax_err == 0 && data->cl_in
 		&& data->cl_in->word)
 	{
-		printf("__%d__\n", data->pipes_count);
 		if (data->pipes_count == 0 && data->cl_in->word [0])
 			alone(data);
 		else

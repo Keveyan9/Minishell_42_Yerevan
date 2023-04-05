@@ -11,15 +11,6 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-static void	handler(int sig)
-{
-	(void)sig;
-	g_flags = 1;
-	ioctl(STDIN_FILENO, TIOCSTI, "\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-}
-
 static void	chek_dolar_push(t_src *data, char **her_line, int flag_doing_dolar)
 {
 	char	**her_line_s;
@@ -49,13 +40,21 @@ static void	chek_dolar_push(t_src *data, char **her_line, int flag_doing_dolar)
 	*her_line = NULL;
 }
 
+static void	free_readline(char **her_line)
+{
+	if (*her_line)
+	{
+		free(*her_line);
+		*her_line = NULL;
+	}
+}
+
 static void	readline_heredoc(t_src *data, char *close_name)
 {
 	char	*her_line;
 	int		fl_doing_dolar;
 	size_t	chek_len;
 
-	g_flags = 0;
 	fl_doing_dolar = 0;
 	if (close_name[0] && close_name[0] == 39)
 		fl_doing_dolar = 1;
@@ -71,15 +70,12 @@ static void	readline_heredoc(t_src *data, char *close_name)
 		chek_len = ft_strlen(close_name) + ft_strlen(her_line);
 		if (ft_strncmp(her_line, &(close_name[fl_doing_dolar]), chek_len) == 0)
 		{
-			free(her_line);
-			her_line = NULL;
+			free_readline(&her_line);
 			break ;
 		}
 		chek_dolar_push(data, &her_line, fl_doing_dolar);
 	}
-	signal(SIGINT, SIG_IGN);
-	if (her_line)
-		free(her_line);
+	free_readline(&her_line);
 }
 
 static int	coll_hear_doc(t_src *data, int *row)
@@ -97,7 +93,9 @@ static int	coll_hear_doc(t_src *data, int *row)
 		data->cl_in->pip_her_doc[0] = -1;
 	}
 	pipe(data->cl_in->pip_her_doc);
+	g_flags = 0;
 	readline_heredoc(data, close_name);
+	signal(SIGINT, SIG_IGN);
 	if (g_flags)
 		data->error = 130;
 	close(data->cl_in->pip_her_doc[1]);

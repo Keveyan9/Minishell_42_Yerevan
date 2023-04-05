@@ -13,31 +13,30 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <fcntl.h>
-#include "../libft/libft.h"
-#include <sys/ioctl.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdlib.h>
+# include <errno.h>
+# include <unistd.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include "../libft/libft.h"
+# include <sys/ioctl.h>
 
 extern int g_flags;
 
-
 typedef enum s_type
 {
-	PIPE,			   // |		0
-	REDIR_APPEND,	   // >>		1
-	HEREDOC,		   // <<		2
-	REDIR_OUT,		   // >		3
-	REDIR_IN,		   // <		4
-	WORD,			   // words	5
-	EXP_QUOTES_SINGLE, // '...'	6
-	EXP_QUOTES_DOUBL,  // "..."	7
-	SPAC,			   //			8
+	PIPE,
+	REDIR_APPEND,
+	HEREDOC,
+	REDIR_OUT,
+	REDIR_IN,
+	WORD,
+	EXP_QUOTES_SINGLE,
+	EXP_QUOTES_DOUBL,
+	SPAC,
 }	t_type;
 
 typedef struct s_env
@@ -64,14 +63,14 @@ typedef struct s_tokens
 
 typedef struct s_cl_in
 {
+	int				pip_her_doc[2];
+	int				index_herdoc;
+	char			**word;
+	char			*oll;
+	struct	s_cl_in	*next;
+	struct	s_cl_in	*prev;
 
-	int 	pip_her_doc[2];
-	int		index_herdoc;
-	char 	**word;
-	char 	*oll;
-	struct s_cl_in	*next;
-	struct s_cl_in	*prev;
-}t_cl_in;
+}	t_cl_in;
 
 typedef struct s_src
 {
@@ -202,8 +201,10 @@ void env_fri(t_env *fri_segment);
 void delet_env(t_env *cat_segmeint);
 void unset(t_src *data);
 void export(t_src *data);
+int	campeyr(t_src *data, t_export *var);
 void sort_print_env(t_env *data);
 void print_export(t_src *data);
+int	chek_key(char *s);
 /// logik//
 int chek_coll_builtin(t_src *data);
 char *find_comand_path(t_src *data);
@@ -216,8 +217,8 @@ void child_coneqt(t_src *data);
 void realaysing(t_src *data);
 void logic(t_src *data);
 int alone_child(t_src *data);
-void	close_discriptor(t_src *data );
-void    shell_level(t_src *data, char ** av);
+void close_discriptor(t_src *data );
+void shell_level(t_src *data, char ** av);
 void alone(t_src *data);
 void exit_f(t_src *data);
 int find_plase(char *s , char c);
@@ -228,6 +229,9 @@ int creat_here_doc(t_src *data);
 void close_herdoq_fd(t_src *data);
 void	free_token(t_src *data);
 void dolar_change(t_env *env , char **key, int n);
+void	handler (int sig);
+void	free_give_null(char **s);
+int	find_index(char *s, char c);
 
 
 // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
