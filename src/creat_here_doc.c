@@ -9,10 +9,7 @@
 /*   Updated: 2023/04/02 15:21:08 by skeveyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "minishell.h"
-
-int	g_flags;
 
 static void	handler(int sig)
 {

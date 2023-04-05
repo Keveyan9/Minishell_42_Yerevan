@@ -41,7 +41,7 @@ void	create_child(t_src *data)
 			child_coneqt(data);
 		if (data->pid > 0)
 		{
-			if(data->pipes_count > data->cycle)
+			if (data->pipes_count > data->cycle)
 				data->cl_in = data->cl_in->next;
 			data->cycle++;
 		}

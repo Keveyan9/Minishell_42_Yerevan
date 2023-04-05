@@ -13,7 +13,7 @@
 
 void	logic(t_src *data)
 {
-	t_cl_in *origin;
+	t_cl_in	*origin;
 
 	origin = data->cl_in;
 	file_discriptor(data);

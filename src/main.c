@@ -12,6 +12,8 @@
 
 #include "../inc/minishell.h"
 
+int	g_flags;
+
 static void	handler_main(int sig)
 {
 	(void)sig;
@@ -26,9 +28,9 @@ static void	main_logica(t_src *data)
 	free_token(data);
 	if (data->syntax_err != 0)
 		print_syntax_err(data);
- 	creat_here_doc(data);
+	creat_here_doc(data);
 	if (!g_flags && data->syntax_err == 0 && data->cl_in
-		 && data->cl_in->word)
+		&& data->cl_in->word)
 	{
 		printf("__%d__\n", data->pipes_count);
 		if (data->pipes_count == 0 && data->cl_in->word [0])
