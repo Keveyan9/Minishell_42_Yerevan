@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   find_index.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:45:00 by skeveyan          #+#    #+#             */
-/*   Updated: 2023/02/28 16:45:14 by skeveyan         ###   ########.fr       */
+/*   Created: 2023/02/28 16:33:21 by skeveyan          #+#    #+#             */
+/*   Updated: 2023/02/28 16:33:37 by skeveyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
 
-void	pwd(t_src *data)
+int	find_index(char *s, char c)
 {
-	char	*v_pwd;
+	int	i;
 
-	v_pwd = getcwd(NULL, 0);
-	if (!v_pwd)
-	{
-		perror("pwd error");
-		data->error = 1;
-	}
-	else
-	{
-		ft_putstr_fd(v_pwd, 1);
-		write(1, "\n", 1);
-		data->error = 0;
-		free(v_pwd);
-		v_pwd = NULL;
-	}
+	i = 0;
+	while (s[i])
+		if (s[i++] == c)
+			return (i);
+	return (0);
 }

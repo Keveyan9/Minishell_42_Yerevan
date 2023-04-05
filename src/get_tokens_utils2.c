@@ -115,7 +115,8 @@ void	print_tokens(t_src *data)
 
 	while (tmp)
 	{
-		printf("type = %d,\ttoken = %s,\tline = %d\n",tmp->type, tmp->token, tmp->len);
+		printf("type = %d,\ttoken = %s,\tline = %d\n",
+			tmp->type, tmp->token, tmp->len);
 		tmp = tmp->next;
 	}
 }

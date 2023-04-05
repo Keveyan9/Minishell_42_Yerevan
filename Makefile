@@ -93,7 +93,7 @@ INCLUDES		=	$(INC) $(READLINE)
 
 LINKERS			=	-L$(READLINE_LIB) -lreadline -L$(LIBFT_DIR) -lft
 
-CFLAGS			=	-Wall -Wextra -Werror -fsanitize=address #-g
+CFLAGS			=	-Wall -Wextra -Werror #-fsanitize=address #-g
 
 OBJS_DIR		=	objs
 

@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   handler.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 16:45:00 by skeveyan          #+#    #+#             */
-/*   Updated: 2023/02/28 16:45:14 by skeveyan         ###   ########.fr       */
+/*   Created: 2023/02/28 16:43:02 by skeveyan          #+#    #+#             */
+/*   Updated: 2023/02/28 16:43:18 by skeveyan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
 
-void	pwd(t_src *data)
+void	handler(int sig)
 {
-	char	*v_pwd;
-
-	v_pwd = getcwd(NULL, 0);
-	if (!v_pwd)
-	{
-		perror("pwd error");
-		data->error = 1;
-	}
-	else
-	{
-		ft_putstr_fd(v_pwd, 1);
-		write(1, "\n", 1);
-		data->error = 0;
-		free(v_pwd);
-		v_pwd = NULL;
-	}
+	(void)sig;
+	g_flags = 1;
+	ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
 }

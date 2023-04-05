@@ -12,6 +12,12 @@
 
 #include "../inc/minishell.h"
 
+static void	find_word_equal(t_src *data, int i, char **line)
+{
+	*line = ft_substr(data->line, 0, i + 1);
+	data->token_list = new_node_tokens(*line, WORD, data->token_list);
+}
+
 t_src	*find_word(char *s, t_src *data)
 {
 	char	*tmp;
@@ -33,80 +39,16 @@ t_src	*find_word(char *s, t_src *data)
 		tmp = ft_substr(data->line, i, k);
 	}
 	else if (i == k)
-	{
-		line = ft_substr(data->line, 0, i + 1);
-		data->token_list = new_node_tokens(line, WORD, data->token_list);
-		tmp = NULL;
-	}
-	free(data->line);
-	data->line = NULL;
+		find_word_equal(data, i, &line);
+	free_give_null(&data->line);
 	data->line = tmp;
 	return (data);
 }
 
-t_src	*find_space(char *s, t_src *data)
+static void	find_duobl_quotes_equal(t_src *data, char **line)
 {
-	char	*tmp;
-	int		i;
-	int		k;
-
-	i = 0;
-	k = ft_strlen(data->line);
-	while (s[i] && s[i] == ' ')
-		i++;
-	data->token_list = new_node_tokens(ft_strdup(" "), SPAC, data->token_list);
-	tmp = ft_substr(data->line, i, k);
-	free(data->line);
-	data->line = NULL;
-	data->line = tmp;
-	return (data);
-}
-
-t_src	*find_pipe(char *s, t_src *data)
-{
-	char	*tmp;
-
-	(void)s;
-	data->token_list = new_node_tokens(ft_strdup("|"), PIPE, data->token_list);
-	if (data->line[1])
-		tmp = ft_substr(data->line, 1, (ft_strlen(data->line) - 1));
-	else
-		tmp = NULL;
-	free(data->line);
-	data->line = NULL;
-	data->line = tmp;
-	return (data);
-}
-
-t_src	*find_single_quotes(char *s, t_src *data)
-{
-	char	*tmp;
-	int		i;
-	int		k;
-
-	i = 0;
-	tmp = NULL;
-	k = ft_strlen(data->line);
-	if (s[i] == '\'')
-		i++;
-	while (s[i] && s[i] != '\'')
-		i++;
-	if (i < k)
-	{
-		data->token_list = new_node_tokens(ft_substr(data->line, 1, i - 1),
-				EXP_QUOTES_SINGLE, data->token_list);
-		tmp = ft_substr(data->line, i + 1, k);
-	}
-	else if (i == k)
-	{
-		data->token_list = new_node_tokens(ft_substr(data->line, 1, i - 1),
-				EXP_QUOTES_SINGLE, data->token_list);
-		tmp = NULL;
-	}
-	free(data->line);
-	data->line = NULL;
-	data->line = tmp;
-	return (data);
+	data->token_list = new_node_tokens(*line,
+			EXP_QUOTES_DOUBL, data->token_list);
 }
 
 t_src	*find_duobl_quotes(char *s, t_src *data)
@@ -132,13 +74,8 @@ t_src	*find_duobl_quotes(char *s, t_src *data)
 		tmp = ft_substr(data->line, i + 1, k);
 	}
 	else if (i == k)
-	{
-		data->token_list = new_node_tokens(line,
-				EXP_QUOTES_DOUBL, data->token_list);
-		tmp = NULL;
-	}
-	free(data->line);
-	data->line = NULL;
+		find_duobl_quotes_equal(data, &line);
+	free_give_null(&data->line);
 	data->line = tmp;
 	return (data);
 }
