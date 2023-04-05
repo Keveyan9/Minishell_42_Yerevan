@@ -228,7 +228,7 @@ void change_fd(t_src *data);
 int creat_here_doc(t_src *data);
 void close_herdoq_fd(t_src *data);
 void	free_token(t_src *data);
-void dolar_change(t_env *env , char **key, int n);
+void	chek_dolar_change(t_env *env, char **string, int flag);
 void	handler (int sig);
 void	free_give_null(char **s);
 int	find_index(char *s, char c);

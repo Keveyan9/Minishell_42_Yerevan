@@ -32,7 +32,8 @@ static int	create_pipe(t_src *data)
 
 void	create_child(t_src *data)
 {
-	while (data->pid > 0 && data->pipes_count >= data->cycle)
+	while (data->pid > 0 && data->pipes_count >= data->cycle
+		&& data->cycle < 200)
 	{
 		if (create_pipe(data))
 			break ;

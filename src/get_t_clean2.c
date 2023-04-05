@@ -39,7 +39,7 @@ static void	join_for_oll(t_src *data)
 		box = ft_strdup(data->cl_in->oll);
 		free(data->cl_in->oll);
 		data->cl_in->oll = NULL;
-		data->cl_in->oll = ft_strjoin(box, "'");
+		data->cl_in->oll = ft_strjoin(box, "31");
 		free(box);
 	}
 	box = ft_strdup(data->cl_in->oll);
@@ -89,8 +89,8 @@ void	join_token_for_clean(t_src *data)
 			boxs = ft_strdup(for_word);
 			free(for_word);
 			for_word = NULL;
-			if (data->token_list->token[0] == '$' && data->token_list->token[1])
-				dolar_change (data->env, &data->token_list->token, 1);
+			chek_dolar_change(data->env, &data->token_list->token,
+				data->token_list->type);
 			for_word = ft_strjoin(boxs, data->token_list->token);
 			free(boxs);
 			boxs = NULL;

@@ -25,8 +25,7 @@ static void	chek_dolar_push(t_src *data, char **her_line, int flag_doing_dolar)
 		her_line_s = ft_split(*her_line, ' ');
 		while (her_line_s[n])
 		{
-			if (her_line_s[n][0] == '$')
-				dolar_change(data->env, &(her_line_s[n]), 1);
+			chek_dolar_change(data->env, &(her_line_s[n]), 1);
 			word_len = ft_strlen(her_line_s[n]);
 			write (data->cl_in->pip_her_doc[1], her_line_s[n], word_len);
 			n++;
