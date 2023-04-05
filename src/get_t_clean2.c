@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "minishell.h"
+
 static void	add_tab(t_src *data)
 {
 	char	*box;
@@ -58,19 +59,19 @@ static void	for_word_split(t_src *data, char **for_word)
 	for_word = NULL;
 }
 
-static int chek_push_word(t_src *data)
-{ 
+static int	chek_push_word(t_src *data)
+{
 	if (!data->token_list->prev)
-		return(1);
-	if (data->token_list->prev && (data->token_list->prev->type > 4 ||
-		data->token_list->prev->type == 0 )&& data->token_list->prev->type != 8 )
 		return (1);
-	if (data->token_list->prev->prev && data->token_list->prev->type == 8 &&
-		(data->token_list->prev->prev->type > 4 
-		|| data->token_list->prev->prev->type == 0))
+	if (data->token_list->prev && (data->token_list->prev->type > 4
+			|| data->token_list->prev->type == 0)
+		&& data->token_list->prev->type != 8)
+		return (1);
+	if (data->token_list->prev->prev && data->token_list->prev->type == 8
+		&& (data->token_list->prev->prev->type > 4
+			|| data->token_list->prev->prev->type == 0))
 		return (1);
 	return (0);
-
 }
 
 void	join_token_for_clean(t_src *data)
@@ -80,12 +81,10 @@ void	join_token_for_clean(t_src *data)
 
 	boxs = NULL;
 	for_word = NULL;
-
-	while (data->token_list && data->token_list->type != 0 )
+	while (data->token_list && data->token_list->type != 0)
 	{
 		join_for_oll(data);
 		if (data->token_list->type > 4 && chek_push_word(data))
-
 		{
 			boxs = ft_strdup(for_word);
 			free(for_word);
