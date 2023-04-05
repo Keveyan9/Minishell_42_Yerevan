@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_t_clean.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 15:37:38 by skeveyan          #+#    #+#             */
-/*   Updated: 2023/04/02 15:37:52 by skeveyan         ###   ########.fr       */
+/*   Updated: 2023/04/05 23:57:49 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ void	get_t_cl_in_list(t_src *data)
 void	print_t_cl_in(t_src *data)
 {
 	t_cl_in	*tmp;
+	int		i;
+	int		n;
 
-	int i = -1;
-	int n = 1;
-
+	i = -1;
+	n = 1;
 	tmp = data->cl_in;
 	while (tmp && tmp->prev != NULL)
 	{
@@ -88,13 +89,9 @@ void	print_t_cl_in(t_src *data)
 	while (tmp)
 	{
 		i = -1;
-		while(tmp->word && tmp->word[++i])
-			printf("word%d = [%s] \n",i, tmp->word[i]);
-		// i = -1;
-		// while(tmp->heredoc && tmp->heredoc[++i])
-		// 	printf("heredoc%d = [%s] \n",i, tmp->heredoc[i]);
-		printf("oll = [%s]__%d\n\n", tmp->oll,n++);
-
+		while (tmp->word && tmp->word[++i])
+			printf("word%d = [%s] \n", i, tmp->word[i]);
+		printf("oll = [%s]__%d\n\n", tmp->oll, n++);
 		tmp = tmp->next;
 	}
 }

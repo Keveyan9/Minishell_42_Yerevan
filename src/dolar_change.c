@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dolar_change.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 15:25:21 by skeveyan          #+#    #+#             */
-/*   Updated: 2023/04/02 15:25:28 by skeveyan         ###   ########.fr       */
+/*   Updated: 2023/04/06 00:08:06 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	find_chanche_key(t_env *env, char **key)
 	{
 		*key = ft_strdup(place->value);
 	}
-
 }
 
 static void	gluing(char **string, char **start, char **key, char **remiander)
@@ -62,7 +61,7 @@ void	chek_dolar_change(t_env *env, char **string, int flag)
 	{
 		if ((*string)[n] == '$' && (*string)[n + 1]
 			&& (*string)[n + 1] != '?' &&
-			(flag != 6 || (*string)[n + 1] != 31 ))
+			(flag != 6 || (*string)[n + 1] != 31))
 		{
 			antil = key_finish(&(*string)[n + 1]);
 			start = ft_substr((*string), 0, n);

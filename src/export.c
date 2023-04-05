@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 16:33:21 by skeveyan          #+#    #+#             */
-/*   Updated: 2023/02/28 16:33:37 by skeveyan         ###   ########.fr       */
+/*   Updated: 2023/04/06 00:07:10 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "minishell.h"
+
+#include"minishell.h"
 
 static void	not_valid_argument(t_src *data, t_export *var)
 {
@@ -60,6 +61,4 @@ void	export(t_src *data)
 			var.row++;
 		}
 	}
-	else
-		print_export(data);
 }
