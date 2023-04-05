@@ -39,7 +39,6 @@ static int	valid_argument(t_src *data, t_export *var)
 	return (0);
 }
 
-
 void	export(t_src *data)
 {
 	t_export	var;

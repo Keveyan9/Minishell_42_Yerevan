@@ -22,8 +22,6 @@ void	logic(t_src *data)
 	close_herdoq_fd(data);
 	data->cl_in = origin;
 	if (chek_coll_builtin(data) == 0)
-		;
-	else
 		coll_comands(data);
 	oll_free(data);
 	exit(data->error);

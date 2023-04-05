@@ -103,20 +103,3 @@ t_src	*find_redir_out(char *s, t_src *data)
 	data->line = tmp;
 	return (data);
 }
-
-//------verjum jnji --------
-//-----VVVVVVVVVVVVV--------
-
-void	print_tokens(t_src *data)
-{
-	t_tokens	*tmp;
-
-	tmp = data->token_list;
-
-	while (tmp)
-	{
-		printf("type = %d,\ttoken = %s,\tline = %d\n",
-			tmp->type, tmp->token, tmp->len);
-		tmp = tmp->next;
-	}
-}

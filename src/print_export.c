@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-static void give_place(t_src *data)
+static void	give_place(t_src *data)
 {
 	t_env	*chek_place;
 	t_env	*grup;

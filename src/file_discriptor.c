@@ -18,14 +18,12 @@ static void	cheak_old_fd(t_src *data, int *fd, int *n)
 		(*n)++;
 	if (data->cl_in->oll[*n] == '\0')
 	{
-		printf("last fd\n");
 		if (data->cl_in->pip_her_doc[0] > 0)
 			close(data->cl_in->pip_her_doc[0]);
 		data->cl_in->pip_her_doc[0] = *fd;
 	}
 	else
 	{
-		printf("not last  fd\n");
 		close(*fd);
 		*fd = 0;
 	}

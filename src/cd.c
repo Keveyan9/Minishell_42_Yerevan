@@ -64,7 +64,7 @@ void	cd(t_src *data)
 {
 	if (data->cl_in->word[2])
 	{
-		printf("cd : too many arguments");
+		printf("cd : too many arguments\n");
 		data->error = 1;
 		g_flags = 1;
 		return ;

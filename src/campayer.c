@@ -50,6 +50,8 @@ static int	creat_chanch_nod(t_export *var, t_src *data)
 			return (1);
 		newnode->key = ft_strdup(var->key);
 		newnode->value = ft_strdup(var->value);
+		free_give_null(&var->key);
+		free_give_null(&var->value);
 		put_env_node(data, newnode);
 	}
 	return (0);
@@ -83,8 +85,8 @@ int	campeyr(t_src *data, t_export *var)
 			var->string_len - var->i + 1);
 		if (chek_key(var->key))
 		{
-			free(var->key);
-			free(var->value);
+			free_give_null(&var->key);
+			free_give_null(&var->value);
 			return (1);
 		}
 		if (creat_chanch_nod(var, data))
