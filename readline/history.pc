@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-prefix=/home/go/Desktop/Minishell/readline_out
-=======
 prefix=/Users/skeveyan/Desktop/Minishell/readline_out
->>>>>>> main
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

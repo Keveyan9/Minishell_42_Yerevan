@@ -22,11 +22,7 @@ topdir = ..
 srcdir = .
 
 
-<<<<<<< HEAD
-prefix = /home/go/Desktop/Minishell/readline_out
-=======
 prefix = /Users/skeveyan/Desktop/Minishell/readline_out
->>>>>>> main
 
 datarootdir = ${prefix}/share
 
@@ -53,11 +49,7 @@ RM = rm -f
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 
-<<<<<<< HEAD
-BUILD_DIR = /home/go/Desktop/Minishell/readline
-=======
 BUILD_DIR = /Users/skeveyan/Desktop/Minishell/readline
->>>>>>> main
 TEXINPUTDIR = $(srcdir)
 
 MAKEINFO    = LANGUAGE= makeinfo

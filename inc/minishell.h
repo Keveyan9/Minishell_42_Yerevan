@@ -231,6 +231,7 @@ void		chek_dolar_change(t_env *env, char **string, int flag, t_src *data);
 void		handler(int sig);
 void		free_give_null(char **s);
 int			find_index(char *s, char c);
+void	change_fd_main(t_src *data);
 // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 //------src------syntax_error_1.c-------
 int			when_find_tokin(t_src *data, char *str, int *i, int j);

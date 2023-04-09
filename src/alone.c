@@ -40,40 +40,31 @@ static int	is_builtin(t_src *data)
 
 static void	chanch_back_main_fd(t_src *data)
 {
-	change_fd(data);
+	change_fd_main(data);
 	chek_coll_builtin(data);
 	if (data->cl_in->pip_her_doc[0] > 0)
 	{	
-		dup2(data->main_fd_0, 0);
 		close(data->cl_in->pip_her_doc[0]);
+		dup2(data->main_fd_0, 0);
 		data->cl_in->pip_her_doc[0] = -1;
-	}
-	else
 		close(data->main_fd_0);
+	}
 	if (data->cl_in->pip_her_doc[1] > 0)
 	{
-		dup2(data->main_fd_1, 1);
 		close(data->cl_in->pip_her_doc[1]);
+		dup2(data->main_fd_1, 1);
+		close(data->main_fd_1);
 		data->cl_in->pip_her_doc[1] = -1;
 	}
-	else
-		close(data->main_fd_1);
 }
 
 void	alone(t_src *data)
 {
 	if (is_builtin(data))
 	{
-		data->main_fd_0 = dup(0);
-		data->main_fd_1 = dup(1);
 		file_discriptor(data);
 		if (!g_flags)
 			chanch_back_main_fd(data);
-		else
-		{
-			close(data->main_fd_1);
-			close(data->main_fd_0);
-		}
 		close_herdoq_fd(data);
 	}
 	else

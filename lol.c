@@ -1,5 +1,0 @@
-cat lol.c | cat > lol.c
-cat lol.c | cat >> lol.c
-cat lol.c | cat >> lol.c
-cat lol.c | cat >> lol.c
-cat lol.c | cat >> lol.c
