@@ -17,7 +17,6 @@ static void	doing_alon_chaild(t_src *data)
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);
 	file_discriptor(data);
-	write(data->cl_in->pip_her_doc[1],"testing chaild print\n",21);
 	if (!g_flags)
 	{
 		change_fd(data);

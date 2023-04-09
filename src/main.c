@@ -34,7 +34,10 @@ static void	main_logica(t_src *data)
 		&& data->cl_in->word)
 	{
 		if (data->pipes_count == 0 && data->cl_in->word [0])
+		{
+			printf("child_pipes__%d__\n",data->pipes_count);
 			alone(data);
+		}
 		else
 			realaysing(data);
 		data->cl_in = data->clin_head;
