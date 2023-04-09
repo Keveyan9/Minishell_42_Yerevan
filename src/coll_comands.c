@@ -54,18 +54,16 @@ void	coll_comands(t_src *data)
 
 	env = list_to_array(data);
 	comand_path = ft_strjoin(data->home_path, &(data->cl_in->word[0][1]));
-	name_argument = (char **)malloc(sizeof(char *) * 3);
+	name_argument = (char **)malloc(sizeof(char *) * 2);
 	name_argument[0] = ft_strdup(data->cl_in->word[0]);
-	name_argument[1] = ft_strdup("1");
-	name_argument[2] = NULL;
+	name_argument[1] = NULL;
 	execve(comand_path, name_argument, env);
 	free(comand_path);
 	frik(name_argument);
 	comand_path = find_comand_path(data);
-	if (comand_path)
-		execve(comand_path, data->cl_in->word, env);
-	else
-		can_not_coll_comand(data);
+	execve(comand_path, data->cl_in->word, env);
+	execve(data->cl_in->word[0], data->cl_in->word, env);
+	can_not_coll_comand(data);
 	frik(env);
 	free(comand_path);
 	oll_free(data);

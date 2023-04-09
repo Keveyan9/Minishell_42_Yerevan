@@ -6,7 +6,7 @@
 /*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 16:55:16 by artadevo          #+#    #+#             */
-/*   Updated: 2023/04/06 00:05:45 by artadevo         ###   ########.fr       */
+/*   Updated: 2023/04/06 00:25:32 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "../libft/libft.h"
 # include <sys/ioctl.h>
 
-extern int g_flags;
+extern int	g_flags;
 
 typedef enum s_type
 {
@@ -217,7 +217,7 @@ void		realaysing(t_src *data);
 void		logic(t_src *data);
 int			alone_child(t_src *data);
 void		close_discriptor(t_src *data );
-void		shell_level(t_src *data, char **av);
+void		shell_level(t_src *data);
 void		alone(t_src *data);
 void		exit_f(t_src *data);
 int			find_plase(char *s, char c);
@@ -227,22 +227,14 @@ void		change_fd(t_src *data);
 int			creat_here_doc(t_src *data);
 void		close_herdoq_fd(t_src *data);
 void		free_token(t_src *data);
-void		chek_dolar_change(t_env *env, char **string, int flag);
+void		chek_dolar_change(t_env *env, char **string, int flag, t_src *data);
 void		handler(int sig);
 void		free_give_null(char **s);
 int			find_index(char *s, char c);
-
-
 // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
-
 //------src------syntax_error_1.c-------
-
-
 int			when_find_tokin(t_src *data, char *str, int *i, int j);
 int			pipe_last(t_src *data, char *str, int j);
 void		syntax_last_nothing(t_src *data, int i, int j);
-
-
-
-int		error_search_error2(t_src *data, char *str, int *i);
+int			error_search_error2(t_src *data, char *str, int *i);
 #endif

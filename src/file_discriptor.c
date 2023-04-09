@@ -72,9 +72,15 @@ void	file_discriptor(t_src *data)
 {
 	int	row;
 
-	row = 0;
-	while (data->cl_in->oll[row] && !g_flags)
+	row = -1;
+	while (data->cl_in->oll[++row] && !g_flags)
 	{
+		if (data->cl_in->oll[row] == 39)
+		{
+			row++;
+			while (data->cl_in->oll[row] != 39)
+				row++;
+		}
 		if (data->cl_in->oll[row] == '>')
 		{
 			data->error = 0;
@@ -88,6 +94,5 @@ void	file_discriptor(t_src *data)
 		else if (data->cl_in->oll[row] == '<'
 			&& (data->cl_in->oll[row + 1] != '<'))
 			coll_chek_in_file(data, &row);
-		row++;
 	}
 }

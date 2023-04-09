@@ -17,7 +17,7 @@ static int	key_finish(char *s)
 	int	n;
 
 	n = 0;
-	while (s[n] && s[n] != '$')
+	while (s[n] && s[n] != '$' && s[n] != ' ')
 		n++;
 	return (n);
 }
@@ -30,9 +30,7 @@ static void	find_chanche_key(t_env *env, char **key)
 	free(*key);
 	*key = NULL;
 	if (place)
-	{
 		*key = ft_strdup(place->value);
-	}
 }
 
 static void	gluing(char **string, char **start, char **key, char **remiander)
@@ -48,7 +46,7 @@ static void	gluing(char **string, char **start, char **key, char **remiander)
 	free_give_null(remiander);
 }
 
-void	chek_dolar_change(t_env *env, char **string, int flag)
+void	chek_dolar_change(t_env *env, char **string, int flag, t_src *data)
 {
 	char	*key;
 	char	*remainder;
@@ -56,21 +54,30 @@ void	chek_dolar_change(t_env *env, char **string, int flag)
 	int		n;
 	int		antil;
 
-	n = 0;
-	while ((*string)[n])
+	n = -1;
+	if (flag == 6)
+		return ;
+	while ((*string)[++n])
 	{
-		if ((*string)[n] == '$' && (*string)[n + 1]
-			&& (*string)[n + 1] != '?' &&
-			(flag != 6 || (*string)[n + 1] != 31))
+		if ((*string)[n] == '$' && (*string)[n + 1])
 		{
 			antil = key_finish(&(*string)[n + 1]);
 			start = ft_substr((*string), 0, n);
-			key = ft_substr((*string), n + 1, antil);
-			remainder = ft_substr((*string), n + antil + 1,
-					ft_strlen (*string));
-			find_chanche_key(env, &key);
+			if ((*string)[n + 1] == '?')
+			{
+				key = ft_itoa(data->error);
+				remainder = ft_substr((*string), n + 2, ft_strlen (*string));
+			}
+			else
+			{
+				key = ft_substr((*string), n + 1, antil);
+				remainder = ft_substr((*string), n + antil +1,
+						ft_strlen (*string));
+				find_chanche_key(env, &key);
+			}
+			printf("__%s_%s___%s___\n",start, key, remainder);
 			gluing(string, &start, &key, &remainder);
+			printf("sting_out__%s__\n",*string);
 		}
-		n++;
 	}
 }

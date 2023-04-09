@@ -91,7 +91,8 @@ void	print_t_cl_in(t_src *data)
 		i = -1;
 		while (tmp->word && tmp->word[++i])
 			printf("word%d = [%s] \n", i, tmp->word[i]);
-		printf("oll = [%s]__%d\n\n", tmp->oll, n++);
+		if(tmp->oll)
+			printf("oll = [%s]__%d\n\n", tmp->oll, n++);
 		tmp = tmp->next;
 	}
 }

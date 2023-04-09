@@ -26,6 +26,7 @@ static void	main_logica(t_src *data)
 {
 	get_t_cl_in_list(data);
 	free_token(data);
+	print_t_cl_in(data);
 	if (data->syntax_err != 0)
 		print_syntax_err(data);
 	creat_here_doc(data);
@@ -51,12 +52,13 @@ int	main(int ac, char **av, char **env)
 	t_src	*data;
 
 	(void)ac;
+	(void)av;
 	data = malloc(sizeof(t_src));
 	if (!data)
 		return (0);
 	if (all_input(data, env))
 		return (0);
-	shell_level(data, av);
+	shell_level(data);
 	while (1 && data->pid > 0)
 	{
 		g_flags = 0;

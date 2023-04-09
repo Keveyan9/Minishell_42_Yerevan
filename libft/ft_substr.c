@@ -18,23 +18,22 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	n;
 
 	n = 0;
+	new_str = NULL;
 	if (ft_strlen(s) < start)
 	{	
-		new_str = malloc (sizeof(char));
-		new_str[n] = '\0';
-		return (new_str);
+		return (NULL);
 	}
 	while (s[n] && n < len)
 		n++;
 	new_str = (char *)malloc(n + 1);
 	if (!s || !new_str)
-		return (0);
+		return (NULL);
 	n = 0;
 	while (s[start + n] && n < len)
 	{
 		new_str[n] = s[start + n];
 		n++;
 	}
-	new_str[n++] = '\0';
+	new_str[n] = '\0';
 	return (new_str);
 }

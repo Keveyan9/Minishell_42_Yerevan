@@ -14,9 +14,12 @@
 
 void	ft_read_l(t_src *data)
 {
+	size_t	n;
+
 	while (!(data->line) || data->line[0] == '\0')
 	{
-		data->line = readline("mini$ ");
+		n = 0;
+		data->line = readline("mini$  ");
 		if (data->line == NULL)
 		{
 			oll_free(data);
@@ -25,9 +28,10 @@ void	ft_read_l(t_src *data)
 		if (data->line[0] != '\0')
 			add_history(data->line);
 		if (data->line[0] == '\0')
-		{
-			free(data->line);
-			data->line = NULL;
-		}
+			free_give_null(&data->line);
+		while (data->line && data->line[n] == 32)
+			n++;
+		if (ft_strlen(data->line) == n)
+			free_give_null(&data->line);
 	}
 }

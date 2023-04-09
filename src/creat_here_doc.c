@@ -25,7 +25,7 @@ static void	chek_dolar_push(t_src *data, char **her_line, int flag_doing_dolar)
 		her_line_s = ft_split(*her_line, ' ');
 		while (her_line_s[n])
 		{
-			chek_dolar_change(data->env, &(her_line_s[n]), 1);
+			chek_dolar_change(data->env, &(her_line_s[n]), 1, data);
 			word_len = ft_strlen(her_line_s[n]);
 			write (data->cl_in->pip_her_doc[1], her_line_s[n], word_len);
 			n++;
@@ -48,15 +48,38 @@ static void	free_readline(char **her_line)
 	}
 }
 
-static void	readline_heredoc(t_src *data, char *close_name)
+static void	clean_close_name(char **close_name, int *fl_doing_dolar)
+{
+	char	*box;
+	char	*start;
+	int		n;
+
+	n = 0;
+	while ((*close_name)[n])
+	{
+		if ((*close_name)[n] == '\'')
+		{	
+			start = ft_substr(*close_name, 0, n);
+			box = ft_substr(*close_name, n + 1, ft_strlen(*close_name));
+			free_give_null(close_name);
+			*close_name = ft_strjoin(start, box);
+			free_give_null(&start);
+			free_give_null(&box);
+			*fl_doing_dolar = 1;
+		}
+		n++;
+	}
+}
+
+static void	readline_heredoc(t_src *data, char **close_name)
 {
 	char	*her_line;
 	int		fl_doing_dolar;
 	size_t	chek_len;
 
 	fl_doing_dolar = 0;
-	if (close_name[0] && close_name[0] == 39)
-		fl_doing_dolar = 1;
+	clean_close_name(close_name, &fl_doing_dolar);
+	printf("close_name___%s__\n",*close_name);
 	signal(SIGINT, handler);
 	while (!g_flags)
 	{
@@ -66,8 +89,8 @@ static void	readline_heredoc(t_src *data, char *close_name)
 			data->error = 1;
 			break ;
 		}
-		chek_len = ft_strlen(close_name) + ft_strlen(her_line);
-		if (ft_strncmp(her_line, &(close_name[fl_doing_dolar]), chek_len) == 0)
+		chek_len = ft_strlen(*close_name) + ft_strlen(her_line);
+		if (ft_strncmp(her_line, *close_name, chek_len) == 0)
 		{
 			free_readline(&her_line);
 			break ;
@@ -82,9 +105,8 @@ static int	coll_hear_doc(t_src *data, int *row)
 	int		len;
 	char	*close_name;
 
-	(*row)++;
-	len = 0;
-	len = find_plase(&(data->cl_in->oll[*row]), ' ');
+	len = ++(*row);
+		len = find_plase(&(data->cl_in->oll[*row]), ' ');
 	close_name = ft_substr(data->cl_in->oll,*row, len);
 	if (data->cl_in->pip_her_doc[0] > 0)
 	{
@@ -93,14 +115,13 @@ static int	coll_hear_doc(t_src *data, int *row)
 	}
 	pipe(data->cl_in->pip_her_doc);
 	g_flags = 0;
-	readline_heredoc(data, close_name);
+	readline_heredoc(data, &close_name);
 	signal(SIGINT, SIG_IGN);
 	if (g_flags)
 		data->error = 130;
 	close(data->cl_in->pip_her_doc[1]);
 	data->cl_in->pip_her_doc[1] = -1;
-	free(close_name);
-	close_name = NULL;
+	free_give_null (&close_name);
 	signal(SIGINT, SIG_IGN);
 	return (0);
 }
