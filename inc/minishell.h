@@ -240,4 +240,5 @@ int			pipe_last(t_src *data, char *str, int j);
 void		syntax_last_nothing(t_src *data, int i, int j);
 int			error_search_error2(t_src *data, char *str, int *i);
 void		clean_close_name(char **close_name, int *fl_doing_dolar);
+void		print_export(t_src *data);
 #endif

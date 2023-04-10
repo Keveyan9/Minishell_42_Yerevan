@@ -71,7 +71,7 @@ void	cd(t_src *data)
 	}
 	if (data->cl_in->word[1])
 	{
-		data->error = chdir(data->cl_in->word[1]);
+		g_flags = chdir(data->cl_in->word[1]);
 		if (!g_flags)
 		{
 			cd_half(data);

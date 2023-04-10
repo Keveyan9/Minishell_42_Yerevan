@@ -61,4 +61,6 @@ void	export(t_src *data)
 			var.row++;
 		}
 	}
+	else
+		print_export(data);
 }

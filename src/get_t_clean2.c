@@ -63,15 +63,6 @@ static void	qneqt_word(t_src *data, int n)
 			data->token_list->type, data);
 		boxs = ft_strjoin(data->cl_in->word[n], data->token_list->token);
 		free_give_null (&(data->cl_in->word[n]));
-		if (n == 0)
-		{
-			while (boxs[t] != '\0')
-			{
-				if (boxs[t] >= 'A' && boxs[t] <= 'Z')
-					boxs[t] += 32;
-				t++;
-			}
-		}
 		data->cl_in->word[n] = ft_strdup(boxs);
 		free_give_null(&boxs);
 		data->token_list = data->token_list->next;
