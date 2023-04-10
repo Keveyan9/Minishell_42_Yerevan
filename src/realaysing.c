@@ -56,6 +56,9 @@ void	create_child(t_src *data)
 
 void	realaysing(t_src *data)
 {
+	int	error;
+
+	error = 0;
 	data->pip = malloc(sizeof(*(data->pip)) * data->pipes_count);
 	if (!data->pip)
 	{
@@ -69,7 +72,8 @@ void	realaysing(t_src *data)
 		close_herdoq_fd(data);
 		while (data->cycle--)
 		{
-			wait(&data->error);
+			wait(&error);
+			data->error = error;
 		}
 		free(data->pip);
 	}

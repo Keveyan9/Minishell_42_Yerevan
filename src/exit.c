@@ -23,21 +23,23 @@ void	exit_f(t_src *data)
 	size_t	n;
 
 	n = 0;
-	if (!data->cl_in->word[2] && data->cl_in->word[1])
+	if (data->cl_in->word[1])
 	{
 		while (data->cl_in->word[1][n])
 		{
-			if (!ft_isdigit(data->cl_in->word[1][n++]))
+			if (ft_isdigit(data->cl_in->word[1][n])
+				|| data->cl_in->word[1][n] == '-'
+				|| data->cl_in->word[1][n] == '+' )
+				;
+			else
 			{
-				printf("exit: %s: numeric argument..n", data->cl_in->word[1]);
+				printf("exit: %s: numeric argumentn\n", data->cl_in->word[1]);
 				data->error = 2;
 				break ;
 			}
+			n++;
 		}
-		if (n == ft_strlen(data->cl_in->word[1]))
 			data->error = ft_atoi(data->cl_in->word[1]);
-		else
-			data->error = 2;
 	}
 	else if (data->cl_in->word[2])
 		exit_many_argument(data);

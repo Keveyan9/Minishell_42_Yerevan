@@ -21,11 +21,14 @@ void	logic(t_src *data)
 	close_discriptor(data);
 	close_herdoq_fd(data);
 	data->cl_in = origin;
-	if (chek_coll_builtin(data) == 0)
-		;
-	else
-	{	
-		coll_comands(data);
+	if (data->cl_in && data->cl_in->word[0])
+	{
+		if (chek_coll_builtin(data) == 0)
+			;
+		else
+		{	
+			coll_comands(data);
+		}
 	}
 	oll_free(data);
 	exit(data->error);

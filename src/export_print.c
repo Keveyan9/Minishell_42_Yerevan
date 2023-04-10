@@ -1,34 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_print.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/11 00:25:07 by artadevo          #+#    #+#             */
+/*   Updated: 2023/04/11 01:48:19 by artadevo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
-void    print_export(t_src *data)
+void	print_export(t_src *data)
 {
-    t_env    *tmp;
-    t_env    *tmp1;
-    int        c;
+	t_env	*tmp;
+	int		c;
 
-    c = 'A';
-    tmp = data->env;
-    tmp1 = tmp;
-	
-    while (c <= 'Z')
-    {
-        while (tmp)
-        {
-            if (tmp->key[0] == (char)c && tmp->flag_p == 0)
-            {
-                printf("declare -x %s=%s\n", tmp->key, tmp->value);
-                tmp->flag_p = 1;
-            }
-        tmp = tmp->next;
-        }
-        tmp = tmp1;
-        c++;
-    }
+	c = 'A';
 	tmp = data->env;
-	while(tmp)
+	while (c <= 'Z')
 	{
-		tmp->flag_p = 0;
+		while (tmp)
+		{
+			if (tmp->key[0] == (char)c || tmp->key[0] == (char)(c + 32))
+			{
+				printf("declare -x %s", tmp->key);
+				if (tmp->flag_p == 0)
+					printf("=");
+				if (tmp->value)
+					printf("%s", tmp->value);
+				printf("\n");
+			}
 		tmp = tmp->next;
+		}
+		tmp = data->env;
+		c++;
 	}
-	
 }

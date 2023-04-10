@@ -21,7 +21,8 @@ static void	doing_alon_chaild(t_src *data)
 	{
 		change_fd(data);
 		close_herdoq_fd(data);
-		coll_comands(data);
+		if (data->cl_in->word[0])
+			coll_comands(data);
 	}
 	oll_free(data);
 	exit(data->error);

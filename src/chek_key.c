@@ -23,8 +23,8 @@ int	chek_key(char *s)
 	if (n == ft_strlen(s))
 		return (0);
 	wrong_arg = ft_strjoin("is non corect key", s);
-	write(1, "\n", 1);
 	write(1, wrong_arg, ft_strlen(wrong_arg));
+	write(1, "\n", 1);
 	free(wrong_arg);
 	wrong_arg = NULL;
 	return (1);

@@ -17,7 +17,7 @@ static void	not_valid_argument(t_src *data, t_export *var)
 	char	*not_valid_arg;
 
 	not_valid_arg = NULL;
-	not_valid_arg = ft_strjoin("is not valid argumwent name",
+	not_valid_arg = ft_strjoin("is not valid argument name  ",
 			data->cl_in->word[var->row]);
 	write(1, not_valid_arg, ft_strlen(not_valid_arg));
 	write(1, "\n", 1);
@@ -33,10 +33,12 @@ static int	valid_argument(t_src *data, t_export *var)
 	if (campeyr(data, var))
 	{
 		data->error = 1;
+		var->add = 0;
 		return (1);
 	}
 	else
 		data->error = 0;
+	var->add = 0;
 	return (0);
 }
 
@@ -54,10 +56,12 @@ void	export(t_src *data)
 		{
 			var.i = 0;
 			var.string_len = 0;
-			if (!ft_isalpha(data->cl_in->word[var.row][0]))
+			if (ft_isalpha(data->cl_in->word[var.row][0])
+				|| data->cl_in->word[var.row][0] == '_'
+				|| data->cl_in->word[var.row][0] == '\'')
+				valid_argument (data, &var);
+			else
 				not_valid_argument(data, &var);
-			else if (valid_argument (data, &var))
-				break ;
 			var.row++;
 		}
 	}

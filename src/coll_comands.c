@@ -50,22 +50,27 @@ void	coll_comands(t_src *data)
 {
 	char	*comand_path;
 	char	**env;
-	char	**name_argument;
+	int		n;
 
+	n = 0;
+	comand_path = NULL;
 	env = list_to_array(data);
-	comand_path = ft_strjoin(data->home_path, &(data->cl_in->word[0][1]));
-	name_argument = (char **)malloc(sizeof(char *) * 2);
-	name_argument[0] = ft_strdup(data->cl_in->word[0]);
-	name_argument[1] = NULL;
-	execve(comand_path, name_argument, env);
-	free(comand_path);
-	frik(name_argument);
-	comand_path = find_comand_path(data);
-	execve(comand_path, data->cl_in->word, env);
-	execve(data->cl_in->word[0], data->cl_in->word, env);
-	can_not_coll_comand(data);
+	while (data->cl_in->word[0][n] && data->cl_in->word[0][n] != '/'
+		&& data->cl_in->word[0][n++] != '.' );
+	if ((data->cl_in->word[0][n] == '/' || data->cl_in->word[0][n] == '.'))
+	{
+		if (!access(data->cl_in->word[0], F_OK))
+			execve(data->cl_in->word[0], data->cl_in->word, env);
+		perror(data->cl_in->word[0]);
+	}
+	else
+	{
+		comand_path = find_comand_path(data);
+		execve(comand_path, data->cl_in->word, env);
+		can_not_coll_comand(data);
+		free_give_null(&comand_path);
+	}
 	frik(env);
-	free(comand_path);
 	oll_free(data);
 	exit(data->error);
 }

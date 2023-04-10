@@ -74,28 +74,28 @@ typedef struct s_cl_in
 
 typedef struct s_src
 {
-	char		*line;
-	int			index_s_err;
-	int			syntax_err;
-	int			doubl_quotes;
-	int			single_quotes;
-	int			error;
-	int			pipes_count;
-	int			pip_doing;
-	int			(*pip)[2];
-	int			cycle;
-	char		*home_path;
-	int			main_fd_0;
-	int			main_fd_1;
-	pid_t		pid;
-	t_tokens	*token_list;
-	t_tokens	*tokens_head;
-	t_env		*env;
-	t_env		*envhead;
-	t_env		*envlast;
-	t_cl_in		*clin_head;
-	t_cl_in		*clin_last;
-	t_cl_in		*cl_in;
+	char			*line;
+	int				index_s_err;
+	int				syntax_err;
+	int				doubl_quotes;
+	int				single_quotes;
+	unsigned char	error;
+	int				pipes_count;
+	int				pip_doing;
+	int				(*pip)[2];
+	int				cycle;
+	char			*home_path;
+	int				main_fd_0;
+	int				main_fd_1;
+	pid_t			pid;
+	t_tokens		*token_list;
+	t_tokens		*tokens_head;
+	t_env			*env;
+	t_env			*envhead;
+	t_env			*envlast;
+	t_cl_in			*clin_head;
+	t_cl_in			*clin_last;
+	t_cl_in			*cl_in;
 }	t_src;
 
 typedef struct s_export
