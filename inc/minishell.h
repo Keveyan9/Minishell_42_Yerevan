@@ -186,6 +186,7 @@ void		error_print(char *s, char *c);
 
 //------src------get_t_clin_list.c------------
 void		get_t_cl_in_list(t_src *data);
+void		join_for_oll(t_src *data);
 void		join_token_for_clean(t_src *data);
 // t_cl_in		*new_node_t_cl_in(t_cl_in *cl_in);
 void		print_t_cl_in(t_src *data); // verjum jnji
@@ -231,7 +232,7 @@ void		chek_dolar_change(t_env *env, char **string, int flag, t_src *data);
 void		handler(int sig);
 void		free_give_null(char **s);
 int			find_index(char *s, char c);
-void	change_fd_main(t_src *data);
+void		change_fd_main(t_src *data);
 // _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 //------src------syntax_error_1.c-------
 int			when_find_tokin(t_src *data, char *str, int *i, int j);

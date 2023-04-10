@@ -75,9 +75,7 @@ void	chek_dolar_change(t_env *env, char **string, int flag, t_src *data)
 						ft_strlen (*string));
 				find_chanche_key(env, &key);
 			}
-			printf("__%s_%s___%s___\n",start, key, remainder);
 			gluing(string, &start, &key, &remainder);
-			printf("sting_out__%s__\n",*string);
 		}
 	}
 }

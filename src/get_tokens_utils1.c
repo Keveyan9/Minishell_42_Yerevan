@@ -29,8 +29,8 @@ t_src	*find_word(char *s, t_src *data)
 	tmp = NULL;
 	line = NULL;
 	k = ft_strlen(data->line);
-	while (s[i] && s[i] != ' ' && s[i] != '<'
-		&& s[i] != '>' && s[i] != '|' && s[i] != '\'' && s[i] != '\"')
+	while (s[i] && s[i] != ' ' && s[i] != '<' && s[i] != '>' && s[i] != '|'
+		&& s[i] != '\'' && s[i] != '\"')
 		i++;
 	if (i < k)
 	{
@@ -45,24 +45,36 @@ t_src	*find_word(char *s, t_src *data)
 	return (data);
 }
 
+static void	find_duobl_quotes_equal(t_src *data, char **line)
+{
+	data->token_list = new_node_tokens(*line,
+			EXP_QUOTES_DOUBL, data->token_list);
+}
+
 t_src	*find_duobl_quotes(char *s, t_src *data)
 {
 	char	*tmp;
+	char	*line;
 	int		i;
 	int		k;
 
 	i = 0;
 	tmp = NULL;
+	line = NULL;
 	k = ft_strlen(data->line);
 	if (s[i] == '\"')
-	{
 		i++;
-		while (s[i] && s[i] != '\"')
-			i++;
+	while (s[i] && s[i] != '\"')
+		i++;
+	line = ft_substr(data->line, 1, i - 1);
+	if (i < k)
+	{
+		data->token_list = new_node_tokens(line,
+				EXP_QUOTES_DOUBL, data->token_list);
+		tmp = ft_substr(data->line, i + 1, k);
 	}
-	data->token_list = new_node_tokens(ft_substr(data->line, 1, i - 1),
-			EXP_QUOTES_DOUBL, data->token_list);
-	tmp = ft_substr(data->line, i + 2, k);
+	else if (i == k)
+		find_duobl_quotes_equal(data, &line);
 	free_give_null(&data->line);
 	data->line = tmp;
 	return (data);

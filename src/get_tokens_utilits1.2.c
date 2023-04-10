@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 #include"minishell.h"
 
+#include"minishell.h"
+
 t_src	*find_space(char *s, t_src *data)
 {
 	char	*tmp;
@@ -53,14 +55,20 @@ t_src	*find_single_quotes(char *s, t_src *data)
 	tmp = NULL;
 	k = ft_strlen(data->line);
 	if (s[i] == '\'')
-	{
 		i++;
-		while (s[i] && s[i] != '\'')
-			i++;
+	while (s[i] && s[i] != '\'')
+		i++;
+	if (i < k)
+	{
+		data->token_list = new_node_tokens(ft_substr(data->line, 1, i - 1),
+				EXP_QUOTES_SINGLE, data->token_list);
+		tmp = ft_substr(data->line, i + 1, k);
 	}
-	data->token_list = new_node_tokens(ft_substr(data->line, 1, i - 1),
-			EXP_QUOTES_SINGLE, data->token_list);
-	tmp = ft_substr(data->line, i + 2, k);
+	else if (i == k)
+	{
+		data->token_list = new_node_tokens(ft_substr(data->line, 1, i - 1),
+				EXP_QUOTES_SINGLE, data->token_list);
+	}
 	free_give_null(&data->line);
 	data->line = tmp;
 	return (data);

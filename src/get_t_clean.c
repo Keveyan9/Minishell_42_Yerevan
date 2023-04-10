@@ -86,13 +86,15 @@ void	print_t_cl_in(t_src *data)
 	{
 		tmp = tmp->prev;
 	}
+	printf("in printf -clin\n");
 	while (tmp)
 	{
 		i = -1;
-		while (tmp->word && tmp->word[++i])
+		while (tmp->word && tmp->word[++i] != '\0')
 			printf("word%d = [%s] \n", i, tmp->word[i]);
-		if(tmp->oll)
+		if (tmp && tmp->oll)
 			printf("oll = [%s]__%d\n\n", tmp->oll, n++);
 		tmp = tmp->next;
 	}
+		printf("after printf -clin\n");
 }
