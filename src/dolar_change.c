@@ -46,13 +46,33 @@ static void	gluing(char **string, char **start, char **key, char **remiander)
 	free_give_null(remiander);
 }
 
-void	chek_dolar_change(t_env *env, char **string, int flag, t_src *data)
+static void	chek_dolar( t_src *data, char **string, int n)
 {
 	char	*key;
 	char	*remainder;
 	char	*start;
-	int		n;
 	int		antil;
+
+	antil = key_finish(&(*string)[n + 1]);
+	start = ft_substr((*string), 0, n);
+	if ((*string)[n + 1] == '?')
+	{
+		key = ft_itoa(data->error);
+		remainder = ft_substr((*string), n + 2, ft_strlen (*string));
+	}
+	else
+	{
+		key = ft_substr((*string), n + 1, antil);
+		remainder = ft_substr((*string), n + antil +1,
+				ft_strlen (*string));
+		find_chanche_key(data->env, &key);
+	}
+	gluing(string, &start, &key, &remainder);
+}
+
+void	chek_dolar_change(char **string, int flag, t_src *data)
+{
+	int		n;
 
 	n = -1;
 	if (flag == 6)
@@ -60,22 +80,6 @@ void	chek_dolar_change(t_env *env, char **string, int flag, t_src *data)
 	while ((*string)[++n])
 	{
 		if ((*string)[n] == '$' && (*string)[n + 1])
-		{
-			antil = key_finish(&(*string)[n + 1]);
-			start = ft_substr((*string), 0, n);
-			if ((*string)[n + 1] == '?')
-			{
-				key = ft_itoa(data->error);
-				remainder = ft_substr((*string), n + 2, ft_strlen (*string));
-			}
-			else
-			{
-				key = ft_substr((*string), n + 1, antil);
-				remainder = ft_substr((*string), n + antil +1,
-						ft_strlen (*string));
-				find_chanche_key(env, &key);
-			}
-			gluing(string, &start, &key, &remainder);
-		}
+			chek_dolar(data, string, n);
 	}
 }

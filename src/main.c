@@ -24,31 +24,31 @@ static void	handler_main(int sig)
 
 static void	main_logica(t_src *data)
 {
-	get_t_cl_in_list(data);
+	int	print_resurs_f;
+
+	print_resurs_f = 0;
 	free_token(data);
-	print_t_cl_in(data);
-	printf("after clin");
-	// if (data->syntax_err != 0)
-	// 	print_syntax_err(data);
-	// creat_here_doc(data);
-	// if (!g_flags && data->syntax_err == 0 && data->cl_in
-	// 	&& data->cl_in->word)
-	// {
-	// 	if (data->pipes_count == 0 && data->cl_in->word [0])
-	// 	{
-	// 		printf("child_pipes__%d__\n",data->pipes_count);
-	// 		alone(data);
-	// 	}
-	// 	else
-	// 		realaysing(data);
-	// 	data->cl_in = data->clin_head;
-	// }
-	// else
-		// close_herdoq_fd(data);
-	if (data->cl_in)
-		free_clin(data);
-	free(data->line);
-	data->line = NULL;
+	if (data->pipes_count > 500)
+	{
+		data->pipes_count = 500;
+		print_resurs_f = 1;
+	}
+	if (data->syntax_err != 0)
+		print_syntax_err(data);
+	creat_here_doc(data);
+	if (!g_flags && data->syntax_err == 0 && data->cl_in
+		&& data->cl_in->word)
+	{
+		if (data->pipes_count == 0 && data->cl_in->word [0])
+			alone(data);
+		else
+			realaysing(data);
+		data->cl_in = data->clin_head;
+	}
+	else
+		close_herdoq_fd(data);
+	if (print_resurs_f)
+		printf("you won't use more than 500 proces\n");
 }
 
 int	main(int ac, char **av, char **env)
@@ -71,7 +71,10 @@ int	main(int ac, char **av, char **env)
 		start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
+		get_t_cl_in_list(data);
 		main_logica(data);
+		free_clin(data);
+		free_give_null(&data->line);
 	}
 	oll_free(data);
 	return (0);

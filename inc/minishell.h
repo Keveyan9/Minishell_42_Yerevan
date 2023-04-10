@@ -228,7 +228,7 @@ void		change_fd(t_src *data);
 int			creat_here_doc(t_src *data);
 void		close_herdoq_fd(t_src *data);
 void		free_token(t_src *data);
-void		chek_dolar_change(t_env *env, char **string, int flag, t_src *data);
+void		chek_dolar_change(char **string, int flag, t_src *data);
 void		handler(int sig);
 void		free_give_null(char **s);
 int			find_index(char *s, char c);
@@ -239,4 +239,5 @@ int			when_find_tokin(t_src *data, char *str, int *i, int j);
 int			pipe_last(t_src *data, char *str, int j);
 void		syntax_last_nothing(t_src *data, int i, int j);
 int			error_search_error2(t_src *data, char *str, int *i);
+void		clean_close_name(char **close_name, int *fl_doing_dolar);
 #endif

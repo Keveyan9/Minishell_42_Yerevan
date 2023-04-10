@@ -86,7 +86,6 @@ void	print_t_cl_in(t_src *data)
 	{
 		tmp = tmp->prev;
 	}
-	printf("in printf -clin\n");
 	while (tmp)
 	{
 		i = -1;
@@ -96,5 +95,4 @@ void	print_t_cl_in(t_src *data)
 			printf("oll = [%s]__%d\n\n", tmp->oll, n++);
 		tmp = tmp->next;
 	}
-		printf("after printf -clin\n");
 }

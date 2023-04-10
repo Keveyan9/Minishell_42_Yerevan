@@ -40,7 +40,7 @@ static int	count_word_len(t_tokens *token_list)
 		{
 			while (token_list && token_list->type != 8)
 				token_list = token_list->next;
-			if(!token_list || token_list->type == 8)
+			if (!token_list || token_list->type == 8)
 				n++;
 		}
 		if (token_list)
@@ -59,7 +59,7 @@ static void	qneqt_word(t_src *data, int n)
 	while (data->token_list && data->token_list->type > 4
 		&& data->token_list->type != 8)
 	{
-		chek_dolar_change(data->env, &data->token_list->token,
+		chek_dolar_change(&data->token_list->token,
 			data->token_list->type, data);
 		boxs = ft_strjoin(data->cl_in->word[n], data->token_list->token);
 		free_give_null (&(data->cl_in->word[n]));
@@ -85,12 +85,10 @@ void	join_token_for_clean(t_src *data)
 	n = count_word_len(data->token_list);
 	if (n)
 	{
-		data->cl_in->word = ft_calloc(n, sizeof (char *));
+		data->cl_in->word = ft_calloc(n + 1, sizeof (char *));
 		if (!data->cl_in->word)
 			return ;
-		data->cl_in->word[n] = NULL;
 	}
-	printf("__%d__\n", n);
 	n = 0;
 	while (data->token_list && data->token_list->type != 0)
 	{
