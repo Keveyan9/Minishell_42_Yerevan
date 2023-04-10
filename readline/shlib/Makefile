@@ -32,11 +32,7 @@ datarootdir = ${prefix}/share
 srcdir = .
 VPATH = ..
 topdir = ..
-<<<<<<< HEAD
-BUILD_DIR = /home/go/Desktop/Minishell/readline
-=======
 BUILD_DIR = /Users/skeveyan/Desktop/Minishell/readline
->>>>>>> main
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -53,14 +49,10 @@ LN = ln
 
 SHELL = /bin/sh
 
-host_os = linux-gnu
-host_vendor = pc
+host_os = darwin18.7.0
+host_vendor = apple
 
-<<<<<<< HEAD
-prefix = /home/go/Desktop/Minishell/readline_out
-=======
 prefix = /Users/skeveyan/Desktop/Minishell/readline_out
->>>>>>> main
 exec_prefix = ${prefix}
 includedir = ${prefix}/include
 bindir = ${exec_prefix}/bin
@@ -86,21 +78,21 @@ LOCAL_DEFS =
 # changes to bash-maintainers@gnu.org.
 #
 SHOBJ_CC = gcc
-SHOBJ_CFLAGS = -fPIC
+SHOBJ_CFLAGS = -fno-common
 SHOBJ_LD = ${CC}
 
-SHOBJ_LDFLAGS = -shared -Wl,-soname,$@
+SHOBJ_LDFLAGS = -dynamiclib -dynamic -undefined dynamic_lookup 
 SHOBJ_XLDFLAGS = 
 SHOBJ_LIBS = 
 
-SHLIB_XLDFLAGS =  -Wl,-rpath,$(libdir) -Wl,-soname,`basename $@ $(SHLIB_MINOR)`
-SHLIB_LIBS =  
+SHLIB_XLDFLAGS =  -dynamiclib -install_name $(libdir)/`echo $@ | sed "s:\..*::"`.$(SHLIB_MAJOR).$(SHLIB_LIBSUFF) -current_version $(SHLIB_MAJOR)$(SHLIB_MINOR) -compatibility_version $(SHLIB_MAJOR)$(SHLIB_MINOR) -v
+SHLIB_LIBS = -lncurses
 
 SHLIB_DOT = .
 SHLIB_LIBPREF = lib
-SHLIB_LIBSUFF = so
+SHLIB_LIBSUFF = dylib
 
-SHLIB_LIBVERSION = $(SHLIB_LIBSUFF).$(SHLIB_MAJOR)$(SHLIB_MINOR)
+SHLIB_LIBVERSION = $(SHLIB_MAJOR)$(SHLIB_MINOR).$(SHLIB_LIBSUFF)
 SHLIB_DLLVERSION = $(SHLIB_MAJOR)
 
 SHLIB_STATUS = supported

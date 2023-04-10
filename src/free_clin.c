@@ -13,12 +13,12 @@
 
 static void	free_clin_half(t_src *data)
 {
-	if (data->cl_in->word)
+	if (data->cl_in->word != NULL)
 	{
 		frik(data->cl_in->word);
 		data->cl_in->word = NULL;
 	}
-	if (data->cl_in->oll)
+	if (data->cl_in->oll != NULL)
 	{
 		free(data->cl_in->oll);
 		data->cl_in->oll = NULL;
@@ -27,21 +27,24 @@ static void	free_clin_half(t_src *data)
 
 void	free_clin(t_src *data)
 {
-	data->cl_in = data->clin_head;
-	while (data->cl_in)
+	if (data->cl_in)
 	{
-		free_clin_half(data);
-		if (data->cl_in->next)
+		data->cl_in = data->clin_head;
+		while (data->cl_in)
 		{
-			data->cl_in = data->cl_in->next;
-			free(data->cl_in->prev);
-			data->cl_in->prev = NULL ;
-		}
-		else
-		{
-			free(data->cl_in);
-			data->cl_in = NULL;
-			break ;
+			free_clin_half(data);
+			if (data->cl_in->next)
+			{
+				data->cl_in = data->cl_in->next;
+				free(data->cl_in->prev);
+				data->cl_in->prev = NULL ;
+			}
+			else
+			{
+				free(data->cl_in);
+				data->cl_in = NULL;
+				break ;
+			}
 		}
 	}
 }

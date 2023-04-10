@@ -20,7 +20,7 @@ void	is_len_delet_spaces(t_src *data, char *s)
 	i = 0;
 	if (data && s && s[i] == ' ')
 	{
-		while (data && s && s[i] == ' ')
+		while (data && s[i] && s[i] == ' ')
 			i++;
 	}
 	d = ft_strdup(data->line);

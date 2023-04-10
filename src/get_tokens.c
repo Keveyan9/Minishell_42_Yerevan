@@ -32,11 +32,12 @@ t_src	*get_tokens(t_src *data)
 			data = find_redir_in(data->line, data);
 		else if ((int)data->line[0] == '>')
 			data = find_redir_out(data->line, data);
-		else
+		else if (data->line[0] > 32)
 			data = find_word(data->line, data);
+		else
+			free_give_null(&data->line);
 	}
-	free(data->line);
-	data->line = NULL;
+	free_give_null(&data->line);
 	return (data);
 }
 

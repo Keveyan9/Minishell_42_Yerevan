@@ -11,92 +11,83 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-static void	add_tab(t_src *data)
+static int	chek_push_word(t_tokens *token_list)
 {
-	char	*box;
-
-	box = NULL;
-	if (data->token_list->type < 5 && data->token_list->next
-		&& data->token_list->next->type > 4
-		&& data->token_list->next->type != 8)
-	{
-		box = ft_strdup(data->cl_in->oll);
-		free (data->cl_in->oll);
-		data->cl_in->oll = NULL;
-		data->cl_in->oll = ft_strjoin(box, " ");
-		free (box);
-	}
-}
-
-static void	join_for_oll(t_src *data)
-{
-	char	*box;
-
-	box = NULL;
-	add_tab(data);
-	if (data->token_list->type == 6 || data->token_list->type == 7)
-	{
-		box = ft_strdup(data->cl_in->oll);
-		free(data->cl_in->oll);
-		data->cl_in->oll = NULL;
-		data->cl_in->oll = ft_strjoin(box, "'");
-		free(box);
-	}
-	box = ft_strdup(data->cl_in->oll);
-	free(data->cl_in->oll);
-	data->cl_in->oll = ft_strjoin(box, data->token_list->token);
-	free(box);
-	box = NULL;
-	if (data->token_list->type < 5 && data->token_list->next
-		&& data->token_list->next->type == 8)
-		data->token_list = data->token_list->next;
-}
-
-static void	for_word_split(t_src *data, char **for_word)
-{
-	data->cl_in->word = ft_split(*for_word, ' ');
-	free(*for_word);
-	for_word = NULL;
-}
-
-static int	chek_push_word(t_src *data)
-{
-	if (!data->token_list->prev)
+	if (!token_list->prev && token_list->type > 4 && token_list->type != 8)
 		return (1);
-	if (data->token_list->prev && (data->token_list->prev->type > 4
-			|| data->token_list->prev->type == 0)
-		&& data->token_list->prev->type != 8)
+	if (token_list->prev && (token_list->prev->type > 4
+			|| token_list->prev->type == 0)
+		&& token_list->prev->type != 8)
 		return (1);
-	if (data->token_list->prev->prev && data->token_list->prev->type == 8
-		&& (data->token_list->prev->prev->type > 4
-			|| data->token_list->prev->prev->type == 0))
+	if (token_list->prev->prev && token_list->prev->type == 8
+		&& (token_list->prev->prev->type > 4
+			|| token_list->prev->prev->type == 0))
 		return (1);
 	return (0);
 }
 
-void	join_token_for_clean(t_src *data)
+static int	count_word_len(t_tokens *token_list)
+{
+	int	n;
+
+	n = 0;
+	if (token_list->type == 5 && !token_list->token)
+		return (0);
+	while (token_list && token_list->type != 0)
+	{
+		if (token_list && token_list->type > 4 && chek_push_word(token_list)
+			&& token_list->type != 8)
+		{
+			while (token_list && token_list->type != 8)
+				token_list = token_list->next;
+			if (!token_list || token_list->type == 8)
+				n++;
+		}
+		if (token_list)
+			token_list = token_list->next;
+	}
+	return (n);
+}
+
+static void	qneqt_word(t_src *data, int n)
 {
 	char	*boxs;
-	char	*for_word;
+	int		t;
 
+	t = 0;
 	boxs = NULL;
-	for_word = NULL;
+	while (data->token_list && data->token_list->type > 4
+		&& data->token_list->type != 8)
+	{
+		chek_dolar_change(&data->token_list->token,
+			data->token_list->type, data);
+		boxs = ft_strjoin(data->cl_in->word[n], data->token_list->token);
+		free_give_null (&(data->cl_in->word[n]));
+		data->cl_in->word[n] = ft_strdup(boxs);
+		free_give_null(&boxs);
+		data->token_list = data->token_list->next;
+	}
+}
+
+void	join_token_for_clean(t_src *data)
+{
+	int		n;
+
+	n = count_word_len(data->token_list);
+	if (n)
+	{
+		data->cl_in->word = ft_calloc(n + 1, sizeof (char *));
+		if (!data->cl_in->word)
+			return ;
+	}
+	n = 0;
 	while (data->token_list && data->token_list->type != 0)
 	{
 		join_for_oll(data);
-		if (data->token_list->type > 4 && chek_push_word(data))
-		{
-			boxs = ft_strdup(for_word);
-			free(for_word);
-			for_word = NULL;
-			if (data->token_list->token[0] == '$' && data->token_list->token[1])
-				dolar_change (data->env, &data->token_list->token, 1);
-			for_word = ft_strjoin(boxs, data->token_list->token);
-			free(boxs);
-			boxs = NULL;
-		}
-		data->token_list = data->token_list->next;
+		if (data->token_list->type > 4
+			&& data->token_list->type != 8 && chek_push_word(data->token_list))
+			qneqt_word(data, n++);
+		if (data->token_list)
+			data->token_list = data->token_list->next;
 	}
-	if (for_word)
-		for_word_split(data, &for_word);
 }

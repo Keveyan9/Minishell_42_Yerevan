@@ -35,6 +35,8 @@ static int	chek_coll(t_src *data)
 	else if (ft_strlen(data->cl_in->word[0]) == 4
 		&& ft_strncmp(data->cl_in->word[0], "exit", 4) == 0)
 		exit_f(data);
+	else
+		return (0);
 	return (1);
 }
 
@@ -43,7 +45,7 @@ int	chek_coll_builtin(t_src *data)
 	if (data->cl_in && data->cl_in->word)
 	{
 		if (chek_coll(data))
-			return (1);
+			return (0);
 	}
-	return (0);
+	return (1);
 }

@@ -18,10 +18,11 @@ void	frik(char **s1)
 	i = 0;
 	if (s1)
 	{
-		while (s1[i])
+		while (s1[i] && s1[i] != NULL)
 		{
 			free(s1[i]);
-			s1[i++] = NULL;
+			s1[i] = NULL;
+			i++;
 		}
 		free(s1);
 		s1 = NULL;

@@ -3,29 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   dolar_change.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 15:25:21 by skeveyan          #+#    #+#             */
-/*   Updated: 2023/04/02 15:25:28 by skeveyan         ###   ########.fr       */
+/*   Updated: 2023/04/06 00:08:06 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	dolar_change(t_env *env, char **key, int n)
+static int	key_finish(char *s)
 {
-	t_env	*plase_key;
+	int	n;
 
-	plase_key = find_env(env, &((*key)[n]));
-	if (!plase_key)
+	n = 0;
+	while (s[n] && s[n] != '$' && s[n] != ' ')
+		n++;
+	return (n);
+}
+
+static void	find_chanche_key(t_env *env, char **key)
+{
+	t_env	*place;
+
+	place = find_env(env, *key);
+	free(*key);
+	*key = NULL;
+	if (place)
+		*key = ft_strdup(place->value);
+}
+
+static void	gluing(char **string, char **start, char **key, char **remiander)
+{
+	char	*full;
+
+	full = ft_strjoin(*start,*key);
+	free_give_null(string);
+	*string = ft_strjoin(full, *remiander);
+	free_give_null(&full);
+	free_give_null(start);
+	free_give_null(key);
+	free_give_null(remiander);
+}
+
+static void	chek_dolar( t_src *data, char **string, int n)
+{
+	char	*key;
+	char	*remainder;
+	char	*start;
+	int		antil;
+
+	antil = key_finish(&(*string)[n + 1]);
+	start = ft_substr((*string), 0, n);
+	if ((*string)[n + 1] == '?')
 	{
-		free(*key);
-		*key = ft_strdup("\n");
+		key = ft_itoa(data->error);
+		remainder = ft_substr((*string), n + 2, ft_strlen (*string));
 	}
 	else
 	{
-		free(*key);
-		*key = ft_strdup(plase_key->value);
+		key = ft_substr((*string), n + 1, antil);
+		remainder = ft_substr((*string), n + antil +1,
+				ft_strlen (*string));
+		find_chanche_key(data->env, &key);
 	}
-	return ;
+	gluing(string, &start, &key, &remainder);
+}
+
+void	chek_dolar_change(char **string, int flag, t_src *data)
+{
+	int		n;
+
+	n = -1;
+	if (flag == 6)
+		return ;
+	while ((*string)[++n])
+	{
+		if ((*string)[n] == '$' && (*string)[n + 1])
+			chek_dolar(data, string, n);
+	}
 }

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 #include"minishell.h"
 
+#include"minishell.h"
+
 t_src	*find_space(char *s, t_src *data)
 {
 	char	*tmp;

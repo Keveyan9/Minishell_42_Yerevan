@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   campeyer.c                                         :+:      :+:    :+:   */
+/*   campayer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skeveyan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: artadevo <artadevo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:49:38 by skeveyan          #+#    #+#             */
-/*   Updated: 2023/02/28 15:49:46 by skeveyan         ###   ########.fr       */
+/*   Updated: 2023/04/06 00:12:10 by artadevo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "minishell.h"
-
+#include"minishell.h"
 
 static void	have_key(t_export *var)
 {

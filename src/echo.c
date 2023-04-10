@@ -11,45 +11,12 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
-static void	call_dolar(char *s, t_src *data, int n)
-{
-	char	*error;
-
-	n++;
-	while (s[n] && !(s[n] > 20 && s[n] < 65))
-		n++;
-	while (s[n])
-	{
-		if (s[n - 1] == '$' && s[n] == '?')
-		{
-			error = ft_itoa(data->error);
-			write(1, error, ft_strlen(error));
-			free (error);
-			error = NULL;
-			n = n + 2;
-		}
-		else
-		{
-			write(1, &s[n], 1);
-			n++;
-		}
-	}
-}
-
 static void	echo_print(t_src *data, size_t *calem, int *row, int *flag)
 {
 	while (data->cl_in->word[*calem])
 	{
 		while (data->cl_in->word[*calem][*row])
-		{
-			if (data->cl_in->word[*calem][*row] == '$')
-			{
-				call_dolar(data->cl_in->word[*calem], data, *row);
-				break ;
-			}
-			else
-				write(1, &(data->cl_in->word[*calem][(*row)++]), 1);
-		}
+			write(1, &(data->cl_in->word[*calem][(*row)++]), 1);
 		if ((data->cl_in->word[*calem + 1]) && \
 			((*calem >= 2 && *flag == 0) || (*calem >= 1 && *flag == 1)))
 			write(1, " ", 1);

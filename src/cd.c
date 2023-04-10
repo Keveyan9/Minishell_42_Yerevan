@@ -64,14 +64,14 @@ void	cd(t_src *data)
 {
 	if (data->cl_in->word[2])
 	{
-		printf("cd : too many arguments\n");
+		printf("cd_ : too many arguments\n" );
 		data->error = 1;
 		g_flags = 1;
 		return ;
 	}
 	if (data->cl_in->word[1])
 	{
-		data->error = chdir(data->cl_in->word[1]);
+		g_flags = chdir(data->cl_in->word[1]);
 		if (!g_flags)
 		{
 			cd_half(data);

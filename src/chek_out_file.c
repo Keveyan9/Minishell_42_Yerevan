@@ -20,7 +20,8 @@ static void	open_file_new_write(t_src *data, int *row)
 	name = ft_substr(data->cl_in->oll,*row, len);
 	data->cl_in->pip_her_doc[1] = open (name, O_RDWR
 			| O_CREAT | O_TRUNC, 0644);
-	data->error = errno;
+	if (data->cl_in->pip_her_doc[1] == -1)
+		data->error = 1;
 	(*row) = (*row) + len ;
 	free(name);
 	name = NULL;
@@ -42,7 +43,8 @@ void	chek_out_file(t_src *data, int *row)
 		name = ft_substr(data->cl_in->oll,*row, len);
 		data->cl_in->pip_her_doc[1] = open (name, O_RDWR
 				| O_CREAT | O_APPEND, 0644);
-		data->error = errno;
+		if (data->cl_in->pip_her_doc[1] == -1)
+			data->error = 1;
 		(*row) = (*row) + len;
 		free(name);
 		name = NULL;

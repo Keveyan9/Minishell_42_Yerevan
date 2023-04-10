@@ -24,8 +24,15 @@ static void	handler_main(int sig)
 
 static void	main_logica(t_src *data)
 {
-	get_t_cl_in_list(data);
+	int	print_resurs_f;
+
+	print_resurs_f = 0;
 	free_token(data);
+	if (data->pipes_count > 500)
+	{
+		data->pipes_count = 500;
+		print_resurs_f = 1;
+	}
 	if (data->syntax_err != 0)
 		print_syntax_err(data);
 	creat_here_doc(data);
@@ -40,10 +47,8 @@ static void	main_logica(t_src *data)
 	}
 	else
 		close_herdoq_fd(data);
-	if (data->cl_in)
-		free_clin(data);
-	free(data->line);
-	data->line = NULL;
+	if (print_resurs_f)
+		printf("you won't use more than 500 proces\n");
 }
 
 int	main(int ac, char **av, char **env)
@@ -51,12 +56,13 @@ int	main(int ac, char **av, char **env)
 	t_src	*data;
 
 	(void)ac;
+	(void)av;
 	data = malloc(sizeof(t_src));
 	if (!data)
 		return (0);
 	if (all_input(data, env))
 		return (0);
-	shell_level(data, av);
+	shell_level(data);
 	while (1 && data->pid > 0)
 	{
 		g_flags = 0;
@@ -65,7 +71,10 @@ int	main(int ac, char **av, char **env)
 		start_input(data);
 		ft_read_l(data);
 		data = syntax_error(data);
+		get_t_cl_in_list(data);
 		main_logica(data);
+		free_clin(data);
+		free_give_null(&data->line);
 	}
 	oll_free(data);
 	return (0);
